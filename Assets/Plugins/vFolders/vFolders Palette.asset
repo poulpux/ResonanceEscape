@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 618f730fcd14941fab38169a7dde8c64, type: 3}
+  m_Script: {fileID: 0}
   m_Name: vFolders Palette
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: VFolders:VFolders:VFoldersPalette
   colors:
   - {r: 0.965468, g: 0.39344412, b: 0.35693195, a: 0.1}
   - {r: 0.97379094, g: 0.6546243, b: 0.36000896, a: 0.1}
