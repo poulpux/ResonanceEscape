@@ -1,0 +1,16 @@
+public enum ELangues
+{
+    SIMPLIFIEDCHINESE,
+    TRADITIONNALCHINESE,
+    ENGLISH,
+    RUSSIAN,
+    SPANISH,
+    BREAZILIAN,
+    GERMAN,
+    KOREAN,
+    FRENCH,
+    TURKISH,
+    JAPANESE,
+    POLISH,
+    ITALIAN
+}

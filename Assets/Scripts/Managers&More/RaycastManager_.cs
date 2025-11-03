@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
+{
+    #region Values
+    [Header("Cam")]
+    [SerializeField]
+    private Camera _camera;
+
+    [Header("UI")]
+    [SerializeField]
+    private GraphicRaycaster UIRaycaster;
+
+    [SerializeField]
+    EventSystem eventSystem;
+    PointerEventData pointerEventData;
+
+    public Dictionary<string, RaycastTag> allTag = new Dictionary<string, RaycastTag>();
+
+    #endregion
+    #region Callbacks
+    protected override void Awake()
+    {
+        base.Awake();
+        InstantiateAllTag();
+    }
+
+    void Start()
+    {
+        if (eventSystem != null)
+            pointerEventData = new PointerEventData(eventSystem);
+        InputSystem_.I._leftClick._event.AddListener(() => Click());
+    }
+
+    private void Update()
+    {
+        Survole();
+    }
+
+    #endregion
+    #region Functions
+    private void InstantiateAllTag()
+    {
+        InstantiateOneTag(GV.TagSO._quitParamter);
+        InstantiateOneTag(GV.TagSO._parameter);
+        InstantiateOneTag(GV.TagSO._playAgain);
+        InstantiateOneTag(GV.TagSO._backToMenu);
+        InstantiateOneTag(GV.TagSO._crédit);
+        InstantiateOneTag(GV.TagSO._giveATips);
+        InstantiateOneTag(GV.TagSO._mode);
+        InstantiateOneTag(GV.TagSO._play);
+        InstantiateOneTag(GV.TagSO._reviewBoard);
+    }
+    private void Click() =>
+        HandleRaycast(UI, TwoD, ThreeD, true);
+
+    private void Survole()=>
+        HandleRaycast(UI, TwoD, ThreeD, false);
+    #endregion
+}

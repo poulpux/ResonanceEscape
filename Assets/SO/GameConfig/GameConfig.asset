@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a035261034b749149a9a0074287d6d79, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  prefabSO: {fileID: 11400000, guid: 3e3b422bdab82eb4ba326200f8d144c9, type: 2}
+  feedbackSO: {fileID: 11400000, guid: 619887d53337fd5498d0c61ad5eef523, type: 2}
+  colorSO: {fileID: 11400000, guid: 9194f3b343ad1fb4ba5654d05a1a1ad1, type: 2}
+  fontSO: {fileID: 11400000, guid: 43fb139604d96f843b68b14b45aa5b96, type: 2}
+  soundSO: {fileID: 11400000, guid: b06901f52510c6f4fbc3cebb374e3967, type: 2}
+  tagSO: {fileID: 11400000, guid: cc1c3a215b8f53541b1621e12073e5c8, type: 2}
