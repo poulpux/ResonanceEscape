@@ -39,7 +39,7 @@ public partial class RaycastManager_
 
     private bool UI(bool cliked)
     {
-        pointerEventData.position = Input.mousePosition;
+        pointerEventData.position = UnityEngine.Input.mousePosition;
         List<RaycastResult> results = new List<RaycastResult>();
         UIRaycaster.Raycast(pointerEventData, results);
 
@@ -60,7 +60,7 @@ public partial class RaycastManager_
 
     private bool TwoD(bool cliked)
     {
-        Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
         if (hit.collider != null)
@@ -79,7 +79,7 @@ public partial class RaycastManager_
 
     private void ThreeD(bool clicked)
     {
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _camera.ScreenPointToRay(UnityEngine.Input.mousePosition);
         RaycastHit hit;
 
         // Lancer un raycast 3D depuis la caméra

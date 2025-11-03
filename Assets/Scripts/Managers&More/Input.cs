@@ -12,7 +12,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
@@ -474,8 +473,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
         }
     }
     private int m_XRSchemeIndex = -1;
-    internal static Vector2 mousePosition;
-
     public InputControlScheme XRScheme
     {
         get
