@@ -4,5 +4,5 @@ public enum EEditorSelectionType
     PLAYER,
     WINCONDITION,
     WALL,
-    SEMIWALL
+    SEMIWALL,
 }

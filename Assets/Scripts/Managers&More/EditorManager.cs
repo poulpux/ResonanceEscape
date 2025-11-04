@@ -19,11 +19,29 @@ public class EditorManager : MonoSingleton<EditorManager>
     EMapType mapType;
     MapData currentMapData = new MapData();
 
+
+    GameObject playerObject, winconditionObject;
     List<GameObject> allObject = new List<GameObject>();
 
     private void Start()
     {
+        RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.PLAYER));
+        RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WINCONDITION));
+        RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
+        RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SEMIWALL));
+
+        InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
         InstantiateAllMap();
+    }
+
+    private void SelectNewCase(EEditorSelectionType selectionType)
+    {
+        this.selectionType = selectionType;
+    }
+
+    private void LeftClick()
+    {
+        if (GameManager.I._state != EGameState.EDITOR) return;
     }
 
     private void InstantiateAllMap()
@@ -36,11 +54,12 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         GameObject player = Instantiate(GV.PrefabSO._player, shapes.transform);
         player.transform.position = (Vector3)currentMapData._playerPosC2 + Vector3.forward *-0.3f;
-
+        playerObject = player;
         allObject.Add(player);
 
         GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
         winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.1f;
+        winconditionObject = winCondition;
         allObject.Add(winCondition);
 
         foreach (var item in currentMapData._wallPosList)
