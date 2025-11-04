@@ -22,6 +22,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     GameObject playerObject, winconditionObject;
     List<GameObject> allObject = new List<GameObject>();
+    List<Vector2> posablePosition = new List<Vector2>();
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
         RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SEMIWALL));
 
+        //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
         InstantiateAllMap();
     }
@@ -42,6 +44,13 @@ public class EditorManager : MonoSingleton<EditorManager>
     private void LeftClick()
     {
         if (GameManager.I._state != EGameState.EDITOR) return;
+
+        if(selectionType == EEditorSelectionType.PLAYER)
+        {
+            // il faut mettre un truc qui aille avec le quadrillage
+            playerObject.transform.position = 
+                //Verifier si on peut poser mon bloc à l'endroit indiqué
+        }
     }
 
     private void InstantiateAllMap()
