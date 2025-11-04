@@ -18,9 +18,10 @@ public class GameManager : MonoSingleton<GameManager>
     #region Callbacks
     private void Start()
     {
-        StartCoroutine(WaitASecond());
+
+        //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(()=>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
-        //_state = EGameState.WAITINGACTION;
+        _state = EGameState.EDITOR;
     }
     #endregion
 
