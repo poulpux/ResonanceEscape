@@ -14,35 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: VFolders:VFolders:VFoldersData
   folderDatas_byGuid:
     keys:
-    - 4deaa3097ed46fb40bdda279cca19afa
-    - 06fc361873273434699863b6a85d0a2d
-    - e7159cdc21de83b40bf38eb7f99dceac
-    - a7677e34b6d37aa4e9602f4579811790
-    - 65c18d699fcadad459bc3e16558c2bd2
-    - 8ca32690ec3fe4c4e9e67f3ade41c36d
+    - afabc6899c78eb242b567da98a34fe0a
+    - dc361faebb9e0354385cdd1f4511b9e3
     values:
-    - iconNameOrGuid: AudioClip Icon
-      colorIndex: 0
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: none
-      colorIndex: 0
-      isIconRecursive: 0
-      isColorRecursive: 0
     - iconNameOrGuid: 
       colorIndex: 1
       isIconRecursive: 0
       isColorRecursive: 0
     - iconNameOrGuid: 
       colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: ScriptableObject Icon
-      colorIndex: 0
       isIconRecursive: 0
       isColorRecursive: 0
   bookmarks: []

@@ -28,4 +28,5 @@ public static class GV
     public static FontSO FontSO => Config.fontSO;
     public static SoundSO SoundSO => Config.soundSO;
     public static TagSO TagSO => Config.tagSO;
+    public static GameSO GameSO => Config.gameSO;
 }

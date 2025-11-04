@@ -13,4 +13,5 @@ public class GameConfig : ScriptableObject
     public FontSO fontSO;
     public SoundSO soundSO;
     public TagSO tagSO;
+    public GameSO gameSO;
 }

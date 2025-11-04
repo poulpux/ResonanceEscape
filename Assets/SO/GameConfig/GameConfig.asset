@@ -18,3 +18,4 @@ MonoBehaviour:
   fontSO: {fileID: 11400000, guid: 43fb139604d96f843b68b14b45aa5b96, type: 2}
   soundSO: {fileID: 11400000, guid: b06901f52510c6f4fbc3cebb374e3967, type: 2}
   tagSO: {fileID: 11400000, guid: cc1c3a215b8f53541b1621e12073e5c8, type: 2}
+  gameSO: {fileID: 11400000, guid: 2e7afbaf993406d42b2b5be7c55a4c1f, type: 2}
