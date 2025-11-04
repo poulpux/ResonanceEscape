@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1b70b2fb009304486b0cf026f97080, type: 3}
   m_Name: TagSO
   m_EditorClassIdentifier: 
-  _playAgain: 
-  _reviewBoard: 
-  _backToMenu: 
-  _giveATips: 
-  _parameter: 
-  _mode: 
-  _play: 
-  "_cr\xE9dit": 
-  _quit: 
+  _playAgain: PlayAgain
+  _reviewBoard: ReviewBoard
+  _backToMenu: BackToMenu
+  _giveATips: GiveATips
+  _parameter: Parameter
+  _mode: Mode
+  _play: Play
+  "_cr\xE9dit": "Cr\xE9dits"
+  _quit: Quit
   _quitParamter: QuitParameter

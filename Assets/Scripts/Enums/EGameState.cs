@@ -1,5 +1,6 @@
 public enum EGameState
 {
     MENU,
-    GAME,
+    WAITINGACTION,
+    ACT
 }
