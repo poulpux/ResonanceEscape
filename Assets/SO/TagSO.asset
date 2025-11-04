@@ -21,4 +21,13 @@ MonoBehaviour:
   _play: Play
   "_cr\xE9dit": "Cr\xE9dits"
   _quit: Quit
+  _editorPlayer: EditorPlayer
+  _editorWinCondition: EditorWinCondition
+  _editorWall: EditorWall
+  _editorSemiWall: EditorSemiWall
+  _editorMapType: EditorMapType
+  _editorPlay: EditorPlay
+  _editorErase: EditorErase
+  _editorSave: EditorSave
+  _editorClean: EditorClean
   _quitParamter: QuitParameter
