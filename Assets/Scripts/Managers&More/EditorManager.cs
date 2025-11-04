@@ -38,6 +38,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private void SelectNewCase(EEditorSelectionType selectionType)
     {
+        //print("seld")
         this.selectionType = selectionType;
     }
 
@@ -47,10 +48,47 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         if(selectionType == EEditorSelectionType.PLAYER)
         {
-            // il faut mettre un truc qui aille avec le quadrillage
-            playerObject.transform.position = 
-                //Verifier si on peut poser mon bloc à l'endroit indiqué
+            Vector3 mousePos = UnityEngine.Input.mousePosition;
+            mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            if (CanMovePlayer(new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y))))
+            {
+                //Verif les murs maintenant !
+                playerObject.transform.position = new Vector3(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y), -0.4f);
+            }
+            //Verifier si on peut poser mon bloc à l'endroit indiqué
         }
+    }
+
+    private bool CanMovePlayer(Vector2Int pos)
+    {
+        //limitMap
+        if(!VerifLimitMap(pos, 1))
+            return false;
+
+        return true;
+    }
+
+    private bool VerifLimitMap(Vector2Int pos, int thinkness)
+    {
+        if (currentMapData._mapTypeC1 == 0)
+        {
+            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness && pos.y >= -5 + thinkness && pos.y <= 5 - thinkness)
+                return true;
+        }
+        else if (currentMapData._mapTypeC1 == 1)
+        {
+            if (pos.x >= -5 + thinkness && pos.x <= 5 - thinkness && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness)
+                return true;
+        }
+        else if (currentMapData._mapTypeC1 == 2)
+        {
+            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness)
+                return true;
+        }
+
+        return false;
     }
 
     private void InstantiateAllMap()
@@ -61,10 +99,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         allObject.Add(map);
 
-        GameObject player = Instantiate(GV.PrefabSO._player, shapes.transform);
-        player.transform.position = (Vector3)currentMapData._playerPosC2 + Vector3.forward *-0.3f;
-        playerObject = player;
-        allObject.Add(player);
+        InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.3f);
 
         GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
         winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.1f;
@@ -139,5 +174,14 @@ public class EditorManager : MonoSingleton<EditorManager>
         }
 
         return data;
+    }
+
+    private void InstantiatePlayer(Vector2 pos)
+    {
+        GameObject player = Instantiate(GV.PrefabSO._player, shapes.transform);
+        player.transform.position = pos;
+        playerObject = player;
+        playerObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        allObject.Add(player);
     }
 }

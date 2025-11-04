@@ -874,6 +874,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MurCadreCadreInnactifBlue (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3166806396834739344, guid: 88493cd96e39533468a6265968b0f266, type: 3}
+      propertyPath: m_TagString
+      value: EditorSemiWall
+      objectReference: {fileID: 0}
     - target: {fileID: 5679901576766120003, guid: 88493cd96e39533468a6265968b0f266, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2317,6 +2321,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MurCadreCadreInnactifBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 3166806396834739344, guid: 88493cd96e39533468a6265968b0f266, type: 3}
+      propertyPath: m_TagString
+      value: EditorWall
+      objectReference: {fileID: 0}
     - target: {fileID: 5679901576766120003, guid: 88493cd96e39533468a6265968b0f266, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2392,6 +2400,10 @@ PrefabInstance:
     - target: {fileID: 3166806396834739344, guid: 88493cd96e39533468a6265968b0f266, type: 3}
       propertyPath: m_Name
       value: WinConditionCadreCadreInnactifBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166806396834739344, guid: 88493cd96e39533468a6265968b0f266, type: 3}
+      propertyPath: m_TagString
+      value: EditorWinCondition
       objectReference: {fileID: 0}
     - target: {fileID: 5679901576766120003, guid: 88493cd96e39533468a6265968b0f266, type: 3}
       propertyPath: m_Enabled
@@ -3373,6 +3385,10 @@ PrefabInstance:
     - target: {fileID: 3166806396834739344, guid: 88493cd96e39533468a6265968b0f266, type: 3}
       propertyPath: m_Name
       value: PlayerCadreCadreInnactifBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166806396834739344, guid: 88493cd96e39533468a6265968b0f266, type: 3}
+      propertyPath: m_TagString
+      value: EditorPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 5679901576766120003, guid: 88493cd96e39533468a6265968b0f266, type: 3}
       propertyPath: m_Enabled
