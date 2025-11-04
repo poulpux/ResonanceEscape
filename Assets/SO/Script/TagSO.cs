@@ -15,5 +15,14 @@ public class TagSO : ScriptableObject
         _play, 
         _crédit, 
         _quit, 
+        _editorPlayer,
+        _editorWinCondition,
+        _editorWall,
+        _editorSemiWall,
+        _editorMapType,
+        _editorPlay,
+        _editorErase,
+        _editorSave,
+        _editorClean,
         _quitParamter;
 }
