@@ -14,40 +14,68 @@ public class EditorManager : MonoSingleton<EditorManager>
         public List<(int type, Vector2 pos)> _semiWallPosList = new List<(int, Vector2)>();
     }
 
+    [SerializeField] GameObject shapes;
     EEditorSelectionType selectionType;
     EMapType mapType;
     MapData currentMapData = new MapData();
-    public string test;
-    // Start is called before the first frame update
-    void Start()
+
+    List<GameObject> allObject = new List<GameObject>();
+
+    private void Start()
     {
-        print(WriteMap(currentMapData));
-        test = WriteMap(currentMapData);
+        InstantiateAllMap();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void InstantiateAllMap()
     {
-        
+        GameObject map = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMap :
+            currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMap :
+            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMap, shapes.transform);
+
+        allObject.Add(map);
+
+        GameObject player = Instantiate(GV.PrefabSO._player, shapes.transform);
+        player.transform.position = (Vector3)currentMapData._playerPosC2 + Vector3.forward *-0.3f;
+
+        allObject.Add(player);
+
+        GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
+        winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.1f;
+        allObject.Add(winCondition);
+
+        foreach (var item in currentMapData._wallPosList)
+        {
+            GameObject wall = Instantiate(GV.PrefabSO._wall, shapes.transform);
+            wall.transform.position = item;
+            allObject.Add(wall);
+        }
+
+        foreach (var item in currentMapData._semiWallPosList)
+        {
+            GameObject semiWall = Instantiate(GV.PrefabSO._semiWall, shapes.transform);
+            semiWall.transform.position = item.pos;
+            semiWall.transform.eulerAngles = Vector3.forward * item.type * 45f;
+            allObject.Add(semiWall);
+        }
     }
 
     public static string WriteMap(MapData data)
     {
         string cat1 = data._mapTypeC1.ToString();
 
-        string cat2 = "µ{data._playerPosC2.x},{data._playerPosC2.y}";
-        string cat3 = "µ{data._winConditionC2.x},{data._winConditionC2.y}";
+        string cat2 = $"{data._playerPosC2.x},{data._playerPosC2.y}";
+        string cat3 = $"{data._winConditionC2.x},{data._winConditionC2.y}";
 
-        string cat4 = string.Join("€", data._wallPosList.ConvertAll(v => "µ{v.x},{v.y}"));
+        string cat4 = string.Join("€", data._wallPosList.ConvertAll(v => $"{v.x},{v.y}"));
 
-        string cat5 = string.Join("€", data._semiWallPosList.ConvertAll(e => "µ{e.type},{e.pos.x},{e.pos.y}"));
+        string cat5 = string.Join("€", data._semiWallPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
 
-        return "µ{cat1}µ{cat2}µ{cat3}µ{cat4}µ{cat5}";
+        return $"{cat1}${cat2}${cat3}${cat4}${cat5}";
     }
 
     public static MapData ReadMap(string mapString)
     {
-        string[] parts = mapString.Split('µ');
+        string[] parts = mapString.Split('$');
         MapData data = new MapData();
 
         if (parts.Length > 0) data._mapTypeC1 = int.Parse(parts[0]);

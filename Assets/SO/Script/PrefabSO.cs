@@ -6,7 +6,9 @@ using UnityEngine;
 public class PrefabSO : ScriptableObject
 {
     [Header("Map")]
-    public GameObject _largeMap, _longMap, _bothMap;
+    public GameObject _largeMap;
+    public GameObject _longMap, _bothMap;
     [Header("Editor")]
-    public GameObject _player, winCondition, wall, semiWall;
+    public GameObject _player;
+    public GameObject _winCondition, _wall, _semiWall;
 }
