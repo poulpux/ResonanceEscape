@@ -21,6 +21,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     GameObject playerObject, winconditionObject;
     List<GameObject> allObject = new List<GameObject>();
+    int indexMapPlayMode = 0;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
-        currentMapData = ReadMap("0$0,0$3,0$-5,0€-4,0€-3,0€-2,0€-4,1€-3,1€-3,2€-4,2€-4,3€-3,3€-3,4€-4,4€-5,-1€-4,-1€-3,-1€-2,-1$");
+        currentMapData = ReadMap(GV.GameSO._allMapList[indexMapPlayMode]);
         InstantiateAllMap();
     }
 

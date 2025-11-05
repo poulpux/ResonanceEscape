@@ -7,7 +7,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     #region ValueGeneral
     public ELangues _langueActuelle = ELangues.ENGLISH;
-    public EGameState _state = EGameState.MENU;
+    public EGameState _state = EGameState.PLAYMODE;
     #endregion
 
     #region Events
@@ -21,7 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(()=>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
-        _state = EGameState.EDITOR;
+        //_state = EGameState.EDITOR;
     }
     #endregion
 

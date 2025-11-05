@@ -1,7 +1,8 @@
 public enum EGameState
 {
-    MENU,
     WAITINGACTION,
     ACT,
-    EDITOR
+    EDITOR,
+    PLAYMODE,
+    EDITORMODE
 }

@@ -23,6 +23,15 @@ TagManager:
   - EditorErase
   - EditorSave
   - EditorClean
+  - MenuPlayMode
+  - MenuEditorMode
+  - MenuPastCode
+  - MenuHelp
+  - MenuCredit
+  - MenuSupport
+  - MenuPlayModeLeftLevel
+  - MenuPlayModeRightLevel
+  - MenuParameter
   layers:
   - Default
   - TransparentFX
