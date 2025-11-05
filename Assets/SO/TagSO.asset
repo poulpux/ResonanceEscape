@@ -30,4 +30,13 @@ MonoBehaviour:
   _editorErase: EditorErase
   _editorSave: EditorSave
   _editorClean: EditorClean
+  _menuPlayMode: MenuPlayMode
+  _menuEditorMode: MenuEditorMode
+  _menuPastCode: MenuPastCode
+  _menuHelp: MenuHelp
+  _menuCredit: MenuCredit
+  _menuSupport: MenuSupport
+  _menuPlayModeLeftLevel: MenuPlayModeLeftLevel
+  _menuPlayModeRightLevel: MenuPlayModeRightLevel
+  _menuParameter: MenuParameter
   _quitParamter: QuitParameter

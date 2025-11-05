@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 379639544}
   m_Layer: 0
   m_Name: LeftTriangle (1)
-  m_TagString: Untagged
+  m_TagString: MenuPlayModeRightLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1241,7 +1241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
-      value: EditorPlay
+      value: MenuPlayMode
       objectReference: {fileID: 0}
     - target: {fileID: 1869709348487161234, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
@@ -1423,7 +1423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
-      value: EditorPlay
+      value: MenuEditorMode
       objectReference: {fileID: 0}
     - target: {fileID: 1760104535850656341, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3073,7 +3073,7 @@ GameObject:
   - component: {fileID: 1506134122}
   m_Layer: 0
   m_Name: LeftTriangle
-  m_TagString: Untagged
+  m_TagString: MenuPlayModeLeftLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3577,7 +3577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
-      value: EditorPlay
+      value: MenuSupport
       objectReference: {fileID: 0}
     - target: {fileID: 1760104535850656341, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3922,7 +3922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
-      value: EditorPlay
+      value: MenuPastCode
       objectReference: {fileID: 0}
     - target: {fileID: 1760104535850656341, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4748,7 +4748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
-      value: EditorPlay
+      value: MenuHelp
       objectReference: {fileID: 0}
     - target: {fileID: 1760104535850656341, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_SizeDelta.x
@@ -5062,7 +5062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
-      value: EditorPlay
+      value: MenuCredit
       objectReference: {fileID: 0}
     - target: {fileID: 1760104535850656341, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_SizeDelta.x
