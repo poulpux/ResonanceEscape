@@ -30,10 +30,16 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SEMIWALL));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
         MenuManager.I._changeLvEvent.AddListener(() => ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
+        GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
 
         ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+    }
+
+    public void F_SetGoodPlayPlayer()
+    {
+        playerObject.transform.position = currentMapData._playerPosC2;
     }
 
     private void ChangeMap(string codeMap)

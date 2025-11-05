@@ -16,6 +16,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeLeftLevel]._click2DEvent.AddListener(() => LeftClickLevel());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeRightLevel]._click2DEvent.AddListener(() => RightClickLevel());
         RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => ClickOnPlay());
+        GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
     }
 
     private void ClickOnPlay()
@@ -37,5 +38,13 @@ public class MenuManager : MonoSingleton<MenuManager>
     {
         _indexMapPlayMode = _indexMapPlayMode == GV.GameSO._allMapList.Count - 1 ? 0 : _indexMapPlayMode += 1;
         _changeLvEvent.Invoke();
+    }
+
+    private void ReturnToMenu()
+    {
+        UIMenu.SetActive(true);
+        UIPlayMode.SetActive(true);
+        camer.Lens.OrthographicSize = 7.64f;
+        camer.transform.position = Vector3.forward * -10f + Vector3.right * -2.11f;
     }
 }

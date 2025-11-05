@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
         InputSystem_.I._space._event.AddListener(()=>TryInertie());
+        GameManager.I._winTheLevelEvent.AddListener(() => { canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); });
 
         moveFeedback.FeedbacksList[0].FeedbackDuration = GV.GameSO._pulseIntervale;
     }
@@ -84,6 +85,8 @@ public class PlayerMovement : MonoBehaviour
         if(collision.transform.tag == GV.TagSO._gameWinCondition)
         {
             //écran de victoire et choix entre plein de trucs
+            //Je veux juste revenir au menu pour le moment
+            GameManager.I._winTheLevelEvent.Invoke();
         }
     }
 }

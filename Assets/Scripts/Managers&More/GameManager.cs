@@ -15,6 +15,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _overwatchEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playPlayModeEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _winTheLevelEvent = new UnityEvent();
     #endregion
 
     #region Callbacks
@@ -24,6 +25,7 @@ public class GameManager : MonoSingleton<GameManager>
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(()=>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
+        _winTheLevelEvent.AddListener(() => GoBackToMenu());
         //_state = EGameState.EDITOR;
     }
     #endregion
@@ -60,6 +62,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _state = EGameState.OVERWATCH;
         _overwatchEvent.Invoke();
+    }
+
+    private void GoBackToMenu()
+    {
+        _state = EGameState.MENUPLAYMODE;
     }
 
     #endregion
