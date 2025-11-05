@@ -78,4 +78,12 @@ public class PlayerMovement : MonoBehaviour
             lastThingWasAMove = false;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.tag == GV.TagSO._gameWinCondition)
+        {
+            //écran de victoire et choix entre plein de trucs
+        }
+    }
 }
