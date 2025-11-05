@@ -24,6 +24,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         UIPlayMode.SetActive(false);
         camer.Lens.OrthographicSize = 6f;
         camer.transform.position = Vector3.forward * -10f;
+        GameManager.I._playPlayModeEvent.Invoke();
     }
 
     private void LeftClickLevel()

@@ -33,6 +33,7 @@ TagManager:
   - MenuPlayModeRightLevel
   - MenuParameter
   - MenuPlay
+  - GameWallCollision
   layers:
   - Default
   - TransparentFX

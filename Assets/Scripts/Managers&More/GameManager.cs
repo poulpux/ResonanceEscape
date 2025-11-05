@@ -12,6 +12,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region Events
     [HideInInspector] public UnityEvent _waitingToActEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _overwatchEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playPlayModeEvent = new UnityEvent();
     #endregion
@@ -58,6 +59,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void PlayPlayMode()
     {
         _state = EGameState.OVERWATCH;
+        _overwatchEvent.Invoke();
     }
 
     #endregion

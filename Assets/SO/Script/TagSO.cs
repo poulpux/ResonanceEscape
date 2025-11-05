@@ -34,5 +34,6 @@ public class TagSO : ScriptableObject
         _menuPlayModeRightLevel,
         _menuParameter,
         _menuPlay,
+        _gameWallCollision,
         _quitParamter;
 }

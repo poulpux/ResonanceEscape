@@ -40,4 +40,5 @@ MonoBehaviour:
   _menuPlayModeRightLevel: MenuPlayModeRightLevel
   _menuParameter: MenuParameter
   _menuPlay: MenuPlay
+  _gameWallCollision: GameWallCollision
   _quitParamter: QuitParameter

@@ -14,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; canDie = true; });
         InputSystem_.I._leftClick._event.AddListener(()=>TryMove());  
+        GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
+        GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
         InputSystem_.I._space._event.AddListener(()=>TryInertie());
 
         moveFeedback.FeedbacksList[0].FeedbackDuration = GV.GameSO._pulseIntervale;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private void TryMove()
     {
         if(!canMove) return;
+        rigidBody.bodyType = RigidbodyType2D.Dynamic;
         lastThingWasAMove = true;
         rigidBody.gravityScale = 0f;
         Vector3 mousePos = UnityEngine.Input.mousePosition;
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     private void TryInertie()
     {
         if (!canMove) return;
-
+        rigidBody.bodyType = RigidbodyType2D.Dynamic;
         rigidBody.gravityScale = 1f;
         if (lastThingWasAMove)
         {
@@ -56,5 +58,24 @@ public class PlayerMovement : MonoBehaviour
             lastThingWasAMove= false;
         }
         GameManager.I._playerActEvent.Invoke();
+    }
+
+    private IEnumerator WaitPlayAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        canMove = true; canDie = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+            print("collision2");
+        if(collision.transform.tag == GV.TagSO._gameWallCollision && lastThingWasAMove)
+        {
+            print("collision");
+            moveFeedback.StopFeedbacks();
+            Vector2 inertie = posToGO - startpos;
+            rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
+            lastThingWasAMove = false;
+        }
     }
 }
