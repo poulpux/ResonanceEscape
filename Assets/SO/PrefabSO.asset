@@ -17,5 +17,5 @@ MonoBehaviour:
   _bothMap: {fileID: 2032829671979229274, guid: 099a01baf627083418647c343676b75a, type: 3}
   _player: {fileID: 6085435589950509100, guid: bab3b45dda4f36f47b69c12e5aca49c7, type: 3}
   _winCondition: {fileID: 4244083778218863383, guid: 98b36142b381fb64f902825656c1fa2f, type: 3}
-  _wall: {fileID: 2600121291672645751, guid: f43618c729cf11e41b587fb8f8a4dd13, type: 3}
+  _wall: {fileID: 8952185345663898900, guid: e49172da5f23cad488935697a6ce07ce, type: 3}
   _semiWall: {fileID: 4808832756562603759, guid: ccf35c4c13a2d0c4c989413b255086d6, type: 3}

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +21,6 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     GameObject playerObject, winconditionObject;
     List<GameObject> allObject = new List<GameObject>();
-    List<Vector2> posablePosition = new List<Vector2>();
 
     private void Start()
     {
@@ -30,9 +28,10 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WINCONDITION));
         RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
         RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SEMIWALL));
-
+        RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
+        currentMapData = ReadMap("0$0,0$3,0$-5,0€-4,0€-3,0€-2,0€-4,1€-3,1€-3,2€-4,2€-4,3€-3,3€-3,4€-4,4€-5,-1€-4,-1€-3,-1€-2,-1$");
         InstantiateAllMap();
     }
 
@@ -46,49 +45,125 @@ public class EditorManager : MonoSingleton<EditorManager>
     {
         if (GameManager.I._state != EGameState.EDITOR) return;
 
-        if(selectionType == EEditorSelectionType.PLAYER)
-        {
-            Vector3 mousePos = UnityEngine.Input.mousePosition;
-            mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        if (selectionType == EEditorSelectionType.PLAYER)
+            VerifAllPlayerAndWin(1, ref playerObject);
+        else if (selectionType == EEditorSelectionType.WINCONDITION)
+            VerifAllPlayerAndWin(2, ref winconditionObject);
+        else if (selectionType == EEditorSelectionType.WALL || selectionType == EEditorSelectionType.SEMIWALL)
+            VerifAllWallAndOther();
+    }
 
-            if (CanMovePlayer(new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y))))
+    private void VerifAllWallAndOther()
+    {
+        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        mousePos.z = 10f; // profondeur depuis la caméra
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        // Décale ton repère pour viser le centre de chaque tile
+        worldPos.x = Mathf.Floor(worldPos.x)/* + 0.5f*/;
+        worldPos.y = Mathf.Floor(worldPos.y) /*+ 0.5f*/;
+
+        Vector2 pos = new Vector2(worldPos.x, worldPos.y);
+
+        if(CanMovePlayer(Vector2Int.RoundToInt(pos), 0,true))
+{
+            if (VerifWalls(pos, 0.33f) && VerifPlayerAndWincondition(pos, 0.33f))
             {
-                //Verif les murs maintenant !
-                playerObject.transform.position = new Vector3(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y), -0.4f);
+                GameObject tile = null;
+                if (selectionType == EEditorSelectionType.WALL)
+                {
+                    tile = Instantiate(GV.PrefabSO._wall);
+                    currentMapData._wallPosList.Add(pos);
+                }
+                else if(selectionType == EEditorSelectionType.SEMIWALL)
+                {
+                    tile = Instantiate(GV.PrefabSO._semiWall);
+                    currentMapData._semiWallPosList.Add((0,pos));
+                }
+                tile.transform.position = new Vector3(pos.x, pos.y, 0f);
+                allObject.Add(tile);
             }
-            //Verifier si on peut poser mon bloc à l'endroit indiqué
         }
     }
 
-    private bool CanMovePlayer(Vector2Int pos)
+    private void VerifAllPlayerAndWin(int thikness, ref GameObject objectToMove)
+    {
+        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2Int posInt = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
+        if (CanMovePlayer(posInt, thikness))
+        {
+            //Verif les murs maintenant !
+            if (VerifWalls(posInt, thikness))
+            {
+                objectToMove.transform.position = new Vector3(posInt.x, posInt.y, -0.4f + thikness * 0.1f);
+
+                if (thikness == 1)
+                    currentMapData._playerPosC2 = new Vector2(posInt.x, posInt.y);
+                else 
+                    currentMapData._winConditionC2 = new Vector2(posInt.x, posInt.y);
+
+            }
+        }
+    }
+
+    private bool CanMovePlayer(Vector2 pos, int thinkness, bool cube = false)
     {
         //limitMap
-        if(!VerifLimitMap(pos, 1))
+        if(!VerifLimitMap(pos, thinkness, cube))
             return false;
 
         return true;
     }
 
-    private bool VerifLimitMap(Vector2Int pos, int thinkness)
+    private bool VerifLimitMap(Vector2 pos, int thinkness, bool cube = false)
     {
         if (currentMapData._mapTypeC1 == 0)
         {
-            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness && pos.y >= -5 + thinkness && pos.y <= 5 - thinkness)
+            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness - (cube ? 1 : 0) && pos.y >= -5 + thinkness && pos.y <= 5 - thinkness-(cube ? 1 : 0))
                 return true;
         }
         else if (currentMapData._mapTypeC1 == 1)
         {
-            if (pos.x >= -5 + thinkness && pos.x <= 5 - thinkness && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness)
+            if (pos.x >= -5 + thinkness && pos.x <= 5 - thinkness - (cube ? 1 : 0) && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness - (cube ? 1 : 0))
                 return true;
         }
         else if (currentMapData._mapTypeC1 == 2)
         {
-            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness)
+            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness - (cube ? 1 : 0) && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness - (cube ? 1 : 0))
                 return true;
         }
 
         return false;
+    }
+
+    private bool VerifWalls(Vector2 pos, float thinkness)
+    {
+        foreach (var item in currentMapData._wallPosList)
+        {
+            if (Vector2.Distance(item, pos) < (float)thinkness)
+                return false;
+        }
+        foreach (var item in currentMapData._semiWallPosList)
+        {
+            if (Vector2.Distance(item.pos, pos) < (float)thinkness)
+                return false;
+        }
+
+
+        return true;
+    }
+
+    private bool VerifPlayerAndWincondition(Vector2 pos, float thinkness)
+    {
+        if (Vector2.Distance(playerObject.transform.position, pos) < (float)thinkness + 1f)
+            return false;
+        
+        if (Vector2.Distance(winconditionObject.transform.position, pos) < (float)thinkness + 2f)
+            return false;
+
+        return true;
     }
 
     private void InstantiateAllMap()
@@ -99,10 +174,10 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         allObject.Add(map);
 
-        InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.3f);
+        InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
 
         GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
-        winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.1f;
+        winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.3f;
         winconditionObject = winCondition;
         allObject.Add(winCondition);
 
@@ -176,7 +251,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         return data;
     }
 
-    private void InstantiatePlayer(Vector2 pos)
+    private void InstantiatePlayer(Vector3 pos)
     {
         GameObject player = Instantiate(GV.PrefabSO._player, shapes.transform);
         player.transform.position = pos;
