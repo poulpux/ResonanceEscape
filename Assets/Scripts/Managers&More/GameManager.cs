@@ -7,12 +7,13 @@ public class GameManager : MonoSingleton<GameManager>
 {
     #region ValueGeneral
     public ELangues _langueActuelle = ELangues.ENGLISH;
-    public EGameState _state = EGameState.PLAYMODE;
+    public EGameState _state = EGameState.MENUPLAYMODE;
     #endregion
 
     #region Events
     [HideInInspector] public UnityEvent _waitingToActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _playPlayModeEvent = new UnityEvent();
     #endregion
 
     #region Callbacks
@@ -21,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(()=>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
+        _playPlayModeEvent.AddListener(() => PlayPlayMode());
         //_state = EGameState.EDITOR;
     }
     #endregion
@@ -51,6 +53,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         yield return new WaitForEndOfFrame();
         F_WaitingAction();
+    }
+
+    private void PlayPlayMode()
+    {
+        _state = EGameState.OVERWATCH;
     }
 
     #endregion

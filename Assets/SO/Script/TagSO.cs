@@ -33,5 +33,6 @@ public class TagSO : ScriptableObject
         _menuPlayModeLeftLevel,
         _menuPlayModeRightLevel,
         _menuParameter,
+        _menuPlay,
         _quitParamter;
 }

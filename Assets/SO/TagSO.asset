@@ -39,4 +39,5 @@ MonoBehaviour:
   _menuPlayModeLeftLevel: MenuPlayModeLeftLevel
   _menuPlayModeRightLevel: MenuPlayModeRightLevel
   _menuParameter: MenuParameter
+  _menuPlay: MenuPlay
   _quitParamter: QuitParameter

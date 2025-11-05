@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    bool canMove;
+    bool canMove, canDie;
     bool lastThingWasAMove;
     public Vector3 startpos, posToGO;
     [SerializeField] MMF_Player moveFeedback;
@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        GameManager.I._waitingToActEvent.AddListener(() => canMove = true);
+        GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; canDie = true; });
         InputSystem_.I._leftClick._event.AddListener(()=>TryMove());  
         InputSystem_.I._space._event.AddListener(()=>TryInertie());
 

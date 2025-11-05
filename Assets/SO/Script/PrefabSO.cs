@@ -8,6 +8,9 @@ public class PrefabSO : ScriptableObject
     [Header("Map")]
     public GameObject _largeMap;
     public GameObject _longMap, _bothMap;
+    [Header("Grille")]
+    public GameObject _largeMapGrille;
+    public GameObject _longMapGrille, _bothMapGrille;
     [Header("Editor")]
     public GameObject _player;
     public GameObject _winCondition, _wall, _semiWall;

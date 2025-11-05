@@ -32,6 +32,7 @@ TagManager:
   - MenuPlayModeLeftLevel
   - MenuPlayModeRightLevel
   - MenuParameter
+  - MenuPlay
   layers:
   - Default
   - TransparentFX
