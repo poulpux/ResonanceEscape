@@ -55,30 +55,51 @@ public class EditorManager : MonoSingleton<EditorManager>
     private void VerifAllWallAndOther()
     {
         Vector3 mousePos = UnityEngine.Input.mousePosition;
-        mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
+        mousePos.z = 10f; // profondeur depuis la caméra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        Vector2Int pos = new Vector2Int(/*Mathf.RoundToInt*/(int)(worldPos.x), /*Mathf.RoundToInt*/(int)(worldPos.y))/*+Vector2.right*0.5f+Vector2.up*0.5f*/;
-        if(CanMovePlayer(pos,0))
-        {
-            if (VerifWalls(pos + Vector2.right /** 0.5f + Vector2.up * 0.5f*/, 0.33f))
+
+        // Décale ton repère pour viser le centre de chaque tile
+        worldPos.x = Mathf.Floor(worldPos.x) + 0.5f;
+        worldPos.y = Mathf.Floor(worldPos.y) + 0.5f;
+
+        Vector2 pos = new Vector2(worldPos.x, worldPos.y);
+
+        if(CanMovePlayer(Vector2Int.RoundToInt(pos), 0))
+{
+            if (VerifWalls(pos, 0.33f))
             {
                 GameObject tile = null;
-                if(selectionType == EEditorSelectionType.WALL)
+                if (selectionType == EEditorSelectionType.WALL)
                 {
                     tile = Instantiate(GV.PrefabSO._wall);
-                    tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
-                    currentMapData._wallPosList.Add(new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/));
-                }
-                else if(selectionType == EEditorSelectionType.SEMIWALL)
-                {
-                    tile = Instantiate(GV.PrefabSO._semiWall);
-                    tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
-                    //Ajouter la direction plus tard
-                    currentMapData._semiWallPosList.Add((0,new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/)));
+                    tile.transform.position = new Vector3(pos.x, pos.y, 0f);
+                    currentMapData._wallPosList.Add(pos);
                 }
                 allObject.Add(tile);
             }
         }
+
+        //if (CanMovePlayer(pos,0))
+        //{
+        //    if (VerifWalls(pos + Vector2.right /** 0.5f + Vector2.up * 0.5f*/, 0.33f))
+        //    {
+        //        GameObject tile = null;
+        //        if(selectionType == EEditorSelectionType.WALL)
+        //        {
+        //            tile = Instantiate(GV.PrefabSO._wall);
+        //            tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
+        //            currentMapData._wallPosList.Add(new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/));
+        //        }
+        //        else if(selectionType == EEditorSelectionType.SEMIWALL)
+        //        {
+        //            tile = Instantiate(GV.PrefabSO._semiWall);
+        //            tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
+        //            //Ajouter la direction plus tard
+        //            currentMapData._semiWallPosList.Add((0,new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/)));
+        //        }
+        //        allObject.Add(tile);
+        //    }
+        //}
     }
 
     private void VerifAllPlayerAndWin(int thikness, ref GameObject objectToMove)
@@ -103,7 +124,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         }
     }
 
-    private bool CanMovePlayer(Vector2Int pos, int thinkness)
+    private bool CanMovePlayer(Vector2 pos, int thinkness)
     {
         //limitMap
         if(!VerifLimitMap(pos, thinkness))
@@ -112,7 +133,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         return true;
     }
 
-    private bool VerifLimitMap(Vector2Int pos, int thinkness)
+    private bool VerifLimitMap(Vector2 pos, int thinkness)
     {
         if (currentMapData._mapTypeC1 == 0)
         {
