@@ -41,4 +41,6 @@ MonoBehaviour:
   _menuParameter: MenuParameter
   _menuPlay: MenuPlay
   _gameWallCollision: GameWallCollision
+  _gameWinCondition: GameWinCondition
+  _menuResetMap: MenuResetMap
   _quitParamter: QuitParameter

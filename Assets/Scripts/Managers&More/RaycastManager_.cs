@@ -70,6 +70,7 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._menuEditorMode);
         InstantiateOneTag(GV.TagSO._menuPastCode);
         InstantiateOneTag(GV.TagSO._menuHelp);
+        InstantiateOneTag(GV.TagSO._menuResetMap);
         InstantiateOneTag(GV.TagSO._menuCredit);
         InstantiateOneTag(GV.TagSO._menuSupport);
         InstantiateOneTag(GV.TagSO._menuPlayModeLeftLevel);
