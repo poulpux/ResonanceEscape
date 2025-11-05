@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +21,6 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     GameObject playerObject, winconditionObject;
     List<GameObject> allObject = new List<GameObject>();
-    List<Vector2> posablePosition = new List<Vector2>();
 
     private void Start()
     {
@@ -46,25 +44,69 @@ public class EditorManager : MonoSingleton<EditorManager>
     {
         if (GameManager.I._state != EGameState.EDITOR) return;
 
-        if(selectionType == EEditorSelectionType.PLAYER)
-        {
-            Vector3 mousePos = UnityEngine.Input.mousePosition;
-            mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        if (selectionType == EEditorSelectionType.PLAYER)
+            VerifAllPlayerAndWin(1, ref playerObject);
+        else if (selectionType == EEditorSelectionType.WINCONDITION)
+            VerifAllPlayerAndWin(2, ref winconditionObject);
+        else if (selectionType == EEditorSelectionType.WALL || selectionType == EEditorSelectionType.SEMIWALL)
+            VerifAllWallAndOther();
+    }
 
-            if (CanMovePlayer(new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y))))
+    private void VerifAllWallAndOther()
+    {
+        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2Int pos = new Vector2Int(/*Mathf.RoundToInt*/(int)(worldPos.x), /*Mathf.RoundToInt*/(int)(worldPos.y))/*+Vector2.right*0.5f+Vector2.up*0.5f*/;
+        if(CanMovePlayer(pos,0))
+        {
+            if (VerifWalls(pos + Vector2.right /** 0.5f + Vector2.up * 0.5f*/, 0.33f))
             {
-                //Verif les murs maintenant !
-                playerObject.transform.position = new Vector3(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y), -0.4f);
+                GameObject tile = null;
+                if(selectionType == EEditorSelectionType.WALL)
+                {
+                    tile = Instantiate(GV.PrefabSO._wall);
+                    tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
+                    currentMapData._wallPosList.Add(new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/));
+                }
+                else if(selectionType == EEditorSelectionType.SEMIWALL)
+                {
+                    tile = Instantiate(GV.PrefabSO._semiWall);
+                    tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
+                    //Ajouter la direction plus tard
+                    currentMapData._semiWallPosList.Add((0,new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/)));
+                }
+                allObject.Add(tile);
             }
-            //Verifier si on peut poser mon bloc à l'endroit indiqué
         }
     }
 
-    private bool CanMovePlayer(Vector2Int pos)
+    private void VerifAllPlayerAndWin(int thikness, ref GameObject objectToMove)
+    {
+        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2Int posInt = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
+        if (CanMovePlayer(posInt, thikness))
+        {
+            //Verif les murs maintenant !
+            if (VerifWalls(posInt, thikness))
+            {
+                objectToMove.transform.position = new Vector3(posInt.x, posInt.y, -0.4f + thikness * 0.1f);
+
+                if (thikness == 1)
+                    currentMapData._playerPosC2 = new Vector2(posInt.x, posInt.y);
+                else 
+                    currentMapData._winConditionC2 = new Vector2(posInt.x, posInt.y);
+
+            }
+        }
+    }
+
+    private bool CanMovePlayer(Vector2Int pos, int thinkness)
     {
         //limitMap
-        if(!VerifLimitMap(pos, 1))
+        if(!VerifLimitMap(pos, thinkness))
             return false;
 
         return true;
@@ -89,6 +131,23 @@ public class EditorManager : MonoSingleton<EditorManager>
         }
 
         return false;
+    }
+
+    private bool VerifWalls(Vector2 pos, float thinkness)
+    {
+        foreach (var item in currentMapData._wallPosList)
+        {
+            if (Vector2.Distance(item, pos) < (float)thinkness)
+                return false;
+        }
+        foreach (var item in currentMapData._semiWallPosList)
+        {
+            if (Vector2.Distance(item.pos, pos) < (float)thinkness)
+                return false;
+        }
+
+
+        return true;
     }
 
     private void InstantiateAllMap()
