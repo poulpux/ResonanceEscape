@@ -28,9 +28,10 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WINCONDITION));
         RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
         RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SEMIWALL));
-
+        RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
+        currentMapData = ReadMap("0$0,0$3,0$-5,0€-4,0€-3,0€-2,0€-4,1€-3,1€-3,2€-4,2€-4,3€-3,3€-3,4€-4,4€-5,-1€-4,-1€-3,-1€-2,-1$");
         InstantiateAllMap();
     }
 
@@ -59,47 +60,30 @@ public class EditorManager : MonoSingleton<EditorManager>
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
         // Décale ton repère pour viser le centre de chaque tile
-        worldPos.x = Mathf.Floor(worldPos.x) + 0.5f;
-        worldPos.y = Mathf.Floor(worldPos.y) + 0.5f;
+        worldPos.x = Mathf.Floor(worldPos.x)/* + 0.5f*/;
+        worldPos.y = Mathf.Floor(worldPos.y) /*+ 0.5f*/;
 
         Vector2 pos = new Vector2(worldPos.x, worldPos.y);
 
-        if(CanMovePlayer(Vector2Int.RoundToInt(pos), 0))
+        if(CanMovePlayer(Vector2Int.RoundToInt(pos), 0,true))
 {
-            if (VerifWalls(pos, 0.33f))
+            if (VerifWalls(pos, 0.33f) && VerifPlayerAndWincondition(pos, 0.33f))
             {
                 GameObject tile = null;
                 if (selectionType == EEditorSelectionType.WALL)
                 {
                     tile = Instantiate(GV.PrefabSO._wall);
-                    tile.transform.position = new Vector3(pos.x, pos.y, 0f);
                     currentMapData._wallPosList.Add(pos);
                 }
+                else if(selectionType == EEditorSelectionType.SEMIWALL)
+                {
+                    tile = Instantiate(GV.PrefabSO._semiWall);
+                    currentMapData._semiWallPosList.Add((0,pos));
+                }
+                tile.transform.position = new Vector3(pos.x, pos.y, 0f);
                 allObject.Add(tile);
             }
         }
-
-        //if (CanMovePlayer(pos,0))
-        //{
-        //    if (VerifWalls(pos + Vector2.right /** 0.5f + Vector2.up * 0.5f*/, 0.33f))
-        //    {
-        //        GameObject tile = null;
-        //        if(selectionType == EEditorSelectionType.WALL)
-        //        {
-        //            tile = Instantiate(GV.PrefabSO._wall);
-        //            tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
-        //            currentMapData._wallPosList.Add(new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/));
-        //        }
-        //        else if(selectionType == EEditorSelectionType.SEMIWALL)
-        //        {
-        //            tile = Instantiate(GV.PrefabSO._semiWall);
-        //            tile.transform.position = new Vector3(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/, 0f);
-        //            //Ajouter la direction plus tard
-        //            currentMapData._semiWallPosList.Add((0,new Vector2(pos.x /*+ 0.5f*/, pos.y /*+ 0.5f*/)));
-        //        }
-        //        allObject.Add(tile);
-        //    }
-        //}
     }
 
     private void VerifAllPlayerAndWin(int thikness, ref GameObject objectToMove)
@@ -124,30 +108,30 @@ public class EditorManager : MonoSingleton<EditorManager>
         }
     }
 
-    private bool CanMovePlayer(Vector2 pos, int thinkness)
+    private bool CanMovePlayer(Vector2 pos, int thinkness, bool cube = false)
     {
         //limitMap
-        if(!VerifLimitMap(pos, thinkness))
+        if(!VerifLimitMap(pos, thinkness, cube))
             return false;
 
         return true;
     }
 
-    private bool VerifLimitMap(Vector2 pos, int thinkness)
+    private bool VerifLimitMap(Vector2 pos, int thinkness, bool cube = false)
     {
         if (currentMapData._mapTypeC1 == 0)
         {
-            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness && pos.y >= -5 + thinkness && pos.y <= 5 - thinkness)
+            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness - (cube ? 1 : 0) && pos.y >= -5 + thinkness && pos.y <= 5 - thinkness-(cube ? 1 : 0))
                 return true;
         }
         else if (currentMapData._mapTypeC1 == 1)
         {
-            if (pos.x >= -5 + thinkness && pos.x <= 5 - thinkness && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness)
+            if (pos.x >= -5 + thinkness && pos.x <= 5 - thinkness - (cube ? 1 : 0) && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness - (cube ? 1 : 0))
                 return true;
         }
         else if (currentMapData._mapTypeC1 == 2)
         {
-            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness)
+            if (pos.x >= -10 + thinkness && pos.x <= 10 - thinkness - (cube ? 1 : 0) && pos.y >= -10 + thinkness && pos.y <= 10 - thinkness - (cube ? 1 : 0))
                 return true;
         }
 
@@ -171,6 +155,17 @@ public class EditorManager : MonoSingleton<EditorManager>
         return true;
     }
 
+    private bool VerifPlayerAndWincondition(Vector2 pos, float thinkness)
+    {
+        if (Vector2.Distance(playerObject.transform.position, pos) < (float)thinkness + 1f)
+            return false;
+        
+        if (Vector2.Distance(winconditionObject.transform.position, pos) < (float)thinkness + 2f)
+            return false;
+
+        return true;
+    }
+
     private void InstantiateAllMap()
     {
         GameObject map = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMap :
@@ -179,10 +174,10 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         allObject.Add(map);
 
-        InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.3f);
+        InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
 
         GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
-        winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.1f;
+        winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.3f;
         winconditionObject = winCondition;
         allObject.Add(winCondition);
 
@@ -256,7 +251,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         return data;
     }
 
-    private void InstantiatePlayer(Vector2 pos)
+    private void InstantiatePlayer(Vector3 pos)
     {
         GameObject player = Instantiate(GV.PrefabSO._player, shapes.transform);
         player.transform.position = pos;

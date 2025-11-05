@@ -13,41 +13,6 @@ MonoBehaviour:
   m_Name: vFolders Data
   m_EditorClassIdentifier: VFolders:VFolders:VFoldersData
   folderDatas_byGuid:
-    keys:
-    - afabc6899c78eb242b567da98a34fe0a
-    - dc361faebb9e0354385cdd1f4511b9e3
-    - 65c18d699fcadad459bc3e16558c2bd2
-    - e7159cdc21de83b40bf38eb7f99dceac
-    - a7677e34b6d37aa4e9602f4579811790
-    - bfbeaa08413217f4fb282a25d55a547e
-    - 875beda806b6bf4488cefdec124b635d
-    values:
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 1
-      isIconRecursive: 0
-      isColorRecursive: 0
+    keys: []
+    values: []
   bookmarks: []
