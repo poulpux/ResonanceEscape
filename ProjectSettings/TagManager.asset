@@ -23,6 +23,17 @@ TagManager:
   - EditorErase
   - EditorSave
   - EditorClean
+  - MenuPlayMode
+  - MenuEditorMode
+  - MenuPastCode
+  - MenuHelp
+  - MenuCredit
+  - MenuSupport
+  - MenuPlayModeLeftLevel
+  - MenuPlayModeRightLevel
+  - MenuParameter
+  - MenuPlay
+  - GameWallCollision
   layers:
   - Default
   - TransparentFX

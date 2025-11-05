@@ -65,6 +65,17 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._editorErase);
         InstantiateOneTag(GV.TagSO._editorSave);
         InstantiateOneTag(GV.TagSO._editorClean);
+
+        InstantiateOneTag(GV.TagSO._menuPlayMode);
+        InstantiateOneTag(GV.TagSO._menuEditorMode);
+        InstantiateOneTag(GV.TagSO._menuPastCode);
+        InstantiateOneTag(GV.TagSO._menuHelp);
+        InstantiateOneTag(GV.TagSO._menuCredit);
+        InstantiateOneTag(GV.TagSO._menuSupport);
+        InstantiateOneTag(GV.TagSO._menuPlayModeLeftLevel);
+        InstantiateOneTag(GV.TagSO._menuPlayModeRightLevel);
+        InstantiateOneTag(GV.TagSO._menuParameter);
+        InstantiateOneTag(GV.TagSO._menuPlay);
     }
     private void Click() =>
         HandleRaycast(UI, TwoD, ThreeD, true);

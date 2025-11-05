@@ -15,6 +15,9 @@ MonoBehaviour:
   _largeMap: {fileID: 7253672785439636849, guid: 6481e8496ede9c9439cb2bfb5bb50ad3, type: 3}
   _longMap: {fileID: 1945674253028259399, guid: c5d8b3a86257ff64d94b0408a8e820df, type: 3}
   _bothMap: {fileID: 2032829671979229274, guid: 099a01baf627083418647c343676b75a, type: 3}
+  _largeMapGrille: {fileID: 1146215921147361192, guid: ad03ecbe8ae89a2498306f8cb545ac0a, type: 3}
+  _longMapGrille: {fileID: 3211320990881968339, guid: 3dd4b87404afac64aac185bc830d7ad0, type: 3}
+  _bothMapGrille: {fileID: 5854284999488506896, guid: 8b02ec9d3da274d4cbfaab6bd33459ae, type: 3}
   _player: {fileID: 6085435589950509100, guid: bab3b45dda4f36f47b69c12e5aca49c7, type: 3}
   _winCondition: {fileID: 4244083778218863383, guid: 98b36142b381fb64f902825656c1fa2f, type: 3}
   _wall: {fileID: 8952185345663898900, guid: e49172da5f23cad488935697a6ce07ce, type: 3}

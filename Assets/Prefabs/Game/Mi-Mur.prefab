@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8317151489027709373}
   m_Layer: 0
   m_Name: Mi-Mur
-  m_TagString: Untagged
+  m_TagString: GameWallCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

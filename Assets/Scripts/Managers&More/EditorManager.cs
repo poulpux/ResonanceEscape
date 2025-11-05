@@ -29,9 +29,28 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
         RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SEMIWALL));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
+        MenuManager.I._changeLvEvent.AddListener(() => ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
+        GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
-        currentMapData = ReadMap("0$0,0$3,0$-5,0€-4,0€-3,0€-2,0€-4,1€-3,1€-3,2€-4,2€-4,3€-3,3€-3,4€-4,4€-5,-1€-4,-1€-3,-1€-2,-1$");
+
+        ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+    }
+
+    public void F_SetGoodPlayPlayer()
+    {
+        playerObject.transform.position = currentMapData._playerPosC2;
+    }
+
+    private void ChangeMap(string codeMap)
+    {
+        if(allObject.Count != 0)
+        {
+            for (int i = allObject.Count-1; i >= 0; i--)
+                Destroy(allObject[i]); 
+        }
+
+        currentMapData = ReadMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
         InstantiateAllMap();
     }
 
@@ -157,10 +176,10 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private bool VerifPlayerAndWincondition(Vector2 pos, float thinkness)
     {
-        if (Vector2.Distance(playerObject.transform.position, pos) < (float)thinkness + 1f)
+        if (Vector2.Distance(playerObject.transform.position, pos) < (float)thinkness + 0.66)
             return false;
         
-        if (Vector2.Distance(winconditionObject.transform.position, pos) < (float)thinkness + 2f)
+        if (Vector2.Distance(winconditionObject.transform.position, pos) < (float)thinkness + 1.66f)
             return false;
 
         return true;
