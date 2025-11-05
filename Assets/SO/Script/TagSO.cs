@@ -24,5 +24,14 @@ public class TagSO : ScriptableObject
         _editorErase,
         _editorSave,
         _editorClean,
+        _menuPlayMode,
+        _menuEditorMode,
+        _menuPastCode,
+        _menuHelp,
+        _menuCredit,
+        _menuSupport,
+        _menuPlayModeLeftLevel,
+        _menuPlayModeRightLevel,
+        _menuParameter,
         _quitParamter;
 }
