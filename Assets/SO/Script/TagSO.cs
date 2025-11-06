@@ -38,5 +38,7 @@ public class TagSO : ScriptableObject
         _gameWinCondition,
         _menuResetMap,
         _gameDie,
+        _gameInertieBoost,
+        _gameStar,
         _quitParamter;
 }

@@ -37,6 +37,8 @@ TagManager:
   - GameWinCondition
   - MenuResetMap
   - GameDie
+  - GameInertieBoost
+  - GameStar
   layers:
   - Default
   - TransparentFX

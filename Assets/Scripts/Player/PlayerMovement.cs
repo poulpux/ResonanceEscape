@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
             EditorManager.I.F_ResetMap();
             //Feedback You Dead
         }
+
        
 
     }
@@ -93,5 +94,15 @@ public class PlayerMovement : MonoBehaviour
             //Je veux juste revenir au menu pour le moment
             GameManager.I._winTheLevelEvent.Invoke();
         }
+        else if(collision.transform.tag == GV.TagSO._gameInertieBoost)
+        {
+            if(!lastThingWasAMove)
+                rigidBody.AddForce(rigidBody.velocity, ForceMode2D.Impulse);
+        }
+        else if(collision.transform.tag == GV.TagSO._gameStar)
+        {
+            //Super, t'as gagné une étoile
+        }
+
     }
 }
