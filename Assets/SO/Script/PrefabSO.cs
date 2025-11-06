@@ -13,5 +13,5 @@ public class PrefabSO : ScriptableObject
     public GameObject _longMapGrille, _bothMapGrille;
     [Header("Editor")]
     public GameObject _player;
-    public GameObject _winCondition, _wall, _semiWall;
+    public GameObject _winCondition, _wall, _semiWall, _murBloobPlein, _murBloobVide, _bloobPlein, _bloobVide, _piks, _projectile;
 }

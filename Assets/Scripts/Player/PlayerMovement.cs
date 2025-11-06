@@ -69,15 +69,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-            print("collision2");
         if(collision.transform.tag == GV.TagSO._gameWallCollision && lastThingWasAMove)
         {
-            print("collision");
             moveFeedback.StopFeedbacks();
             Vector2 inertie = posToGO - startpos;
             rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
             lastThingWasAMove = false;
         }
+        else if(collision.transform.tag == GV.TagSO._gameDie && canDie)
+        {
+            EditorManager.I.F_ResetMap();
+            //Feedback You Dead
+        }
+       
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

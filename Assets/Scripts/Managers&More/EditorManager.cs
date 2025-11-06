@@ -42,6 +42,11 @@ public class EditorManager : MonoSingleton<EditorManager>
         playerObject.transform.position = currentMapData._playerPosC2;
     }
 
+    public void F_ResetMap()
+    {
+        ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+    }
+
     private void ChangeMap(string codeMap)
     {
         if(allObject.Count != 0)
