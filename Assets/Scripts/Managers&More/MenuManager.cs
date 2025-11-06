@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using static EditorManager;
 
 public class MenuManager : MonoSingleton<MenuManager>
 {
@@ -13,6 +14,14 @@ public class MenuManager : MonoSingleton<MenuManager>
 
     void Start()
     {
+        RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() =>
+        {
+            UIMenu.SetActive(false);
+            UIPlayMode.SetActive(false);
+            UIEditMode.SetActive(true);
+            camer.Lens.OrthographicSize = 7f;
+            camer.transform.position = Vector3.forward * -10f + Vector3.right * -2.11f;
+        });
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeLeftLevel]._click2DEvent.AddListener(() => LeftClickLevel());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeRightLevel]._click2DEvent.AddListener(() => RightClickLevel());
         RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => ClickOnPlay());
