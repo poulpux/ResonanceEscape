@@ -11,6 +11,13 @@ public class EditorManager : MonoSingleton<EditorManager>
         public Vector2 _winConditionC2 = Vector2.right*3f;
         public List<Vector2> _wallPosList = new List<Vector2>();
         public List<(int type, Vector2 pos)> _semiWallPosList = new List<(int, Vector2)>();
+
+        public List<(int type, Vector2 pos)> _murBlobPosList = new List<(int, Vector2)>();
+        public List<(int type, Vector2 pos)> _blobPosList = new List<(int, Vector2)>();
+        public List<Vector2> _piksPosList = new List<Vector2>();
+        public List<(int type, Vector2 pos)> _projectilePosList = new List<(int, Vector2)>();
+        public List<Vector2> _starPosList = new List<Vector2>();
+        public List<Vector2> _blackHolePosList = new List<Vector2>();
     }
 
     [SerializeField] GameObject shapes;
@@ -28,6 +35,13 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WINCONDITION));
         RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
         RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SEMIWALL));
+        RaycastManager_.I.allTag[GV.TagSO._editorBloobWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALLBLOOB));
+        RaycastManager_.I.allTag[GV.TagSO._editorBloob]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.BLOOB));
+        RaycastManager_.I.allTag[GV.TagSO._editorSpike]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.SPIKS));
+        RaycastManager_.I.allTag[GV.TagSO._editorProjectile]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.PROJECTILE));
+        RaycastManager_.I.allTag[GV.TagSO._editorInertieBoost]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.INERTIEBOOST));
+        RaycastManager_.I.allTag[GV.TagSO._editorStar]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.STAR));
+        RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.BLACKHOLE));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
         MenuManager.I._changeLvEvent.AddListener(() => ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
@@ -40,6 +54,13 @@ public class EditorManager : MonoSingleton<EditorManager>
     public void F_SetGoodPlayPlayer()
     {
         playerObject.transform.position = currentMapData._playerPosC2;
+        Rigidbody2D playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
+        playerRigidBody.velocity = Vector3.zero;
+    }
+
+    public void F_ResetMap()
+    {
+        ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
 
     private void ChangeMap(string codeMap)
@@ -68,7 +89,15 @@ public class EditorManager : MonoSingleton<EditorManager>
             VerifAllPlayerAndWin(1, ref playerObject);
         else if (selectionType == EEditorSelectionType.WINCONDITION)
             VerifAllPlayerAndWin(2, ref winconditionObject);
-        else if (selectionType == EEditorSelectionType.WALL || selectionType == EEditorSelectionType.SEMIWALL)
+        else if (selectionType == EEditorSelectionType.WALL 
+            || selectionType == EEditorSelectionType.SEMIWALL
+            || selectionType == EEditorSelectionType.WALLBLOOB
+            || selectionType == EEditorSelectionType.BLOOB
+            || selectionType == EEditorSelectionType.SPIKS
+            || selectionType == EEditorSelectionType.PROJECTILE
+            || selectionType == EEditorSelectionType.INERTIEBOOST
+            || selectionType == EEditorSelectionType.STAR
+            || selectionType == EEditorSelectionType.BLACKHOLE)
             VerifAllWallAndOther();
     }
 

@@ -41,4 +41,17 @@ MonoBehaviour:
   _menuParameter: MenuParameter
   _menuPlay: MenuPlay
   _gameWallCollision: GameWallCollision
+  _gameWinCondition: GameWinCondition
+  _menuResetMap: MenuResetMap
+  _gameDie: GameDie
+  _gameInertieBoost: GameInertieBoost
+  _gameStar: GameStar
+  _editorBloobWall: EditorBloobWall
+  _editorBloob: EditorBloob
+  _editorSpike: EditorSpike
+  _editorProjectile: EditorProjectile
+  _editorInertieBoost: EditorInertieBoost
+  _editorStar: EditorStar
+  _gameBlackHole: GameBlackHole
+  _editorBlackHole: EditorBlackHole
   _quitParamter: QuitParameter

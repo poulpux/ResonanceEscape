@@ -5,16 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TagSO", menuName = "SO/Tag")]
 public class TagSO : ScriptableObject
 {
-    public string 
-        _playAgain, 
-        _reviewBoard, 
-        _backToMenu, 
-        _giveATips, 
-        _parameter,  
-        _mode, 
-        _play, 
-        _crédit, 
-        _quit, 
+    public string
+        _playAgain,
+        _reviewBoard,
+        _backToMenu,
+        _giveATips,
+        _parameter,
+        _mode,
+        _play,
+        _crédit,
+        _quit,
         _editorPlayer,
         _editorWinCondition,
         _editorWall,
@@ -36,5 +36,17 @@ public class TagSO : ScriptableObject
         _menuPlay,
         _gameWallCollision,
         _gameWinCondition,
+        _menuResetMap,
+        _gameDie,
+        _gameInertieBoost,
+        _gameStar,
+        _editorBloobWall,
+        _editorBloob,
+        _editorSpike,
+        _editorProjectile,
+        _editorInertieBoost,
+        _editorStar,
+        _gameBlackHole,
+        _editorBlackHole,
         _quitParamter;
 }
