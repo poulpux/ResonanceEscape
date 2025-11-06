@@ -16,6 +16,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playPlayModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _winTheLevelEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _enterInEditModeEvent = new UnityEvent();
     #endregion
 
     #region Callbacks
@@ -23,9 +24,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
 
         //StartCoroutine(WaitASecond());
-        _playerActEvent.AddListener(()=>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
+        _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
         _winTheLevelEvent.AddListener(() => GoBackToMenu());
+        RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.MENUEDITORMODE; _enterInEditModeEvent.Invoke(); });
+        RaycastManager_.I.allTag[GV.TagSO._menuPlayMode]._click2DEvent.AddListener(() => _state = EGameState.MENUPLAYMODE);
         //_state = EGameState.EDITOR;
     }
     #endregion

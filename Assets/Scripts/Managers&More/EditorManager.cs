@@ -31,6 +31,11 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private void Start()
     {
+        GameManager.I._enterInEditModeEvent.AddListener(() => 
+        {
+                ChangeMap(WriteMap(new MapData())); 
+        });
+     
         RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.PLAYER));
         RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WINCONDITION));
         RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
@@ -65,13 +70,14 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private void ChangeMap(string codeMap)
     {
+        print("changeMaP");
         if(allObject.Count != 0)
         {
             for (int i = allObject.Count-1; i >= 0; i--)
                 Destroy(allObject[i]); 
         }
 
-        currentMapData = ReadMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+        currentMapData = ReadMap(codeMap);
         InstantiateAllMap();
     }
 
@@ -199,6 +205,8 @@ public class EditorManager : MonoSingleton<EditorManager>
                 return false;
         }
 
+        //Continuer ici 
+
 
         return true;
     }
@@ -222,6 +230,16 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         allObject.Add(map);
 
+        if(GameManager.I._state == EGameState.MENUEDITORMODE)
+        {
+            GameObject lines = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMapGrille :
+            currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMapGrille :
+            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMapGrille, shapes.transform);
+
+            allObject.Add(lines);
+        }
+
+
         InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
 
         GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
@@ -243,6 +261,49 @@ public class EditorManager : MonoSingleton<EditorManager>
             semiWall.transform.eulerAngles = Vector3.forward * item.type * 45f;
             allObject.Add(semiWall);
         }
+
+        foreach (var item in currentMapData._murBlobPosList)
+        {
+            GameObject semiWall = Instantiate(item.type == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, shapes.transform);
+            semiWall.transform.position = item.pos;
+            allObject.Add(semiWall);
+        }
+        
+        foreach (var item in currentMapData._blobPosList)
+        {
+            GameObject semiWall = Instantiate(item.type == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, shapes.transform);
+            semiWall.transform.position = item.pos;
+            allObject.Add(semiWall);
+        }
+
+        foreach (var item in currentMapData._piksPosList)
+        {
+            GameObject semiWall = Instantiate(GV.PrefabSO._piks, shapes.transform);
+            semiWall.transform.position = item;
+            allObject.Add(semiWall);
+        }
+
+        foreach (var item in currentMapData._projectilePosList)
+        {
+            GameObject semiWall = Instantiate(GV.PrefabSO._projectile, shapes.transform);
+            semiWall.transform.position = item.pos;
+            semiWall.transform.eulerAngles = Vector3.forward * item.type * 45f;
+            allObject.Add(semiWall);
+        }
+
+        foreach (var item in currentMapData._starPosList)
+        {
+            GameObject semiWall = Instantiate(GV.PrefabSO._star, shapes.transform);
+            semiWall.transform.position = item;
+            allObject.Add(semiWall);
+        }
+
+        foreach (var item in currentMapData._blackHolePosList)
+        {
+            GameObject semiWall = Instantiate(GV.PrefabSO._blackHole, shapes.transform);
+            semiWall.transform.position = item;
+            allObject.Add(semiWall);
+        }
     }
 
     public static string WriteMap(MapData data)
@@ -255,8 +316,17 @@ public class EditorManager : MonoSingleton<EditorManager>
         string cat4 = string.Join("€", data._wallPosList.ConvertAll(v => $"{v.x},{v.y}"));
 
         string cat5 = string.Join("€", data._semiWallPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
+        string cat6 = string.Join("€", data._murBlobPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
+        string cat7 = string.Join("€", data._blobPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
 
-        return $"{cat1}${cat2}${cat3}${cat4}${cat5}";
+        string cat8 = string.Join("€", data._piksPosList.ConvertAll(v => $"{v.x},{v.y}"));
+
+        string cat9 = string.Join("€", data._projectilePosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
+
+        string cat10 = string.Join("€", data._starPosList.ConvertAll(v => $"{v.x},{v.y}"));
+        string cat11 = string.Join("€", data._blackHolePosList.ConvertAll(v => $"{v.x},{v.y}"));
+
+        return $"{cat1}${cat2}${cat3}${cat4}${cat5}${cat6}${cat7}${cat8}${cat9}${cat10}${cat11}";
     }
 
     public static MapData ReadMap(string mapString)
@@ -293,6 +363,66 @@ public class EditorManager : MonoSingleton<EditorManager>
                 string[] v = entry.Split(',');
                 if (v.Length == 3)
                     data._semiWallPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+            }
+        }
+        if (parts.Length > 5)
+        {
+            string[] entries = parts[5].Split('€');
+            foreach (string entry in entries)
+            {
+                string[] v = entry.Split(',');
+                if (v.Length == 3)
+                    data._murBlobPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+            }
+        }
+        if (parts.Length > 6)
+        {
+            string[] entries = parts[6].Split('€');
+            foreach (string entry in entries)
+            {
+                string[] v = entry.Split(',');
+                if (v.Length == 3)
+                    data._blobPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+            }
+        }
+        if (parts.Length > 7)
+        {
+            string[] entries = parts[7].Split('€');
+            foreach (string entry in entries)
+            {
+                string[] v = entry.Split(',');
+                if (v.Length == 2)
+                    data._piksPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+            }
+        }
+        if (parts.Length > 8)
+        {
+            string[] entries = parts[8].Split('€');
+            foreach (string entry in entries)
+            {
+                string[] v = entry.Split(',');
+                if (v.Length == 3)
+                    data._projectilePosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+            }
+        }
+        if (parts.Length > 9)
+        {
+            string[] entries = parts[9].Split('€');
+            foreach (string entry in entries)
+            {
+                string[] v = entry.Split(',');
+                if (v.Length == 2)
+                    data._starPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+            }
+        }
+        if (parts.Length > 9)
+        {
+            string[] entries = parts[10].Split('€');
+            foreach (string entry in entries)
+            {
+                string[] v = entry.Split(',');
+                if (v.Length == 2)
+                    data._blackHolePosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
             }
         }
 

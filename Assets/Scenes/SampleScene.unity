@@ -726,7 +726,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 7.64
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 3000
     Dutch: 0
@@ -3384,7 +3384,7 @@ Camera:
   far clip plane: 3000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.64
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
