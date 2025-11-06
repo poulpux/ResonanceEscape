@@ -5,4 +5,11 @@ public enum EEditorSelectionType
     WINCONDITION,
     WALL,
     SEMIWALL,
+    WALLBLOOB,
+    BLOOB,
+    SPIKS,
+    PROJECTILE,
+    INERTIEBOOST,
+    STAR,
+    BLACKHOLE
 }
