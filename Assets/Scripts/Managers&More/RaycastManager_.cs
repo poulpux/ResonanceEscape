@@ -65,6 +65,13 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._editorErase);
         InstantiateOneTag(GV.TagSO._editorSave);
         InstantiateOneTag(GV.TagSO._editorClean);
+        InstantiateOneTag(GV.TagSO._editorBloobWall);
+        InstantiateOneTag(GV.TagSO._editorBloob);
+        InstantiateOneTag(GV.TagSO._editorSpike);
+        InstantiateOneTag(GV.TagSO._editorProjectile);
+        InstantiateOneTag(GV.TagSO._editorInertieBoost);
+        InstantiateOneTag(GV.TagSO._editorStar);
+        InstantiateOneTag(GV.TagSO._editorBlackHole);
 
         InstantiateOneTag(GV.TagSO._menuPlayMode);
         InstantiateOneTag(GV.TagSO._menuEditorMode);

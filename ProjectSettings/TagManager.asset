@@ -39,6 +39,15 @@ TagManager:
   - GameDie
   - GameInertieBoost
   - GameStar
+  - GameStart
+  - EditorBloobWall
+  - EditorBloob
+  - EditorSpike
+  - EditorProjectile
+  - EditorInertieBoost
+  - EditorStar
+  - GameBlackHole
+  - EditorBlackHole
   layers:
   - Default
   - TransparentFX

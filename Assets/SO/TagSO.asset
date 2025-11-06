@@ -46,4 +46,12 @@ MonoBehaviour:
   _gameDie: GameDie
   _gameInertieBoost: GameInertieBoost
   _gameStar: GameStar
+  _editorBloobWall: EditorBloobWall
+  _editorBloob: EditorBloob
+  _editorSpike: EditorSpike
+  _editorProjectile: EditorProjectile
+  _editorInertieBoost: EditorInertieBoost
+  _editorStar: EditorStar
+  _gameBlackHole: GameBlackHole
+  _editorBlackHole: EditorBlackHole
   _quitParamter: QuitParameter

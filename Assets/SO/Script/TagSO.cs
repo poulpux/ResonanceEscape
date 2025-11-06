@@ -40,5 +40,13 @@ public class TagSO : ScriptableObject
         _gameDie,
         _gameInertieBoost,
         _gameStar,
+        _editorBloobWall,
+        _editorBloob,
+        _editorSpike,
+        _editorProjectile,
+        _editorInertieBoost,
+        _editorStar,
+        _gameBlackHole,
+        _editorBlackHole,
         _quitParamter;
 }
