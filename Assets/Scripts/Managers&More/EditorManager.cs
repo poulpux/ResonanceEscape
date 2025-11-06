@@ -40,6 +40,8 @@ public class EditorManager : MonoSingleton<EditorManager>
     public void F_SetGoodPlayPlayer()
     {
         playerObject.transform.position = currentMapData._playerPosC2;
+        Rigidbody2D playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
+        playerRigidBody.velocity = Vector3.zero;
     }
 
     public void F_ResetMap()
