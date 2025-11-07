@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
         InputSystem_.I._r._event.AddListener(() => REsetTimer());
         InputSystem_.I._r._event.AddListener(() => REsetTimer());
         GameManager.I._overwatchEvent.AddListener(()=> REsetTimer());
+        GameManager.I._winTheLevelEvent.AddListener(()=> SaveTimer());
     }
 
     // Update is called once per frame
@@ -23,6 +24,16 @@ public class Timer : MonoBehaviour
         {
             time += Time.deltaTime;
             text.text = $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
+        }
+    }
+
+    private void SaveTimer()
+    {
+        print("save1");
+        if (time < PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f))
+        {
+            PlayerPrefs.SetFloat(MenuManager.I._indexMapPlayMode.ToString(), Mathf.Round(time * 100f) / 100f);
+            print("save2 + "+ Mathf.Round(time * 100f) / 100f);
         }
     }
 
