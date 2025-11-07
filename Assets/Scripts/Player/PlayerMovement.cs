@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoSingleton<PlayerMovement>
 {
     bool canMove, canDie;
     bool lastThingWasAMove;
@@ -11,12 +11,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] MMF_Player moveFeedback;
 
     Rigidbody2D rigidBody;
+    public float _dashDistance;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
-        GameManager.I._winTheLevelEvent.AddListener(() => { moveFeedback.StopFeedbacks(); canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); });
+        GameManager.I._winTheLevelEvent.AddListener(() => { moveFeedback.StopFeedbacks(); canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
 
         InputSystem_.I._leftClick._event.AddListener(()=>TryMove());  
         InputSystem_.I._space._event.AddListener(()=>TryInertie());
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
         moveFeedback.transform.position = posToGO;
         moveFeedback.PlayFeedbacks();
 
+        _dashDistance += Vector3.Distance(startpos, posToGO);
+
         print(Vector3.Distance(transform.position, posToGO));
 
         GameManager.I._playerActEvent.Invoke();
@@ -70,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         moveFeedback.StopFeedbacks();
         canDie = false;
         canMove= false;
+        _dashDistance = 0f;
         StartCoroutine(WaitPlayAnimation());
         rigidBody.bodyType = RigidbodyType2D.Kinematic; 
         rigidBody.velocity = Vector2.zero; 
@@ -87,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         if(collision.transform.tag == GV.TagSO._gameWallCollision && lastThingWasAMove)
         {
             moveFeedback.StopFeedbacks();
+            _dashDistance -= Vector3.Distance(posToGO, transform.position);
             Vector2 inertie = posToGO - startpos;
             rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
             lastThingWasAMove = false;

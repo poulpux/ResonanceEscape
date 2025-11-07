@@ -3375,7 +3375,7 @@ Transform:
   m_GameObject: {fileID: 726076129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.01}
+  m_LocalPosition: {x: -0.425, y: -3.67145, z: -0.01}
   m_LocalScale: {x: 0.85, y: 0.97, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3445,7 +3445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendMode: 1
   scaleMode: 0
-  color: {r: 0.9716981, g: 0.62793696, b: 0.62793696, a: 1}
+  color: {r: 0.13207549, g: 0.016820936, b: 0.016820936, a: 1}
   detailLevel: 2
   culling: 0
   boundsPadding: 0
@@ -3459,7 +3459,7 @@ MonoBehaviour:
   stencilRefID: 0
   stencilReadMask: 255
   stencilWriteMask: 255
-  pivot: 1
+  pivot: 0
   width: 1
   height: 7.57
   type: 0
@@ -4030,6 +4030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013959294}
+  - component: {fileID: 1013959295}
   m_Layer: 0
   m_Name: energyBar
   m_TagString: Untagged
@@ -4056,6 +4057,21 @@ Transform:
   - {fileID: 1607319686}
   m_Father: {fileID: 1241593393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1013959295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013959293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed83ae52fc7baae4c8621d1f6282b576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filledLine: {fileID: 726076133}
+  feedbackLine: {fileID: 1468536145}
+  preshootLine: {fileID: 1607319689}
 --- !u!1001 &1033877310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5597,7 +5613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1468536142
 Transform:
   m_ObjectHideFlags: 0
@@ -5607,7 +5623,7 @@ Transform:
   m_GameObject: {fileID: 1468536141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.02}
+  m_LocalPosition: {x: -0.425, y: -3.67145, z: -0.02}
   m_LocalScale: {x: 0.85, y: 0.97, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5620,7 +5636,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468536141}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -5691,7 +5707,7 @@ MonoBehaviour:
   stencilRefID: 0
   stencilReadMask: 255
   stencilWriteMask: 255
-  pivot: 1
+  pivot: 0
   width: 1
   height: 7.57
   type: 0
@@ -6043,7 +6059,7 @@ Transform:
   m_GameObject: {fileID: 1607319685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.03}
+  m_LocalPosition: {x: -0.425, y: -3.67145, z: -0.03}
   m_LocalScale: {x: 0.85, y: 0.97, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6127,7 +6143,7 @@ MonoBehaviour:
   stencilRefID: 0
   stencilReadMask: 255
   stencilWriteMask: 255
-  pivot: 1
+  pivot: 0
   width: 1
   height: 7.57
   type: 0
