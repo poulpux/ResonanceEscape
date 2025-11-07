@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using static EditorManager;
 
 public class GameManager : MonoSingleton<GameManager>
@@ -31,22 +32,12 @@ public class GameManager : MonoSingleton<GameManager>
         _winTheLevelEvent.AddListener(() => GoBackToMenu());
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.MENUEDITORMODE; _enterInEditModeEvent.Invoke(); });
-        RaycastManager_.I.allTag[GV.TagSO._menuPastCode]._click2DEvent.AddListener(() => 
-        {
-            MapData newMapData = null;
-            newMapData = ReadMap(GUIUtility.systemCopyBuffer);
-            if (newMapData == null)
-                return;
-
-            print("passe ici");
-            EditorManager.I.F_ChangeMap(GUIUtility.systemCopyBuffer);
-            _state = EGameState.MENUEDITORMODE;
-            _enterInEditModePastEvent.Invoke(); 
-        });
+        RaycastManager_.I.allTag[GV.TagSO._menuPastCode]._click2DEvent.AddListener(() =>  PastBoutonMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayMode]._click2DEvent.AddListener(() => _state = EGameState.MENUPLAYMODE);
         RaycastManager_.I.allTag[GV.TagSO._menuSupport]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
         RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise.mt/"));
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
+        RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
         //_state = EGameState.EDITOR;
     }
     #endregion
@@ -71,6 +62,19 @@ public class GameManager : MonoSingleton<GameManager>
         ChangeTimeScale(1f);
         yield return new WaitForSeconds(GV.GameSO._pulseIntervale);
         F_WaitingAction();
+    }
+
+    private void PastBoutonMenu()
+    {
+        MapData newMapData = null;
+        newMapData = ReadMap(GUIUtility.systemCopyBuffer);
+        if (newMapData == null)
+            return;
+
+        print("passe ici");
+        EditorManager.I.F_ChangeMap(GUIUtility.systemCopyBuffer);
+        _state = EGameState.MENUEDITORMODE;
+        _enterInEditModePastEvent.Invoke();
     }
 
     private IEnumerator WaitASecond()
