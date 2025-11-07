@@ -11,11 +11,6 @@ public class CrreditCameraController : MonoBehaviour
     float timeAnimation = 0.8f;
     bool animateCurve;
     AnimatingCurve curve = new AnimatingCurve();
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
