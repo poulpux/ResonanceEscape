@@ -1498,7 +1498,7 @@ GameObject:
   - component: {fileID: 411488262}
   m_Layer: 0
   m_Name: Insta-Icon
-  m_TagString: Untagged
+  m_TagString: MenuInsta
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7191,7 +7191,7 @@ GameObject:
   - component: {fileID: 2003867377}
   m_Layer: 0
   m_Name: fiverr-icon
-  m_TagString: Untagged
+  m_TagString: MenuFiverr
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7962,7 +7962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
-      value: MenuCredit
+      value: MenuLangage
       objectReference: {fileID: 0}
     - target: {fileID: 1760104535850656341, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_SizeDelta.x
