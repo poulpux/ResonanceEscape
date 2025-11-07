@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EditorManager : MonoSingleton<EditorManager>
@@ -53,6 +54,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
+        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_ResetMap(false);});
 
         F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
@@ -66,22 +68,26 @@ public class EditorManager : MonoSingleton<EditorManager>
         playerRigidBody.velocity = Vector3.zero;
     }
 
-    public void F_ResetMap()
+    public void F_ResetMap(bool player = true)
     {
-        F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+        F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode], player);
     }
 
-    public void F_ChangeMap(string codeMap)
+    public void F_ChangeMap(string codeMap, bool player = true)
     {
-        print("changeMaP");
         if(allObject.Count != 0)
         {
-            for (int i = allObject.Count-1; i >= 0; i--)
-                Destroy(allObject[i]); 
+            for (int i = allObject.Count - 1; i >= 0; i--)
+            {
+                if (!player && allObject[i] == playerObject)
+                    continue;
+                else
+                    Destroy(allObject[i]);
+            }
         }
 
         currentMapData = ReadMap(codeMap);
-        InstantiateAllMap();
+        InstantiateAllMap(player);
     }
 
     private void SelectNewCase(EEditorSelectionType selectionType)
@@ -225,7 +231,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         return true;
     }
 
-    private void InstantiateAllMap()
+    private void InstantiateAllMap(bool player)
     {
         GameObject map = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMap :
             currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMap :
@@ -242,8 +248,8 @@ public class EditorManager : MonoSingleton<EditorManager>
             allObject.Add(lines);
         }
 
-
-        InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
+        if(player)
+            InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
 
         GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
         winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.3f;

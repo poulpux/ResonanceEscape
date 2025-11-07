@@ -12,7 +12,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
@@ -72,6 +71,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea089943-83a0-4ac0-ba5e-14ae1e612029"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -228,6 +236,17 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""action"": ""LeftJoystick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c53bd77-75d8-4b80-ac65-d247085bf801"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -302,6 +321,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Default_Quit = m_Default.FindAction("Quit", throwIfNotFound: true);
         m_Default_Space = m_Default.FindAction("Space", throwIfNotFound: true);
         m_Default_LeftJoystick = m_Default.FindAction("LeftJoystick", throwIfNotFound: true);
+        m_Default_R = m_Default.FindAction("R", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -368,6 +388,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Quit;
     private readonly InputAction m_Default_Space;
     private readonly InputAction m_Default_LeftJoystick;
+    private readonly InputAction m_Default_R;
     public struct DefaultActions
     {
         private @Input m_Wrapper;
@@ -377,6 +398,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Quit => m_Wrapper.m_Default_Quit;
         public InputAction @Space => m_Wrapper.m_Default_Space;
         public InputAction @LeftJoystick => m_Wrapper.m_Default_LeftJoystick;
+        public InputAction @R => m_Wrapper.m_Default_R;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -401,6 +423,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @LeftJoystick.started += instance.OnLeftJoystick;
             @LeftJoystick.performed += instance.OnLeftJoystick;
             @LeftJoystick.canceled += instance.OnLeftJoystick;
+            @R.started += instance.OnR;
+            @R.performed += instance.OnR;
+            @R.canceled += instance.OnR;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -420,6 +445,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @LeftJoystick.started -= instance.OnLeftJoystick;
             @LeftJoystick.performed -= instance.OnLeftJoystick;
             @LeftJoystick.canceled -= instance.OnLeftJoystick;
+            @R.started -= instance.OnR;
+            @R.performed -= instance.OnR;
+            @R.canceled -= instance.OnR;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -474,8 +502,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
         }
     }
     private int m_XRSchemeIndex = -1;
-    internal static Vector3 mousePosition;
-
     public InputControlScheme XRScheme
     {
         get
@@ -491,5 +517,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnQuit(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
         void OnLeftJoystick(InputAction.CallbackContext context);
+        void OnR(InputAction.CallbackContext context);
     }
 }

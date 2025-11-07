@@ -30,6 +30,9 @@ public class GameManager : MonoSingleton<GameManager>
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
         _winTheLevelEvent.AddListener(() => GoBackToMenu());
+
+        InputSystem_.I._r._event.AddListener(() => PlayPlayMode());
+
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.MENUEDITORMODE; _enterInEditModeEvent.Invoke(); });
         RaycastManager_.I.allTag[GV.TagSO._menuPastCode]._click2DEvent.AddListener(() =>  PastBoutonMenu());
@@ -59,6 +62,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private IEnumerator PlayerMoveCoroutine()
     {
+        _state = EGameState.ACT;
         ChangeTimeScale(1f);
         yield return new WaitForSeconds(GV.GameSO._pulseIntervale);
         if(_state == EGameState.OVERWATCH || _state == EGameState.ACT)
@@ -86,6 +90,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void PlayPlayMode()
     {
+        ChangeTimeScale(1f);
         _state = EGameState.OVERWATCH;
         _overwatchEvent.Invoke();
     }
