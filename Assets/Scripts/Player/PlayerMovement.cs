@@ -64,8 +64,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         moveFeedback.transform.position = posToGO;
         moveFeedback.PlayFeedbacks();
 
-        print(Vector3.Distance(transform.position, posToGO));
-
         GameManager.I._playerActEvent.Invoke();
     }
 
