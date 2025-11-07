@@ -7,7 +7,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 {
     bool canMove, canDie;
     bool lastThingWasAMove;
-    public Vector3 startpos, posToGO;
+    public Vector3 startpos, posToGO, lastPos;
     [SerializeField] MMF_Player moveFeedback;
 
     Rigidbody2D rigidBody;
@@ -26,15 +26,30 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         moveFeedback.FeedbacksList[0].FeedbackDuration = GV.GameSO._pulseIntervale;
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    print(canMove + " " + canDie);
-    //}
+    // Update is called once per frame
+    void Update()
+    {
+        if(lastThingWasAMove)
+        {
+            _dashDistance += Vector3.Distance(transform.position, lastPos);
+            lastPos = transform.position;
+
+            if(_dashDistance >= GV.GameSO._maxJumpDistance)
+            {
+                moveFeedback.StopFeedbacks();
+                //_dashDistance -= Vector3.Distance(posToGO, transform.position);
+                _dashDistance = GV.GameSO._maxJumpDistance;
+                Vector2 inertie = transform.position - startpos;
+                print(inertie);
+                rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
+                lastThingWasAMove = false;
+            }
+        }
+    }
 
     private void TryMove()
     {
-        if(!canMove) return;
+        if(!canMove && _dashDistance < GV.GameSO._maxJumpDistance) return;
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
         lastThingWasAMove = true;
         rigidBody.gravityScale = 0f;
@@ -43,11 +58,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         startpos = transform.position;
         posToGO = worldPos;
+        lastPos = transform.position;
         canMove = false;
+        rigidBody.velocity = Vector2.zero;
         moveFeedback.transform.position = posToGO;
         moveFeedback.PlayFeedbacks();
-
-        _dashDistance += Vector3.Distance(startpos, posToGO);
 
         print(Vector3.Distance(transform.position, posToGO));
 
@@ -62,6 +77,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         if (lastThingWasAMove)
         {
             Vector2 inertie = posToGO - startpos;
+            rigidBody.velocity = Vector2.zero;
             rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
             lastThingWasAMove= false;
         }
@@ -91,8 +107,9 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         if(collision.transform.tag == GV.TagSO._gameWallCollision && lastThingWasAMove)
         {
             moveFeedback.StopFeedbacks();
-            _dashDistance -= Vector3.Distance(posToGO, transform.position);
+            //_dashDistance -= Vector3.Distance(posToGO, transform.position);
             Vector2 inertie = posToGO - startpos;
+            rigidBody.velocity = Vector2.zero;
             rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
             lastThingWasAMove = false;
         }
