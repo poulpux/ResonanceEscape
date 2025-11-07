@@ -48,6 +48,7 @@ TagManager:
   - EditorStar
   - GameBlackHole
   - EditorBlackHole
+  - EditorBackToMenu
   layers:
   - Default
   - TransparentFX

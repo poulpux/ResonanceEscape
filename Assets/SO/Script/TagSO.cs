@@ -48,5 +48,6 @@ public class TagSO : ScriptableObject
         _editorStar,
         _gameBlackHole,
         _editorBlackHole,
+        _editorBackToMenu,
         _quitParamter;
 }

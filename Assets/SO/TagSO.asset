@@ -54,4 +54,5 @@ MonoBehaviour:
   _editorStar: EditorStar
   _gameBlackHole: GameBlackHole
   _editorBlackHole: EditorBlackHole
+  _editorBackToMenu: EditorBackToMenu
   _quitParamter: QuitParameter
