@@ -4765,6 +4765,9 @@ MonoBehaviour:
   _winTheLevelEvent:
     m_PersistentCalls:
       m_Calls: []
+  _enterInEditModePastEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _enterInEditModeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5923,7 +5926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004525728586820098, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 3004525728586820098, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7450,15 +7453,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 289300996308111944, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 547106526940536539, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Name
       value: ResetMap Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_TagString
@@ -7470,7 +7477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1869709348487161234, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2305638428474804874, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7534,7 +7541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163422394015822753, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3672715997863472061, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_text
@@ -7558,7 +7565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932207514683573722, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7808,7 +7815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004525728586820098, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.51
+      value: -1.51
       objectReference: {fileID: 0}
     - target: {fileID: 3004525728586820098, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_LocalPosition.z

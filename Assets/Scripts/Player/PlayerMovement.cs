@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         InputSystem_.I._leftClick._event.AddListener(()=>TryMove());  
-        GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
-        GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
+        GameManager.I._waitingToActEvent.AddListener(() => { print("canMove"); canMove = true; });
+        GameManager.I._overwatchEvent.AddListener(() => { print("passe"); StartCoroutine(WaitPlayAnimation()); });
         InputSystem_.I._space._event.AddListener(()=>TryInertie());
         GameManager.I._winTheLevelEvent.AddListener(() => { canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); });
 
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        print(canMove + " " + canDie);
     }
 
     private void TryMove()

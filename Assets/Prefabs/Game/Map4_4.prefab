@@ -8278,7 +8278,7 @@ GameObject:
   - component: {fileID: 8214003108158304807}
   m_Layer: 0
   m_Name: Mur (2)
-  m_TagString: Untagged
+  m_TagString: GameWallCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9482,7 +9482,7 @@ GameObject:
   - component: {fileID: 6581235914167610685}
   m_Layer: 0
   m_Name: Mur (4)
-  m_TagString: Untagged
+  m_TagString: GameWallCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14972,7 +14972,7 @@ GameObject:
   - component: {fileID: 1374781877252787934}
   m_Layer: 0
   m_Name: Mur (3)
-  m_TagString: Untagged
+  m_TagString: GameWallCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16142,7 +16142,7 @@ GameObject:
   - component: {fileID: 2684580797860167860}
   m_Layer: 0
   m_Name: Mur (1)
-  m_TagString: Untagged
+  m_TagString: GameWallCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19509,7 +19509,7 @@ GameObject:
   - component: {fileID: 8881333164064682468}
   m_Layer: 0
   m_Name: Mur (1)
-  m_TagString: Untagged
+  m_TagString: GameWallCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26311,7 +26311,7 @@ GameObject:
   - component: {fileID: 6357914065661913605}
   m_Layer: 0
   m_Name: Mur (2)
-  m_TagString: Untagged
+  m_TagString: GameWallCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

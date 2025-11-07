@@ -262,9 +262,9 @@ MonoBehaviour:
         AnimateRotationY: 1
         AnimateRotationZ: 1
         AnimateRotationW: 1
-        AnimateScaleX: 1
-        AnimateScaleY: 1
-        AnimateScaleZ: 1
+        AnimateScaleX: 0
+        AnimateScaleY: 0
+        AnimateScaleZ: 0
         SeparatePositionCurve: 0
         AnimatePositionTween:
           MMTweenDefinitionType: 1
