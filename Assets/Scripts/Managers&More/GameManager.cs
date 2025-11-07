@@ -61,7 +61,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         ChangeTimeScale(1f);
         yield return new WaitForSeconds(GV.GameSO._pulseIntervale);
-        F_WaitingAction();
+        if(_state == EGameState.OVERWATCH || _state == EGameState.ACT)
+            F_WaitingAction();
     }
 
     private void PastBoutonMenu()
