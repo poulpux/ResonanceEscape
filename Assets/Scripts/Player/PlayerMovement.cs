@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
-        GameManager.I._winTheLevelEvent.AddListener(() => { canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); });
+        GameManager.I._winTheLevelEvent.AddListener(() => { moveFeedback.StopFeedbacks(); canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); });
 
         InputSystem_.I._leftClick._event.AddListener(()=>TryMove());  
         InputSystem_.I._space._event.AddListener(()=>TryInertie());
@@ -67,10 +67,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetLV()
     {
+        moveFeedback.StopFeedbacks();
         canDie = false;
         canMove= false;
         StartCoroutine(WaitPlayAnimation());
-        rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer();
+        rigidBody.bodyType = RigidbodyType2D.Kinematic; 
+        rigidBody.velocity = Vector2.zero; 
+        EditorManager.I.F_SetGoodPlayPlayer();
     }
 
     private IEnumerator WaitPlayAnimation()

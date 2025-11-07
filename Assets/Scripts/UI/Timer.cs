@@ -12,6 +12,8 @@ public class Timer : MonoBehaviour
     {
         text = GetComponent<TextMeshPro>();
         InputSystem_.I._r._event.AddListener(() => REsetTimer());
+        InputSystem_.I._r._event.AddListener(() => REsetTimer());
+        GameManager.I._overwatchEvent.AddListener(()=> REsetTimer());
     }
 
     // Update is called once per frame

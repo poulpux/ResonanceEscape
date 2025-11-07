@@ -73,6 +73,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
         UIEditMode.SetActive(false);
+        UIInGame.SetActive(false);
         camer.Lens.OrthographicSize = 7.64f;
         camer.transform.position = Vector3.forward * -10f + Vector3.right * -2.11f;
     }
