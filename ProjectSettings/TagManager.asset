@@ -49,6 +49,9 @@ TagManager:
   - GameBlackHole
   - EditorBlackHole
   - EditorBackToMenu
+  - MenuInsta
+  - MenuFiverr
+  - MenuLangage
   layers:
   - Default
   - TransparentFX

@@ -33,9 +33,10 @@ public class EditorManager : MonoSingleton<EditorManager>
     {
         GameManager.I._enterInEditModeEvent.AddListener(() => 
         {
-                ChangeMap(WriteMap(new MapData())); 
+                F_ChangeMap(WriteMap(new MapData())); 
         });
-     
+
+        GameManager.I._enterInEditModePastEvent.AddListener(()=> F_ChangeMap(WriteMap(currentMapData)));     
         RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.PLAYER));
         RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WINCONDITION));
         RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.WALL));
@@ -48,13 +49,15 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorStar]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.STAR));
         RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.BLACKHOLE));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
-        MenuManager.I._changeLvEvent.AddListener(() => ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
+        MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
 
-        ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+        F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
+
+
 
     public void F_SetGoodPlayPlayer()
     {
@@ -65,10 +68,10 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     public void F_ResetMap()
     {
-        ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+        F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
 
-    private void ChangeMap(string codeMap)
+    public void F_ChangeMap(string codeMap)
     {
         print("changeMaP");
         if(allObject.Count != 0)

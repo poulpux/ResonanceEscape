@@ -55,4 +55,7 @@ MonoBehaviour:
   _gameBlackHole: GameBlackHole
   _editorBlackHole: EditorBlackHole
   _editorBackToMenu: EditorBackToMenu
+  _menuInsta: MenuInsta
+  _menuFiverr: MenuFiverr
+  _menuLangage: MenuLangage
   _quitParamter: QuitParameter
