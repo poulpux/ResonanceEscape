@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EditorManager : MonoSingleton<EditorManager>
@@ -53,6 +54,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
         //Faire une option pour maintenir
         InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
+        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_ResetMap(); });
 
         F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }

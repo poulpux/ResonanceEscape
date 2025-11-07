@@ -14,20 +14,22 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        InputSystem_.I._leftClick._event.AddListener(()=>TryMove());  
-        GameManager.I._waitingToActEvent.AddListener(() => { print("canMove"); canMove = true; });
-        GameManager.I._overwatchEvent.AddListener(() => { print("passe"); StartCoroutine(WaitPlayAnimation()); });
-        InputSystem_.I._space._event.AddListener(()=>TryInertie());
+        GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
+        GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
         GameManager.I._winTheLevelEvent.AddListener(() => { canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); });
+
+        InputSystem_.I._leftClick._event.AddListener(()=>TryMove());  
+        InputSystem_.I._space._event.AddListener(()=>TryInertie());
+        InputSystem_.I._r._event.AddListener(()=>ResetLV());
 
         moveFeedback.FeedbacksList[0].FeedbackDuration = GV.GameSO._pulseIntervale;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        print(canMove + " " + canDie);
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    print(canMove + " " + canDie);
+    //}
 
     private void TryMove()
     {
@@ -44,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
         moveFeedback.transform.position = posToGO;
         moveFeedback.PlayFeedbacks();
 
+        print(Vector3.Distance(transform.position, posToGO));
+
         GameManager.I._playerActEvent.Invoke();
     }
 
@@ -59,6 +63,14 @@ public class PlayerMovement : MonoBehaviour
             lastThingWasAMove= false;
         }
         GameManager.I._playerActEvent.Invoke();
+    }
+
+    private void ResetLV()
+    {
+        canDie = false;
+        canMove= false;
+        StartCoroutine(WaitPlayAnimation());
+        rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer();
     }
 
     private IEnumerator WaitPlayAnimation()
@@ -78,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(collision.transform.tag == GV.TagSO._gameDie && canDie)
         {
-            EditorManager.I.F_ResetMap();
+            InputSystem_.I._r._event.Invoke();
             //Feedback You Dead
         }
 

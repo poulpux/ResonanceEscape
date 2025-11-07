@@ -8,6 +8,7 @@ public partial class InputSystem_ : MonoSingleton<InputSystem_>
 
     public ButtonInputSystem _echap = new ButtonInputSystem("Quit");
     public ButtonInputSystem _space = new ButtonInputSystem("Space");
+    public ButtonInputSystem _r = new ButtonInputSystem("R");
     public ButtonInputSystem _leftClick = new ButtonInputSystem("LeftClick");
     public ButtonInputSystem _rightClick = new ButtonInputSystem("RightClick");
     
@@ -35,6 +36,7 @@ public partial class InputSystem_ : MonoSingleton<InputSystem_>
     {
         EnableMapButton(action, _echap);
         EnableMapButton(action, _space);
+        EnableMapButton(action, _r);
         EnableMapButton(action, _leftClick);
         EnableMapButton(action, _rightClick);
         EnableMapButton(action, _leftJoystick);
@@ -43,6 +45,7 @@ public partial class InputSystem_ : MonoSingleton<InputSystem_>
     {
         DisableMapButton(action, _echap);
         DisableMapButton(action, _space);
+        DisableMapButton(action, _r);
         DisableMapButton(action, _leftClick);
         DisableMapButton(action, _rightClick);
         DisableMapButton(action, _leftJoystick);

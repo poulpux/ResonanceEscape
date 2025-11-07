@@ -9,7 +9,7 @@ public class MenuManager : MonoSingleton<MenuManager>
 {
     public int _indexMapPlayMode = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
-    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode;
+    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame;
     [SerializeField] CinemachineCamera  camer;
 
     void Start()
@@ -21,12 +21,17 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => ClickOnPlay());
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
+
+        UIMenu.SetActive(true);
+        UIPlayMode.SetActive(true);
+        UIInGame.SetActive(false);
     }
 
     private void ClickOnPlay()
     {
         UIMenu.SetActive(false);
         UIPlayMode.SetActive(false);
+        UIInGame.SetActive(true) ;
         camer.Lens.OrthographicSize = 6f;
         camer.transform.position = Vector3.forward * -10f;
         GameManager.I._playPlayModeEvent.Invoke();
