@@ -30,6 +30,7 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.MENUEDITORMODE; _enterInEditModeEvent.Invoke(); });
         RaycastManager_.I.allTag[GV.TagSO._menuPlayMode]._click2DEvent.AddListener(() => _state = EGameState.MENUPLAYMODE);
+        RaycastManager_.I.allTag[GV.TagSO._menuSupport]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
         //_state = EGameState.EDITOR;
     }
     #endregion
