@@ -15,6 +15,6 @@ public class EnergyBar : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        preshootLine.Height = (7.57f * 1f - (PlayerMovement.I._dashDistance / GV.GameSO._maxJumpDistance));
+        preshootLine.Height = (7.57f * (1f - (Mathf.Clamp01(PlayerMovement.I._dashDistance / GV.GameSO._maxJumpDistance))));
     }
 }
