@@ -1419,7 +1419,6 @@ GameObject:
   - component: {fileID: 375593561}
   - component: {fileID: 375593560}
   - component: {fileID: 375593563}
-  - component: {fileID: 375593564}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1518,24 +1517,6 @@ MonoBehaviour:
   - {x: 0, y: 16.5}
   - {x: 80.2, y: 16.5}
   - {x: 80.2, y: -34.7}
---- !u!114 &375593564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375593559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5376971c1befb4da39e7586c6f2d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabSO: {fileID: 0}
-  feedbackSO: {fileID: 11400000, guid: ee06989cc9822304fa983f909065f243, type: 2}
-  colorSO: {fileID: 11400000, guid: cc79eb32ac9f7ca4495cc906dd2ce2c1, type: 2}
-  tagSO: {fileID: 11400000, guid: 4137ea3d030fa824d8d644443071d6d5, type: 2}
-  fontSO: {fileID: 11400000, guid: edd7cb0be06a3ed49a845ff68e28459d, type: 2}
-  soundSO: {fileID: 11400000, guid: 9b9dd97ed8405494fb725900618d0e94, type: 2}
 --- !u!1 &398677919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,8 +1660,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Intro Banner by Xdelayli on Fiverr
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d5f2621bb0545b499547a7995e267b7, type: 2}
-  m_sharedMaterial: {fileID: 128731759004539752, guid: 9d5f2621bb0545b499547a7995e267b7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1769,7 +1750,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 128731759004539752, guid: 9d5f2621bb0545b499547a7995e267b7, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4342,8 +4323,8 @@ MonoBehaviour:
   m_text: "Police :  Quicksand, NotoSansKR & cinecaption\nCopyright : \xA9 2014-2021
     Adobe"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d5f2621bb0545b499547a7995e267b7, type: 2}
-  m_sharedMaterial: {fileID: 128731759004539752, guid: 9d5f2621bb0545b499547a7995e267b7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4432,7 +4413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 128731759004539752, guid: 9d5f2621bb0545b499547a7995e267b7, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
