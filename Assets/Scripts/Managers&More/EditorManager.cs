@@ -26,7 +26,7 @@ public class EditorManager : MonoSingleton<EditorManager>
     [SerializeField] GameObject shapes;
     EEditorSelectionType selectionType;
     EMapType mapType;
-    MapData currentMapData = new MapData();
+    public MapData currentMapData = new MapData();
 
 
     GameObject playerObject, winconditionObject;
@@ -88,7 +88,10 @@ public class EditorManager : MonoSingleton<EditorManager>
                 if (/*!player && */allObject[i] == playerObject)
                     continue;
                 else
+                {
                     Destroy(allObject[i]);
+                    allObject.RemoveAt(i);
+                }
             }
         }
 
@@ -146,9 +149,46 @@ public class EditorManager : MonoSingleton<EditorManager>
             }
         }
 
+        void EraseFromListSemiWall<T>(List<T> list, Func<T, Vector2> getPos, Func<T, int> getIndex)
+        {
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                Vector2 pos = getPos(list[i]);
+                int index = getIndex(list[i]);
+
+                Vector2 posByAdding = pos;
+                if (index == 1)
+                    posByAdding -= Vector2.right;
+                else if(index == 2)
+                    posByAdding -= Vector2.right+ Vector2.up;
+                else if(index == 3)
+                    posByAdding -= Vector2.up;
+
+                if (Vector2.Distance(posByAdding, posInt) < 0.3f)
+                {
+                    // Trouve l’objet correspondant et détruit-le
+                    for (int j = allObject.Count - 1; j >= 0; j--)
+                    {
+                        var obj = allObject[j];
+                        if (obj == null) continue;
+
+                        if ((Vector2)obj.transform.position == pos)
+                        {
+                            Destroy(obj);
+                            allObject.RemoveAt(j);
+                            break;
+                        }
+                    }
+
+                    list.RemoveAt(i);
+                    return; // on peut arrêter ici
+                }
+            }
+        }
+
         // Efface tous les types d’éléments
         EraseFromList(currentMapData._wallPosList, p => p);
-        EraseFromList(currentMapData._semiWallPosList, p => p.pos);
+        EraseFromListSemiWall(currentMapData._semiWallPosList, p => p.pos, p => p.type);
         EraseFromList(currentMapData._piksPosList, p => p);
         EraseFromList(currentMapData._blobPosList, p => p.pos);
         EraseFromList(currentMapData._murBlobPosList, p => p.pos);
@@ -159,7 +199,6 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private void SelectNewCase(EEditorSelectionType selectionType)
     {
-        print("seld");
         this.selectionType = selectionType;
     }
 
@@ -209,7 +248,6 @@ public class EditorManager : MonoSingleton<EditorManager>
                 {
                     tile = Instantiate(GV.PrefabSO._semiWall);
                     tile.transform.eulerAngles = Vector3.forward * 90 * indexRotate;
-                    currentMapData._semiWallPosList.Add((indexRotate,pos));
                 }
                 else if(selectionType == EEditorSelectionType.WALLBLOOB)
                 {
@@ -251,6 +289,8 @@ public class EditorManager : MonoSingleton<EditorManager>
                         tile.transform.position += Vector3.right + Vector3.up;
                     else if(indexRotate == 3)
                         tile.transform.position += Vector3.up;
+
+                    currentMapData._semiWallPosList.Add((indexRotate, (Vector2)tile.transform.position));
                 }
                 allObject.Add(tile);
             }
@@ -389,7 +429,6 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         if (player)
         {
-            print("instantiate playerr");
             InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
         }
 
