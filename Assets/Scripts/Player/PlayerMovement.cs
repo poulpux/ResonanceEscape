@@ -18,6 +18,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     int indexGhost;
     void Start()
     {
+        //for (int i = 0; i < 15; i++)
+        //{
+        //    PlayerPrefs.SetFloat(i.ToString(), 99.99f);
+        //}
         rigidBody = GetComponent<Rigidbody2D>();
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
@@ -69,11 +73,19 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         if (GameManager.I._replay)
         {
-            if (timer < 0.5f)
+            if (timer < 0.2f)
                 return;
             
             transform.position = gostAllFrames[indexGhost];
-            indexGhost = indexGhost == gostAllFrames.Count - 1 ? 0 : indexGhost += 1;
+
+            if (indexGhost == gostAllFrames.Count - 1)
+            {
+                timer = 0f;
+                indexGhost = 0;
+                EditorManager.I.F_SetGoodPlayPlayer();
+            }
+            else
+                indexGhost++;
         }
         else
         {
@@ -82,7 +94,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 gostAllFrames.Add(transform.position);
                 print("print");
             }
-            print(GameManager.I._state);
         }
     }
 
@@ -104,25 +115,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         //    gostActionList.Add(posToGO);
         rigidBody.velocity = Vector2.zero;
 
-        
-        //moveFeedback.transform.position = posToGO;
-        //moveFeedback.PlayFeedbacks();
-        timer = 0f;
-
-        GameManager.I._playerActEvent.Invoke();
-    }
-    private void TryMove(Vector2 posToGO)
-    {
-        isDead = false;
-        if(!canMove && _dashDistance < GV.GameSO._maxJumpDistance) return;
-        rigidBody.bodyType = RigidbodyType2D.Dynamic;
-        lastThingWasAMove = true;
-        rigidBody.gravityScale = 0f;
-        startpos = transform.position;
-        lastPos = transform.position;
-        canMove = false;
-        rigidBody.velocity = Vector2.zero;
-        this.posToGO = posToGO;
         
         //moveFeedback.transform.position = posToGO;
         //moveFeedback.PlayFeedbacks();
