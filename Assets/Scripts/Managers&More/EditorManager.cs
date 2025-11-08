@@ -79,13 +79,14 @@ public class EditorManager : MonoSingleton<EditorManager>
         {
             for (int i = allObject.Count - 1; i >= 0; i--)
             {
-                if (!player && allObject[i] == playerObject)
+                if (/*!player && */allObject[i] == playerObject)
                     continue;
                 else
                     Destroy(allObject[i]);
             }
         }
 
+        print(player);
         currentMapData = ReadMap(codeMap);
         InstantiateAllMap(player);
     }
@@ -248,8 +249,11 @@ public class EditorManager : MonoSingleton<EditorManager>
             allObject.Add(lines);
         }
 
-        if(player)
+        if (player)
+        {
+            print("instantiate playerr");
             InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
+        }
 
         GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
         winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.3f;
@@ -440,10 +444,16 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private void InstantiatePlayer(Vector3 pos)
     {
-        GameObject player = Instantiate(GV.PrefabSO._player, shapes.transform);
-        player.transform.position = pos;
-        playerObject = player;
+        GameObject player = null;
+        if (playerObject == null)
+        {
+            player = Instantiate(GV.PrefabSO._player, shapes.transform);
+            playerObject = player;  
+        }
+
+        playerObject.transform.position = pos;
         playerObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        print(playerObject);
         allObject.Add(player);
     }
 }

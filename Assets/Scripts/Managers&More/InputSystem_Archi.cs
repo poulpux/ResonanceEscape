@@ -20,6 +20,7 @@ public partial class InputSystem_
     public class ButtonInputSystem : InputMother
     {
         public UnityEvent _event = new UnityEvent();
+        public UnityEvent _eventMaintain = new UnityEvent();
         public bool _button;
 
         public ButtonInputSystem(string inputName)=>
@@ -30,6 +31,8 @@ public partial class InputSystem_
             if (value.ReadValue<float>() > 0 && !_button)
                 _event.Invoke();
 
+            if(value.ReadValue<float>() > 0)
+                _eventMaintain.Invoke();
             _button = true;
         }
 
