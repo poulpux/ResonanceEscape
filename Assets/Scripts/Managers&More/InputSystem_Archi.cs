@@ -20,9 +20,10 @@ public partial class InputSystem_
     public class ButtonInputSystem : InputMother
     {
         public UnityEvent _event = new UnityEvent();
-        public bool _button;
+        public bool _button, _pressed;
 
-        public ButtonInputSystem(string inputName)=>
+
+        public ButtonInputSystem(string inputName) =>
             _inputName = inputName;
 
         public override void F_Act(InputAction.CallbackContext value)
@@ -30,11 +31,15 @@ public partial class InputSystem_
             if (value.ReadValue<float>() > 0 && !_button)
                 _event.Invoke();
 
+            _pressed = true;
             _button = true;
         }
 
-        public override void F_Sleep(InputAction.CallbackContext value)=>
+        public override void F_Sleep(InputAction.CallbackContext value) 
+        {     
+            _pressed = false;
             _button = false;
+        }
     }
 
     public class JoystickInput : InputMother

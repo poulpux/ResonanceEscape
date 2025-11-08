@@ -18,6 +18,7 @@ public class Heightscore : MonoBehaviour
     private void SetRightHightscore()
     {
         float time = PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f);
-        text.text = $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
+        print(time);
+        text.text = "HIGHTSCORE : "+ $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
     }
 }

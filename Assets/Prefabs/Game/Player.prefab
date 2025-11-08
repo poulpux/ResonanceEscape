@@ -541,6 +541,7 @@ MonoBehaviour:
   lastPos: {x: 0, y: 0, z: 0}
   moveFeedback: {fileID: 7369447191623635430}
   _dashDistance: 0
+  gostAllFrames: []
 --- !u!212 &1223518871680760237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -650,8 +651,8 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0

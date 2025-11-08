@@ -10,6 +10,7 @@ public class GameManager : MonoSingleton<GameManager>
     #region ValueGeneral
     public ELangues _langueActuelle = ELangues.ENGLISH;
     public EGameState _state = EGameState.MENUPLAYMODE;
+    public bool _replay;
     #endregion
 
     #region Events
@@ -20,6 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _winTheLevelEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModePastEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModeEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _goToMenuEvent = new UnityEvent();
     #endregion
 
     #region Callbacks
@@ -29,18 +31,21 @@ public class GameManager : MonoSingleton<GameManager>
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
-        _winTheLevelEvent.AddListener(() => GoBackToMenu());
+        _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; });
 
         InputSystem_.I._r._event.AddListener(() => PlayPlayMode());
+        InputSystem_.I._leftClick._event.AddListener(() => { if (_replay) { GoBackToMenu(); _replay = false; } });
 
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
-        RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.MENUEDITORMODE; _enterInEditModeEvent.Invoke(); });
+        RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.EDITOR; _enterInEditModeEvent.Invoke(); });
         RaycastManager_.I.allTag[GV.TagSO._menuPastCode]._click2DEvent.AddListener(() =>  PastBoutonMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayMode]._click2DEvent.AddListener(() => _state = EGameState.MENUPLAYMODE);
         RaycastManager_.I.allTag[GV.TagSO._menuSupport]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
         RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise.mt/"));
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
         RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
+
+        //RaycastManager_.I.allTag[GV.TagSO.menupl]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
         //_state = EGameState.EDITOR;
     }
     #endregion
@@ -49,6 +54,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void F_WaitingAction()
     {
+        if (!(_state == EGameState.OVERWATCH || _state == EGameState.ACT || _replay))
+            return;
+
+        if (_replay)
+            return;
         _state = EGameState.WAITINGACTION;
         ChangeTimeScale(0f);
         _waitingToActEvent.Invoke();
@@ -57,7 +67,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void ChangeTimeScale(float timeScale)
     {
         Time.timeScale = timeScale;
-        Time.fixedDeltaTime = Time.timeScale * 0.01f;
+        Time.fixedDeltaTime = Time.timeScale * 0.005f;
     }
 
     private IEnumerator PlayerMoveCoroutine()
@@ -65,7 +75,7 @@ public class GameManager : MonoSingleton<GameManager>
         _state = EGameState.ACT;
         ChangeTimeScale(1f);
         yield return new WaitForSeconds(GV.GameSO._pulseIntervale);
-        if(_state == EGameState.OVERWATCH || _state == EGameState.ACT)
+        if(_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _replay)
             F_WaitingAction();
     }
 
@@ -90,6 +100,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void PlayPlayMode()
     {
+        //if (!(_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH))
+        //    return;
         ChangeTimeScale(1f);
         _state = EGameState.OVERWATCH;
         _overwatchEvent.Invoke();
@@ -98,6 +110,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void GoBackToMenu()
     {
         _state = EGameState.MENUPLAYMODE;
+        _goToMenuEvent.Invoke();
     }
 
     #endregion

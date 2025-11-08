@@ -5,5 +5,5 @@ public enum EGameState
     ACT,
     EDITOR,
     MENUPLAYMODE,
-    MENUEDITORMODE
+    MENUEDITORMODE,
 }

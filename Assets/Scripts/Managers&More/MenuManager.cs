@@ -9,7 +9,7 @@ public class MenuManager : MonoSingleton<MenuManager>
 {
     public int _indexMapPlayMode = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
-    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame;
+    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay;
     [SerializeField] CinemachineCamera  camer;
 
     void Start()
@@ -20,17 +20,26 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeRightLevel]._click2DEvent.AddListener(() => RightClickLevel());
         RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => ClickOnPlay());
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => ReturnToMenu());
-        GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
+        //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
+        GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
+        GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu()); 
 
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
         UIInGame.SetActive(false);
     }
 
+    private void EnterInReplayMod()
+    {
+        UIReplay.SetActive(true );
+        UIInGame.SetActive(false );
+    }
+
     private void ClickOnPlay()
     {
         UIMenu.SetActive(false);
         UIPlayMode.SetActive(false);
+        UIReplay.SetActive(false);
         UIInGame.SetActive(true) ;
         camer.Lens.OrthographicSize = 6f;
         camer.transform.position = Vector3.forward * -10f;
@@ -72,6 +81,7 @@ public class MenuManager : MonoSingleton<MenuManager>
     {
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
+        UIReplay.SetActive(false);
         UIEditMode.SetActive(false);
         UIInGame.SetActive(false);
         camer.Lens.OrthographicSize = 7.64f;

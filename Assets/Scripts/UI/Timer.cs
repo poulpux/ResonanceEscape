@@ -29,11 +29,9 @@ public class Timer : MonoBehaviour
 
     private void SaveTimer()
     {
-        print("save1");
         if (time < PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f))
         {
-            PlayerPrefs.SetFloat(MenuManager.I._indexMapPlayMode.ToString(), Mathf.Round(time * 100f) / 100f);
-            print("save2 + "+ Mathf.Round(time * 100f) / 100f);
+            PlayerPrefs.SetFloat(MenuManager.I._indexMapPlayMode.ToString(), time);
         }
     }
 
