@@ -13,7 +13,7 @@ public class EnergyBar : MonoBehaviour
     //}
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT)
             preshootLine.Height = (7.57f * (1f - (Mathf.Clamp01(PlayerMovement.I._dashDistance / GV.GameSO._maxJumpDistance))));

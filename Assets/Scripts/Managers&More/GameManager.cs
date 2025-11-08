@@ -50,6 +50,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void F_WaitingAction()
     {
+        if (!(_state == EGameState.OVERWATCH || _state == EGameState.ACT))
+            return;
         _state = EGameState.WAITINGACTION;
         ChangeTimeScale(0f);
         _waitingToActEvent.Invoke();
@@ -58,7 +60,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void ChangeTimeScale(float timeScale)
     {
         Time.timeScale = timeScale;
-        Time.fixedDeltaTime = Time.timeScale * 0.01f;
+        Time.fixedDeltaTime = Time.timeScale * 0.005f;
     }
 
     private IEnumerator PlayerMoveCoroutine()
@@ -66,7 +68,7 @@ public class GameManager : MonoSingleton<GameManager>
         _state = EGameState.ACT;
         ChangeTimeScale(1f);
         yield return new WaitForSeconds(GV.GameSO._pulseIntervale);
-        if(_state == EGameState.OVERWATCH || _state == EGameState.ACT)
+        if(_state == EGameState.WAITINGACTION || _state == EGameState.ACT)
             F_WaitingAction();
     }
 

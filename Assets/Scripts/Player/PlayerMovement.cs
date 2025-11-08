@@ -6,12 +6,13 @@ using UnityEngine;
 public class PlayerMovement : MonoSingleton<PlayerMovement>
 {
     bool canMove, canDie;
-    bool lastThingWasAMove;
+    bool lastThingWasAMove, isDead;
     public Vector3 startpos, posToGO, lastPos;
     [SerializeField] MMF_Player moveFeedback;
 
     Rigidbody2D rigidBody;
     public float _dashDistance;
+    float timer;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -29,7 +30,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     // Update is called once per frame
     void Update()
     {
-        if(lastThingWasAMove)
+        timer += Time.deltaTime;
+        if (isDead)
+            return;
+
+        if (timer < GV.GameSO._pulseIntervale && lastThingWasAMove)
+            rigidBody.MovePosition(startpos + (timer / GV.GameSO._pulseIntervale) * (posToGO - startpos));
+
+        if (lastThingWasAMove)
         {
             _dashDistance += Vector3.Distance(transform.position, lastPos);
             lastPos = transform.position;
@@ -49,6 +57,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     private void TryMove()
     {
+        isDead = false;
         if(!canMove && _dashDistance < GV.GameSO._maxJumpDistance) return;
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
         lastThingWasAMove = true;
@@ -61,14 +70,16 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         lastPos = transform.position;
         canMove = false;
         rigidBody.velocity = Vector2.zero;
-        moveFeedback.transform.position = posToGO;
-        moveFeedback.PlayFeedbacks();
+        //moveFeedback.transform.position = posToGO;
+        //moveFeedback.PlayFeedbacks();
+        timer = 0f;
 
         GameManager.I._playerActEvent.Invoke();
     }
 
     private void TryInertie()
     {
+        isDead = false;
         if (!canMove) return;
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
         rigidBody.gravityScale = 1f;
@@ -90,6 +101,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         moveFeedback.StopFeedbacks();
         canDie = false;
         canMove= false;
+        lastThingWasAMove = false;
         _dashDistance = 0f;
         StartCoroutine(WaitPlayAnimation());
         rigidBody.bodyType = RigidbodyType2D.Kinematic; 
@@ -116,6 +128,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         }
         else if(collision.transform.tag == GV.TagSO._gameDie && canDie)
         {
+            isDead = true;
             InputSystem_.I._r._event.Invoke();
             //Feedback You Dead
         }
