@@ -57,12 +57,20 @@ public class EditorManager : MonoSingleton<EditorManager>
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
 
         //Faire une option pour maintenir
-        InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());
-        InputSystem_.I._rightClick._eventMaintain.AddListener(() => Erase());
+        //InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());
+        //InputSystem_.I._rightClick._eventMaintain.AddListener(() => Erase());
         InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_ResetMap(false);});
         InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1; });
 
         F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
+    }
+
+    private void FixedUpdate()
+    {
+        if (InputSystem_.I._leftClick._pressed)
+            LeftClick();
+        if (InputSystem_.I._rightClick._pressed)
+            Erase();
     }
 
 
@@ -358,7 +366,14 @@ public class EditorManager : MonoSingleton<EditorManager>
         }
         foreach (var item in currentMapData._semiWallPosList)
         {
-            if (Vector2.Distance(item.pos, pos) < (float)thinkness)
+            Vector2 posByAdding = pos;
+            if (item.type == 1)
+                posByAdding -= Vector2.right;
+            else if (item.type == 2)
+                posByAdding -= Vector2.right + Vector2.up;
+            else if (item.type == 3)
+                posByAdding -= Vector2.up;
+            if (Vector2.Distance(item.pos, posByAdding) < (float)thinkness)
                 return false;
         }
         foreach (var item in currentMapData._piksPosList)
@@ -401,10 +416,10 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private bool VerifPlayerAndWincondition(Vector2 pos, float thinkness)
     {
-        if (Vector2.Distance(playerObject.transform.position, pos) < (float)thinkness + 0.66)
+        if (Vector2.Distance(playerObject.transform.position - Vector3.right * 0.5f - Vector3.up * 0.5f, pos) < (float)thinkness + 0.66f)
             return false;
         
-        if (Vector2.Distance(winconditionObject.transform.position, pos) < (float)thinkness + 1.66f)
+        if (Vector2.Distance(winconditionObject.transform.position-Vector3.right*0.5f-Vector3.up*0.5f, pos) < (float)thinkness + 0.99f)
             return false;
 
         return true;
