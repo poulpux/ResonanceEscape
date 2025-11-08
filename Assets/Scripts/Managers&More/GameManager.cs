@@ -34,7 +34,7 @@ public class GameManager : MonoSingleton<GameManager>
         InputSystem_.I._r._event.AddListener(() => PlayPlayMode());
 
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
-        RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.MENUEDITORMODE; _enterInEditModeEvent.Invoke(); });
+        RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.EDITOR; _enterInEditModeEvent.Invoke(); });
         RaycastManager_.I.allTag[GV.TagSO._menuPastCode]._click2DEvent.AddListener(() =>  PastBoutonMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayMode]._click2DEvent.AddListener(() => _state = EGameState.MENUPLAYMODE);
         RaycastManager_.I.allTag[GV.TagSO._menuSupport]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
@@ -90,6 +90,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void PlayPlayMode()
     {
+        if (!(_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH))
+            return;
         ChangeTimeScale(1f);
         _state = EGameState.OVERWATCH;
         _overwatchEvent.Invoke();

@@ -84,7 +84,9 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     private void ResetLV()
     {
-        moveFeedback.StopFeedbacks();
+        if (!(GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH))
+            return;
+            moveFeedback.StopFeedbacks();
         canDie = false;
         canMove= false;
         _dashDistance = 0f;

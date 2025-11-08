@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class EditorManager : MonoSingleton<EditorManager>
 {
@@ -17,7 +19,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         public List<(int type, Vector2 pos)> _blobPosList = new List<(int, Vector2)>();
         public List<Vector2> _piksPosList = new List<Vector2>();
         public List<(int type, Vector2 pos)> _projectilePosList = new List<(int, Vector2)>();
-        public List<Vector2> _starPosList = new List<Vector2>();
+        public List<Vector2> _inertieBoostPosList = new List<Vector2>();
         public List<Vector2> _blackHolePosList = new List<Vector2>();
     }
 
@@ -29,6 +31,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     GameObject playerObject, winconditionObject;
     List<GameObject> allObject = new List<GameObject>();
+    int indexRotate = 0;
 
     private void Start()
     {
@@ -52,9 +55,12 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
+
         //Faire une option pour maintenir
-        InputSystem_.I._leftClick._event.AddListener(() => LeftClick());
+        InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());
+        InputSystem_.I._rightClick._eventMaintain.AddListener(() => Erase());
         InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_ResetMap(false);});
+        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1; });
 
         F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
@@ -91,9 +97,69 @@ public class EditorManager : MonoSingleton<EditorManager>
         InstantiateAllMap(player);
     }
 
+    private void Erase()
+    {
+        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        mousePos.z = 10f; // profondeur depuis la caméra
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        // Décale ton repère pour viser le centre de chaque tile
+        worldPos.x = Mathf.Floor(worldPos.x)/* + 0.5f*/;
+        worldPos.y = Mathf.Floor(worldPos.y) /*+ 0.5f*/;
+
+        Vector2 posInt = new Vector2(worldPos.x, worldPos.y);
+
+        // Supprime un élément d'une liste sans casser le foreach
+        void SafeRemove<T>(List<T> list, Predicate<T> match)
+        {
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (match(list[i]))
+                    list.RemoveAt(i);
+            }
+        }
+
+        void EraseFromList<T>(List<T> list, Func<T, Vector2> getPos)
+        {
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                Vector2 pos = getPos(list[i]);
+                if (Vector2.Distance(pos, posInt) < 0.3f)
+                {
+                    // Trouve l’objet correspondant et détruit-le
+                    for (int j = allObject.Count - 1; j >= 0; j--)
+                    {
+                        var obj = allObject[j];
+                        if (obj == null) continue;
+
+                        if ((Vector2)obj.transform.position == pos)
+                        {
+                            Destroy(obj);
+                            allObject.RemoveAt(j);
+                            break;
+                        }
+                    }
+
+                    list.RemoveAt(i);
+                    return; // on peut arrêter ici
+                }
+            }
+        }
+
+        // Efface tous les types d’éléments
+        EraseFromList(currentMapData._wallPosList, p => p);
+        EraseFromList(currentMapData._semiWallPosList, p => p.pos);
+        EraseFromList(currentMapData._piksPosList, p => p);
+        EraseFromList(currentMapData._blobPosList, p => p.pos);
+        EraseFromList(currentMapData._murBlobPosList, p => p.pos);
+        EraseFromList(currentMapData._projectilePosList, p => p.pos);
+        EraseFromList(currentMapData._blackHolePosList, p => p);
+        EraseFromList(currentMapData._inertieBoostPosList, p => p);
+    }
+
     private void SelectNewCase(EEditorSelectionType selectionType)
     {
-        //print("seld")
+        print("seld");
         this.selectionType = selectionType;
     }
 
@@ -142,9 +208,50 @@ public class EditorManager : MonoSingleton<EditorManager>
                 else if(selectionType == EEditorSelectionType.SEMIWALL)
                 {
                     tile = Instantiate(GV.PrefabSO._semiWall);
-                    currentMapData._semiWallPosList.Add((0,pos));
+                    tile.transform.eulerAngles = Vector3.forward * 90 * indexRotate;
+                    currentMapData._semiWallPosList.Add((indexRotate,pos));
                 }
+                else if(selectionType == EEditorSelectionType.WALLBLOOB)
+                {
+                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide);
+                    currentMapData._murBlobPosList.Add((indexRotate, pos));
+                }
+                else if(selectionType == EEditorSelectionType.BLOOB)
+                {
+                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide);
+                    currentMapData._blobPosList.Add((indexRotate, pos));
+                }
+                else if(selectionType == EEditorSelectionType.SPIKS)
+                {
+                    tile = Instantiate(GV.PrefabSO._piks);
+                    currentMapData._piksPosList.Add(pos);
+                }
+                else if(selectionType == EEditorSelectionType.PROJECTILE)
+                {
+                    tile = Instantiate(GV.PrefabSO._projectile);
+                    currentMapData._projectilePosList.Add((indexRotate, pos));
+                }
+                else if(selectionType == EEditorSelectionType.INERTIEBOOST)
+                {
+                    tile = Instantiate(GV.PrefabSO._inertieBoost);
+                    currentMapData._inertieBoostPosList.Add(pos);
+                }
+                else if(selectionType == EEditorSelectionType.BLACKHOLE)
+                {
+                    tile = Instantiate(GV.PrefabSO._blackHole);
+                    currentMapData._blackHolePosList.Add(pos);
+                }
+
                 tile.transform.position = new Vector3(pos.x, pos.y, 0f);
+                if (selectionType == EEditorSelectionType.SEMIWALL)
+                {
+                    if (indexRotate == 1)
+                        tile.transform.position += Vector3.right;
+                    else if(indexRotate == 2)
+                        tile.transform.position += Vector3.right + Vector3.up;
+                    else if(indexRotate == 3)
+                        tile.transform.position += Vector3.up;
+                }
                 allObject.Add(tile);
             }
         }
@@ -214,6 +321,37 @@ public class EditorManager : MonoSingleton<EditorManager>
             if (Vector2.Distance(item.pos, pos) < (float)thinkness)
                 return false;
         }
+        foreach (var item in currentMapData._piksPosList)
+        {
+            if (Vector2.Distance(item, pos) < (float)thinkness)
+                return false;
+        }
+        foreach (var item in currentMapData._blobPosList)
+        {
+            if (Vector2.Distance(item.pos, pos) < (float)thinkness)
+                return false;
+        }
+        foreach (var item in currentMapData._murBlobPosList)
+        {
+            if (Vector2.Distance(item.pos, pos) < (float)thinkness)
+                return false;
+        }
+        foreach (var item in currentMapData._projectilePosList)
+        {
+            if (Vector2.Distance(item.pos, pos) < (float)thinkness)
+                return false;
+        }
+        foreach (var item in currentMapData._blackHolePosList)
+        {
+            if (Vector2.Distance(item, pos) < (float)thinkness)
+                return false;
+        }
+        foreach (var item in currentMapData._inertieBoostPosList)
+        {
+            if (Vector2.Distance(item, pos) < (float)thinkness)
+                return false;
+        }
+
 
         //Continuer ici 
 
@@ -240,7 +378,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         allObject.Add(map);
 
-        if(GameManager.I._state == EGameState.MENUEDITORMODE)
+        if(GameManager.I._state == EGameState.EDITOR)
         {
             GameObject lines = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMapGrille :
             currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMapGrille :
@@ -304,7 +442,7 @@ public class EditorManager : MonoSingleton<EditorManager>
             allObject.Add(semiWall);
         }
 
-        foreach (var item in currentMapData._starPosList)
+        foreach (var item in currentMapData._inertieBoostPosList)
         {
             GameObject semiWall = Instantiate(GV.PrefabSO._star, shapes.transform);
             semiWall.transform.position = item;
@@ -336,7 +474,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         string cat9 = string.Join("€", data._projectilePosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
 
-        string cat10 = string.Join("€", data._starPosList.ConvertAll(v => $"{v.x},{v.y}"));
+        string cat10 = string.Join("€", data._inertieBoostPosList.ConvertAll(v => $"{v.x},{v.y}"));
         string cat11 = string.Join("€", data._blackHolePosList.ConvertAll(v => $"{v.x},{v.y}"));
 
         return $"{cat1}${cat2}${cat3}${cat4}${cat5}${cat6}${cat7}${cat8}${cat9}${cat10}${cat11}";
@@ -425,7 +563,7 @@ public class EditorManager : MonoSingleton<EditorManager>
             {
                 string[] v = entry.Split(',');
                 if (v.Length == 2)
-                    data._starPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                    data._inertieBoostPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
             }
         }
         if (parts.Length > 9)
