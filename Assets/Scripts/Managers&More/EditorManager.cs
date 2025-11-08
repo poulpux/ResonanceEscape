@@ -103,7 +103,6 @@ public class EditorManager : MonoSingleton<EditorManager>
             }
         }
 
-        print(player);
         currentMapData = ReadMap(codeMap);
         InstantiateAllMap(player);
     }
@@ -463,7 +462,14 @@ public class EditorManager : MonoSingleton<EditorManager>
         {
             GameObject semiWall = Instantiate(GV.PrefabSO._semiWall, shapes.transform);
             semiWall.transform.position = item.pos;
-            semiWall.transform.eulerAngles = Vector3.forward * item.type * 45f;
+            //if (item.type == 1)
+            //    semiWall.transform.position += Vector3.right*0.5f;
+            //else if (item.type == 2)
+            //    semiWall.transform.position += Vector3.right*0.5f + Vector3.up*0.5f;
+            //else if (item.type == 3)
+            //    semiWall.transform.position += Vector3.up*0.5f;
+
+            semiWall.transform.eulerAngles = Vector3.forward * item.type * 90;
             allObject.Add(semiWall);
         }
 
@@ -645,7 +651,6 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         playerObject.transform.position = pos;
         playerObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        print(playerObject);
         allObject.Add(player);
     }
 }

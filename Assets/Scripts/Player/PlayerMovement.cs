@@ -86,7 +86,8 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         if (!(GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH))
             return;
-            moveFeedback.StopFeedbacks();
+
+        moveFeedback.StopFeedbacks();
         canDie = false;
         canMove= false;
         _dashDistance = 0f;

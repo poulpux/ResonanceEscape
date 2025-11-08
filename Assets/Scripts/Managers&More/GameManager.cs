@@ -41,6 +41,7 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise.mt/"));
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
         RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
+        //RaycastManager_.I.allTag[GV.TagSO.menupl]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
         //_state = EGameState.EDITOR;
     }
     #endregion
@@ -90,8 +91,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void PlayPlayMode()
     {
-        if (!(_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH))
-            return;
+        //if (!(_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH))
+        //    return;
         ChangeTimeScale(1f);
         _state = EGameState.OVERWATCH;
         _overwatchEvent.Invoke();
