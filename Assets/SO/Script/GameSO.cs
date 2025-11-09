@@ -8,7 +8,7 @@ public class GameSO : ScriptableObject
 {
     [Header("Player")]
     public float _pulseIntervale;
-    public float _maxJumpDistance;
+    public float _maxJumpDistance, _blackHolePower;
     [Header("Levels")]
     [MultiLineProperty]
     public List<string> _allMapList = new List<string>();

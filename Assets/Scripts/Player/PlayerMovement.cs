@@ -208,7 +208,22 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.tag == GV.TagSO._gameBlackHole)
-        { }
+        {
+            if (rigidBody == null || rigidBody.isKinematic) return;
+
+            // Direction vers le centre
+            Vector2 direction = (Vector2)collision.transform.position - rigidBody.position;
+            float distance = direction.magnitude;
+
+            // On évite les divisions nulles
+            distance = Mathf.Max(distance, 0.1f);
+
+            // Intensité de la force (1 / distance^n)
+            float forceMagnitude = GV.GameSO._blackHolePower / Mathf.Pow(distance, 2f);
+
+            // Applique la force proportionnelle à la distance et à la direction
+            rigidBody.AddForce(direction.normalized * forceMagnitude, ForceMode2D.Force);
+        }
 
         //BlackHole
     }
