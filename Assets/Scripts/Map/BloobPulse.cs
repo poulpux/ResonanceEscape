@@ -14,7 +14,6 @@ public class BloobPulse : MonoBehaviour
 
     private void Change()
     {
-        print("pulse");
         GameObject invoque = null;
         if (vide)
         {

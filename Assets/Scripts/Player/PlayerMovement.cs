@@ -92,7 +92,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (GameManager.I._state == EGameState.ACT)
             {
                 gostAllFrames.Add(transform.position);
-                print("print");
             }
         }
     }
@@ -164,7 +163,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private IEnumerator WaitPlayAnimation()
     {
         yield return new WaitForSecondsRealtime(0.1f);
-        canMove = true; canDie = true; isDead = false; print("passe 2");
+        canMove = true; canDie = true; isDead = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -184,9 +183,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             InputSystem_.I._r._event.Invoke();
             //Feedback You Dead
         }
-
-       
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
