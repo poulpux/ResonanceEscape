@@ -22,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _enterInEditModePastEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _goToMenuEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _pulseEvent = new UnityEvent();
     #endregion
 
     #region Callbacks
@@ -75,8 +76,11 @@ public class GameManager : MonoSingleton<GameManager>
         _state = EGameState.ACT;
         ChangeTimeScale(1f);
         yield return new WaitForSeconds(GV.GameSO._pulseIntervale);
-        if(_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _replay)
+        if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _replay)
+        {
+            _pulseEvent.Invoke();
             F_WaitingAction();
+        }
     }
 
     private void PastBoutonMenu()

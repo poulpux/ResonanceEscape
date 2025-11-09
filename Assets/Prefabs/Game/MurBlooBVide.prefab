@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4482336027023690238}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -149,6 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4136242417717526861}
+  - component: {fileID: 1956613041123439899}
   m_Layer: 0
   m_Name: MurBlooBVide
   m_TagString: Untagged
@@ -172,3 +173,17 @@ Transform:
   - {fileID: 3482090487553630007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1956613041123439899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5333126346209759430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a740c2ff10ea7cb49a2268cd4733f28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vide: 1
+  wall: 1
