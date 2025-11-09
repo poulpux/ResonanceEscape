@@ -23,7 +23,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         public List<Vector2> _blackHolePosList = new List<Vector2>();
     }
 
-    [SerializeField] GameObject shapes;
+    public GameObject _shapes;
     EEditorSelectionType selectionType;
     EMapType mapType;
     public MapData currentMapData = new MapData();
@@ -54,7 +54,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.BLACKHOLE));
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
-        RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => { if (lines != null) { lines.SetActive(false); GUIUtility.systemCopyBuffer = WriteMap(currentMapData); } });
+        RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => { if (lines != null) { lines.SetActive(false); GUIUtility.systemCopyBuffer = WriteMap(currentMapData); _shapes.transform.localScale = Vector3.one * (currentMapData._mapTypeC1 == 0 ? 1f : 0.5f); } });
         RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => { indexMapType = currentMapData._mapTypeC1; currentMapData = new MapData(); indexMapType = indexMapType == 2 ? 0 : indexMapType += 1; currentMapData._mapTypeC1 = indexMapType; F_ChangeMap(WriteMap(currentMapData)); });
         RaycastManager_.I.allTag[GV.TagSO._editorClean]._click2DEvent.AddListener(() => { currentMapData = new MapData(); F_ChangeMap(WriteMap(currentMapData)); });
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
@@ -93,8 +93,8 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     public void F_ChangeMap(string codeMap, bool player = true)
     {
-        shapes.transform.localScale = Vector3.one;
-        shapes.transform.position = Vector3.zero;
+        _shapes.transform.localScale = Vector3.one;
+        _shapes.transform.position = Vector3.zero;
         if (_allObject.Count != 0)
         {
             for (int i = _allObject.Count - 1; i >= 0; i--)
@@ -113,8 +113,8 @@ public class EditorManager : MonoSingleton<EditorManager>
         InstantiateAllMap(player);
         if (currentMapData._mapTypeC1 != 0 && GameManager.I._state != EGameState.EDITOR && GameManager.I._state != EGameState.MENUEDITORMODE)
         {
-            shapes.transform.localScale = Vector3.one * 0.5f;
-            shapes.transform.position = Vector3.right * 0.8f;
+            _shapes.transform.localScale = Vector3.one * 0.5f;
+            _shapes.transform.position = Vector3.right * 0.8f;
         }
     }
 
@@ -439,7 +439,7 @@ public class EditorManager : MonoSingleton<EditorManager>
     {
         GameObject map = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMap :
             currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMap :
-            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMap, shapes.transform);
+            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMap, _shapes.transform);
 
         _allObject.Add(map);
 
@@ -447,7 +447,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         {
             GameObject lines = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMapGrille :
             currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMapGrille :
-            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMapGrille, shapes.transform);
+            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMapGrille, _shapes.transform);
 
             this.lines = lines;
             _allObject.Add(lines);
@@ -458,21 +458,21 @@ public class EditorManager : MonoSingleton<EditorManager>
             InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
         }
 
-        GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
+        GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, _shapes.transform);
         winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.3f;
         winconditionObject = winCondition;
         _allObject.Add(winCondition);
 
         foreach (var item in currentMapData._wallPosList)
         {
-            GameObject wall = Instantiate(GV.PrefabSO._wall, shapes.transform);
+            GameObject wall = Instantiate(GV.PrefabSO._wall, _shapes.transform);
             wall.transform.position = item;
             _allObject.Add(wall);
         }
 
         foreach (var item in currentMapData._semiWallPosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._semiWall, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._semiWall, _shapes.transform);
             semiWall.transform.position = item.pos;
             //if (item.type == 1)
             //    semiWall.transform.position += Vector3.right*0.5f;
@@ -487,28 +487,28 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         foreach (var item in currentMapData._murBlobPosList)
         {
-            GameObject semiWall = Instantiate(item.type == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, shapes.transform);
+            GameObject semiWall = Instantiate(item.type % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, _shapes.transform);
             semiWall.transform.position = item.pos;
             _allObject.Add(semiWall);
         }
         
         foreach (var item in currentMapData._blobPosList)
         {
-            GameObject semiWall = Instantiate(item.type == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, shapes.transform);
+            GameObject semiWall = Instantiate(item.type % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, _shapes.transform);
             semiWall.transform.position = item.pos;
             _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._piksPosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._piks, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._piks, _shapes.transform);
             semiWall.transform.position = item;
             _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._projectilePosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._projectile, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._projectile, _shapes.transform);
             semiWall.transform.position = item.pos;
             semiWall.transform.eulerAngles = Vector3.forward * item.type * 45f;
             _allObject.Add(semiWall);
@@ -516,14 +516,14 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         foreach (var item in currentMapData._inertieBoostPosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._star, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._star, _shapes.transform);
             semiWall.transform.position = item;
             _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._blackHolePosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._blackHole, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._blackHole, _shapes.transform);
             semiWall.transform.position = item;
             _allObject.Add(semiWall);
         }
@@ -657,7 +657,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         GameObject player = null;
         if (playerObject == null)
         {
-            player = Instantiate(GV.PrefabSO._player, shapes.transform);
+            player = Instantiate(GV.PrefabSO._player, _shapes.transform);
             playerObject = player;  
         }
 

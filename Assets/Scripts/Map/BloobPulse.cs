@@ -6,6 +6,8 @@ using UnityEngine;
 public class BloobPulse : MonoBehaviour
 {
     public bool vide, wall;
+
+
     void Start()
     {
         GameManager.I._pulseEvent.AddListener(() => Change());
@@ -18,19 +20,20 @@ public class BloobPulse : MonoBehaviour
         if (vide)
         {
             if (wall)
-                invoque = Instantiate(GV.PrefabSO._murBloobPlein);
+                invoque = Instantiate(GV.PrefabSO._murBloobPlein, EditorManager.I._shapes.transform);
             else
-                invoque = Instantiate(GV.PrefabSO._bloobPlein);
+                invoque = Instantiate(GV.PrefabSO._bloobPlein, EditorManager.I._shapes.transform);
         }
         else
         {
             if (wall)
-                invoque = Instantiate(GV.PrefabSO._murBloobVide);
+                invoque = Instantiate(GV.PrefabSO._murBloobVide, EditorManager.I._shapes.transform);
             else
-                invoque = Instantiate(GV.PrefabSO._bloobVide);
+                invoque = Instantiate(GV.PrefabSO._bloobVide, EditorManager.I._shapes.transform);
         }
 
         invoque.transform.position = transform.position;
+        invoque.transform.localScale = transform.parent.localScale;
         EditorManager.I._allObject.Add(invoque);
         EditorManager.I._allObject.Remove(gameObject);
         Destroy(gameObject);
