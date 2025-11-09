@@ -23,16 +23,16 @@ public class EditorManager : MonoSingleton<EditorManager>
         public List<Vector2> _blackHolePosList = new List<Vector2>();
     }
 
-    [SerializeField] GameObject shapes;
+    public GameObject _shapes;
     EEditorSelectionType selectionType;
     EMapType mapType;
     public MapData currentMapData = new MapData();
 
 
-    GameObject playerObject, winconditionObject;
-    List<GameObject> allObject = new List<GameObject>();
+    GameObject playerObject, winconditionObject, lines;
+    public List<GameObject> _allObject = new List<GameObject>();
     int indexRotate = 0;
-
+    int indexMapType;
     private void Start()
     {
         GameManager.I._enterInEditModeEvent.AddListener(() => 
@@ -52,7 +52,11 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorInertieBoost]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.INERTIEBOOST));
         RaycastManager_.I.allTag[GV.TagSO._editorStar]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.STAR));
         RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.BLACKHOLE));
+        RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
+        RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => { if (lines != null) { lines.SetActive(false); GUIUtility.systemCopyBuffer = WriteMap(currentMapData); _shapes.transform.localScale = Vector3.one * (currentMapData._mapTypeC1 == 0 ? 1f : 0.5f); } });
+        RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => { indexMapType = currentMapData._mapTypeC1; currentMapData = new MapData(); indexMapType = indexMapType == 2 ? 0 : indexMapType += 1; currentMapData._mapTypeC1 = indexMapType; F_ChangeMap(WriteMap(currentMapData)); });
+        RaycastManager_.I.allTag[GV.TagSO._editorClean]._click2DEvent.AddListener(() => { currentMapData = new MapData(); F_ChangeMap(WriteMap(currentMapData)); });
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
 
@@ -60,7 +64,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         //InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());
         //InputSystem_.I._rightClick._eventMaintain.AddListener(() => Erase());
         InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_ResetMap(false);});
-        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1; });
+        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1;  });
 
         F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
@@ -77,34 +81,41 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     public void F_SetGoodPlayPlayer()
     {
-        playerObject.transform.position = currentMapData._playerPosC2;
+        playerObject.transform.localPosition = currentMapData._playerPosC2;
         Rigidbody2D playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
         playerRigidBody.velocity = Vector3.zero;
     }
 
     public void F_ResetMap(bool player = true)
     {
-        F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode], player);
+        F_ChangeMap(WriteMap(currentMapData), player);
     }
 
     public void F_ChangeMap(string codeMap, bool player = true)
     {
-        if(allObject.Count != 0)
+        _shapes.transform.localScale = Vector3.one;
+        _shapes.transform.position = Vector3.zero;
+        if (_allObject.Count != 0)
         {
-            for (int i = allObject.Count - 1; i >= 0; i--)
+            for (int i = _allObject.Count - 1; i >= 0; i--)
             {
-                if (/*!player && */allObject[i] == playerObject)
+                if (/*!player && */_allObject[i] == playerObject)
                     continue;
                 else
                 {
-                    Destroy(allObject[i]);
-                    allObject.RemoveAt(i);
+                    Destroy(_allObject[i]);
+                    _allObject.RemoveAt(i);
                 }
             }
         }
 
         currentMapData = ReadMap(codeMap);
         InstantiateAllMap(player);
+        if (currentMapData._mapTypeC1 != 0 && GameManager.I._state != EGameState.EDITOR && GameManager.I._state != EGameState.MENUEDITORMODE)
+        {
+            _shapes.transform.localScale = Vector3.one * 0.5f;
+            _shapes.transform.position = Vector3.right * 0.8f;
+        }
     }
 
     private void Erase()
@@ -137,15 +148,15 @@ public class EditorManager : MonoSingleton<EditorManager>
                 if (Vector2.Distance(pos, posInt) < 0.3f)
                 {
                     // Trouve l’objet correspondant et détruit-le
-                    for (int j = allObject.Count - 1; j >= 0; j--)
+                    for (int j = _allObject.Count - 1; j >= 0; j--)
                     {
-                        var obj = allObject[j];
+                        var obj = _allObject[j];
                         if (obj == null) continue;
 
                         if ((Vector2)obj.transform.position == pos)
                         {
                             Destroy(obj);
-                            allObject.RemoveAt(j);
+                            _allObject.RemoveAt(j);
                             break;
                         }
                     }
@@ -174,15 +185,15 @@ public class EditorManager : MonoSingleton<EditorManager>
                 if (Vector2.Distance(posByAdding, posInt) < 0.3f)
                 {
                     // Trouve l’objet correspondant et détruit-le
-                    for (int j = allObject.Count - 1; j >= 0; j--)
+                    for (int j = _allObject.Count - 1; j >= 0; j--)
                     {
-                        var obj = allObject[j];
+                        var obj = _allObject[j];
                         if (obj == null) continue;
 
                         if ((Vector2)obj.transform.position == pos)
                         {
                             Destroy(obj);
-                            allObject.RemoveAt(j);
+                            _allObject.RemoveAt(j);
                             break;
                         }
                     }
@@ -248,42 +259,42 @@ public class EditorManager : MonoSingleton<EditorManager>
                 GameObject tile = null;
                 if (selectionType == EEditorSelectionType.WALL)
                 {
-                    tile = Instantiate(GV.PrefabSO._wall);
+                    tile = Instantiate(GV.PrefabSO._wall, _shapes.transform);
                     currentMapData._wallPosList.Add(pos);
                 }
                 else if(selectionType == EEditorSelectionType.SEMIWALL)
                 {
-                    tile = Instantiate(GV.PrefabSO._semiWall);
+                    tile = Instantiate(GV.PrefabSO._semiWall, _shapes.transform);
                     tile.transform.eulerAngles = Vector3.forward * 90 * indexRotate;
                 }
                 else if(selectionType == EEditorSelectionType.WALLBLOOB)
                 {
-                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide);
+                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, _shapes.transform);
                     currentMapData._murBlobPosList.Add((indexRotate, pos));
                 }
                 else if(selectionType == EEditorSelectionType.BLOOB)
                 {
-                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide);
+                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, _shapes.transform);
                     currentMapData._blobPosList.Add((indexRotate, pos));
                 }
                 else if(selectionType == EEditorSelectionType.SPIKS)
                 {
-                    tile = Instantiate(GV.PrefabSO._piks);
+                    tile = Instantiate(GV.PrefabSO._piks, _shapes.transform);
                     currentMapData._piksPosList.Add(pos);
                 }
                 else if(selectionType == EEditorSelectionType.PROJECTILE)
                 {
-                    tile = Instantiate(GV.PrefabSO._projectile);
+                    tile = Instantiate(GV.PrefabSO._projectile, _shapes.transform);
                     currentMapData._projectilePosList.Add((indexRotate, pos));
                 }
                 else if(selectionType == EEditorSelectionType.INERTIEBOOST)
                 {
-                    tile = Instantiate(GV.PrefabSO._inertieBoost);
+                    tile = Instantiate(GV.PrefabSO._inertieBoost, _shapes.transform);
                     currentMapData._inertieBoostPosList.Add(pos);
                 }
                 else if(selectionType == EEditorSelectionType.BLACKHOLE)
                 {
-                    tile = Instantiate(GV.PrefabSO._blackHole);
+                    tile = Instantiate(GV.PrefabSO._blackHole, _shapes.transform);
                     currentMapData._blackHolePosList.Add(pos);
                 }
 
@@ -299,7 +310,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
                     currentMapData._semiWallPosList.Add((indexRotate, (Vector2)tile.transform.position));
                 }
-                allObject.Add(tile);
+                _allObject.Add(tile);
             }
         }
     }
@@ -428,17 +439,18 @@ public class EditorManager : MonoSingleton<EditorManager>
     {
         GameObject map = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMap :
             currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMap :
-            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMap, shapes.transform);
+            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMap, _shapes.transform);
 
-        allObject.Add(map);
+        _allObject.Add(map);
 
         if(GameManager.I._state == EGameState.EDITOR)
         {
             GameObject lines = Instantiate(currentMapData._mapTypeC1 == 0 ? GV.PrefabSO._largeMapGrille :
             currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMapGrille :
-            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMapGrille, shapes.transform);
+            /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMapGrille, _shapes.transform);
 
-            allObject.Add(lines);
+            this.lines = lines;
+            _allObject.Add(lines);
         }
 
         if (player)
@@ -446,21 +458,21 @@ public class EditorManager : MonoSingleton<EditorManager>
             InstantiatePlayer((Vector3)currentMapData._playerPosC2 + Vector3.forward * -0.4f);
         }
 
-        GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, shapes.transform);
+        GameObject winCondition = Instantiate(GV.PrefabSO._winCondition, _shapes.transform);
         winCondition.transform.position = (Vector3)currentMapData._winConditionC2 + Vector3.forward * -0.3f;
         winconditionObject = winCondition;
-        allObject.Add(winCondition);
+        _allObject.Add(winCondition);
 
         foreach (var item in currentMapData._wallPosList)
         {
-            GameObject wall = Instantiate(GV.PrefabSO._wall, shapes.transform);
+            GameObject wall = Instantiate(GV.PrefabSO._wall, _shapes.transform);
             wall.transform.position = item;
-            allObject.Add(wall);
+            _allObject.Add(wall);
         }
 
         foreach (var item in currentMapData._semiWallPosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._semiWall, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._semiWall, _shapes.transform);
             semiWall.transform.position = item.pos;
             //if (item.type == 1)
             //    semiWall.transform.position += Vector3.right*0.5f;
@@ -470,50 +482,50 @@ public class EditorManager : MonoSingleton<EditorManager>
             //    semiWall.transform.position += Vector3.up*0.5f;
 
             semiWall.transform.eulerAngles = Vector3.forward * item.type * 90;
-            allObject.Add(semiWall);
+            _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._murBlobPosList)
         {
-            GameObject semiWall = Instantiate(item.type == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, shapes.transform);
+            GameObject semiWall = Instantiate(item.type % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, _shapes.transform);
             semiWall.transform.position = item.pos;
-            allObject.Add(semiWall);
+            _allObject.Add(semiWall);
         }
         
         foreach (var item in currentMapData._blobPosList)
         {
-            GameObject semiWall = Instantiate(item.type == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, shapes.transform);
+            GameObject semiWall = Instantiate(item.type % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, _shapes.transform);
             semiWall.transform.position = item.pos;
-            allObject.Add(semiWall);
+            _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._piksPosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._piks, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._piks, _shapes.transform);
             semiWall.transform.position = item;
-            allObject.Add(semiWall);
+            _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._projectilePosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._projectile, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._projectile, _shapes.transform);
             semiWall.transform.position = item.pos;
             semiWall.transform.eulerAngles = Vector3.forward * item.type * 45f;
-            allObject.Add(semiWall);
+            _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._inertieBoostPosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._star, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._star, _shapes.transform);
             semiWall.transform.position = item;
-            allObject.Add(semiWall);
+            _allObject.Add(semiWall);
         }
 
         foreach (var item in currentMapData._blackHolePosList)
         {
-            GameObject semiWall = Instantiate(GV.PrefabSO._blackHole, shapes.transform);
+            GameObject semiWall = Instantiate(GV.PrefabSO._blackHole, _shapes.transform);
             semiWall.transform.position = item;
-            allObject.Add(semiWall);
+            _allObject.Add(semiWall);
         }
     }
 
@@ -645,12 +657,12 @@ public class EditorManager : MonoSingleton<EditorManager>
         GameObject player = null;
         if (playerObject == null)
         {
-            player = Instantiate(GV.PrefabSO._player, shapes.transform);
+            player = Instantiate(GV.PrefabSO._player, _shapes.transform);
             playerObject = player;  
         }
 
         playerObject.transform.position = pos;
         playerObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-        allObject.Add(player);
+        _allObject.Add(player);
     }
 }

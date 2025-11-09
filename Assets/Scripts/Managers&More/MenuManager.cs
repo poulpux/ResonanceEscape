@@ -9,7 +9,7 @@ public class MenuManager : MonoSingleton<MenuManager>
 {
     public int _indexMapPlayMode = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
-    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay;
+    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter;
     [SerializeField] CinemachineCamera  camer;
 
     void Start()
@@ -24,6 +24,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu()); 
 
+
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
         UIInGame.SetActive(false);
@@ -37,6 +38,8 @@ public class MenuManager : MonoSingleton<MenuManager>
 
     private void ClickOnPlay()
     {
+        if (!(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0))
+            return;
         UIMenu.SetActive(false);
         UIPlayMode.SetActive(false);
         UIReplay.SetActive(false);
@@ -61,20 +64,26 @@ public class MenuManager : MonoSingleton<MenuManager>
         UIMenu.SetActive(false);
         UIPlayMode.SetActive(false);
         UIEditMode.SetActive(true);
-        camer.Lens.OrthographicSize = 7f;
+        parameter.SetActive(false); 
+        camer.Lens.OrthographicSize = 12f;
         camer.transform.position = Vector3.forward * -10f + Vector3.right * -2.11f;
     }
 
     private void LeftClickLevel()
     {
         _indexMapPlayMode = _indexMapPlayMode == 0 ? GV.GameSO._allMapList.Count-1 : _indexMapPlayMode -= 1;
+
         _changeLvEvent.Invoke();
+        lockedBackground.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
+        shapes.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode-1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
     }
     
     private void RightClickLevel()
     {
         _indexMapPlayMode = _indexMapPlayMode == GV.GameSO._allMapList.Count - 1 ? 0 : _indexMapPlayMode += 1;
         _changeLvEvent.Invoke();
+        lockedBackground.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
+        shapes.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
     }
 
     private void ReturnToMenu()
@@ -84,6 +93,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         UIReplay.SetActive(false);
         UIEditMode.SetActive(false);
         UIInGame.SetActive(false);
+        parameter.SetActive(true) ;
         camer.Lens.OrthographicSize = 7.64f;
         camer.transform.position = Vector3.forward * -10f + Vector3.right * -2.11f;
     }

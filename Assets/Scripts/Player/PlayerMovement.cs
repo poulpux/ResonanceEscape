@@ -57,7 +57,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 //_dashDistance -= Vector3.Distance(posToGO, transform.position);
                 _dashDistance = GV.GameSO._maxJumpDistance;
                 Vector2 inertie = transform.position - startpos;
-                print(inertie);
                 rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
                 lastThingWasAMove = false;
             }
@@ -76,6 +75,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (timer < 0.2f)
                 return;
             
+            if(timer > GV.GameSO._pulseIntervale + 0.2f)
+            {
+                GameManager.I._pulseEvent.Invoke();
+                timer = 0.2f;
+            }    
             transform.position = gostAllFrames[indexGhost];
 
             if (indexGhost == gostAllFrames.Count - 1)
@@ -92,7 +96,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (GameManager.I._state == EGameState.ACT)
             {
                 gostAllFrames.Add(transform.position);
-                print("print");
             }
         }
     }
@@ -104,7 +107,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
         lastThingWasAMove = true;
         rigidBody.gravityScale = 0f;
-        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        Vector3 mousePos = new Vector3(
+     Mathf.Clamp(UnityEngine.Input.mousePosition.x, 0, Screen.width),
+     Mathf.Clamp(UnityEngine.Input.mousePosition.y, 0, Screen.height),
+     UnityEngine.Input.mousePosition.z
+ );
         mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         startpos = transform.position;
@@ -164,7 +171,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private IEnumerator WaitPlayAnimation()
     {
         yield return new WaitForSecondsRealtime(0.1f);
-        canMove = true; canDie = true; isDead = false; print("passe 2");
+        canMove = true; canDie = true; isDead = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -184,9 +191,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             InputSystem_.I._r._event.Invoke();
             //Feedback You Dead
         }
-
-       
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -212,7 +216,22 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.tag == GV.TagSO._gameBlackHole)
-        { }
+        {
+            if (rigidBody == null || rigidBody.isKinematic) return;
+
+            // Direction vers le centre
+            Vector2 direction = (Vector2)collision.transform.position - rigidBody.position;
+            float distance = direction.magnitude;
+
+            // On évite les divisions nulles
+            distance = Mathf.Max(distance, 0.1f);
+
+            // Intensité de la force (1 / distance^n)
+            float forceMagnitude = GV.GameSO._blackHolePower / Mathf.Pow(distance, 2f);
+
+            // Applique la force proportionnelle à la distance et à la direction
+            rigidBody.AddForce(direction.normalized * forceMagnitude, ForceMode2D.Force);
+        }
 
         //BlackHole
     }

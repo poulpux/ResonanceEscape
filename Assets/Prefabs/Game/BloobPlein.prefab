@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4125609063463663856}
   - component: {fileID: 222148790432596219}
   - component: {fileID: 6874214133647279788}
+  - component: {fileID: 114091520660387724}
   m_Layer: 0
   m_Name: BloobPlein
   m_TagString: GameDie
@@ -186,3 +187,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114091520660387724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335175836358599538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a740c2ff10ea7cb49a2268cd4733f28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vide: 0
+  wall: 0

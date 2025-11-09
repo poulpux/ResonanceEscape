@@ -22,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _enterInEditModePastEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _goToMenuEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _pulseEvent = new UnityEvent();
     #endregion
 
     #region Callbacks
@@ -33,7 +34,7 @@ public class GameManager : MonoSingleton<GameManager>
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
         _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; });
 
-        InputSystem_.I._r._event.AddListener(() => PlayPlayMode());
+        InputSystem_.I._r._event.AddListener(() => { if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH) PlayPlayMode(); });
         InputSystem_.I._leftClick._event.AddListener(() => { if (_replay) { GoBackToMenu(); _replay = false; } });
 
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
@@ -75,8 +76,11 @@ public class GameManager : MonoSingleton<GameManager>
         _state = EGameState.ACT;
         ChangeTimeScale(1f);
         yield return new WaitForSeconds(GV.GameSO._pulseIntervale);
-        if(_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _replay)
+        if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _replay)
+        {
+            _pulseEvent.Invoke();
             F_WaitingAction();
+        }
     }
 
     private void PastBoutonMenu()
@@ -88,7 +92,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         print("passe ici");
         EditorManager.I.F_ChangeMap(GUIUtility.systemCopyBuffer);
-        _state = EGameState.MENUEDITORMODE;
+        _state = EGameState.EDITOR;
         _enterInEditModePastEvent.Invoke();
     }
 
