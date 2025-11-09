@@ -29,10 +29,10 @@ public class EditorManager : MonoSingleton<EditorManager>
     public MapData currentMapData = new MapData();
 
 
-    GameObject playerObject, winconditionObject;
+    GameObject playerObject, winconditionObject, lines;
     List<GameObject> allObject = new List<GameObject>();
     int indexRotate = 0;
-
+    int indexMapType;
     private void Start()
     {
         GameManager.I._enterInEditModeEvent.AddListener(() => 
@@ -52,7 +52,10 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorInertieBoost]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.INERTIEBOOST));
         RaycastManager_.I.allTag[GV.TagSO._editorStar]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.STAR));
         RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.BLACKHOLE));
+        RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
+        RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => { if (lines != null) { lines.SetActive(false); GUIUtility.systemCopyBuffer = WriteMap(currentMapData); } });
+        RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => { print("passe ici"); indexMapType = currentMapData._mapTypeC1; currentMapData = new MapData(); indexMapType = indexMapType == 2 ? 0 : indexMapType += 1; currentMapData._mapTypeC1 = indexMapType; F_ChangeMap(WriteMap(currentMapData)); });
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
 
@@ -60,7 +63,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         //InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());
         //InputSystem_.I._rightClick._eventMaintain.AddListener(() => Erase());
         InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_ResetMap(false);});
-        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1; });
+        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1;  });
 
         F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
@@ -438,6 +441,7 @@ public class EditorManager : MonoSingleton<EditorManager>
             currentMapData._mapTypeC1 == 1 ? GV.PrefabSO._longMapGrille :
             /*currentMapData._mapTypeC1 == 2 ?*/ GV.PrefabSO._bothMapGrille, shapes.transform);
 
+            this.lines = lines;
             allObject.Add(lines);
         }
 

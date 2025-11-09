@@ -38,6 +38,8 @@ public class MenuManager : MonoSingleton<MenuManager>
 
     private void ClickOnPlay()
     {
+        if (!(PlayerPrefs.GetFloat(_indexMapPlayMode.ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0))
+            return;
         UIMenu.SetActive(false);
         UIPlayMode.SetActive(false);
         UIReplay.SetActive(false);
