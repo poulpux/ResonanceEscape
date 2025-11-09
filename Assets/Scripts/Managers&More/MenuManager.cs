@@ -9,7 +9,7 @@ public class MenuManager : MonoSingleton<MenuManager>
 {
     public int _indexMapPlayMode = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
-    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay;
+    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes;
     [SerializeField] CinemachineCamera  camer;
 
     void Start()
@@ -23,6 +23,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu()); 
+
 
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
@@ -68,13 +69,18 @@ public class MenuManager : MonoSingleton<MenuManager>
     private void LeftClickLevel()
     {
         _indexMapPlayMode = _indexMapPlayMode == 0 ? GV.GameSO._allMapList.Count-1 : _indexMapPlayMode -= 1;
+
         _changeLvEvent.Invoke();
+        lockedBackground.SetActive(PlayerPrefs.GetFloat(_indexMapPlayMode.ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
+        shapes.SetActive(PlayerPrefs.GetFloat(_indexMapPlayMode.ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
     }
     
     private void RightClickLevel()
     {
         _indexMapPlayMode = _indexMapPlayMode == GV.GameSO._allMapList.Count - 1 ? 0 : _indexMapPlayMode += 1;
         _changeLvEvent.Invoke();
+        lockedBackground.SetActive(PlayerPrefs.GetFloat(_indexMapPlayMode.ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
+        shapes.SetActive(PlayerPrefs.GetFloat(_indexMapPlayMode.ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
     }
 
     private void ReturnToMenu()
