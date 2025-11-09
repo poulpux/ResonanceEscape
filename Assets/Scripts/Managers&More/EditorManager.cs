@@ -55,7 +55,8 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
         RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => { if (lines != null) { lines.SetActive(false); GUIUtility.systemCopyBuffer = WriteMap(currentMapData); } });
-        RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => { print("passe ici"); indexMapType = currentMapData._mapTypeC1; currentMapData = new MapData(); indexMapType = indexMapType == 2 ? 0 : indexMapType += 1; currentMapData._mapTypeC1 = indexMapType; F_ChangeMap(WriteMap(currentMapData)); });
+        RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => { indexMapType = currentMapData._mapTypeC1; currentMapData = new MapData(); indexMapType = indexMapType == 2 ? 0 : indexMapType += 1; currentMapData._mapTypeC1 = indexMapType; F_ChangeMap(WriteMap(currentMapData)); });
+        RaycastManager_.I.allTag[GV.TagSO._editorClean]._click2DEvent.AddListener(() => { currentMapData = new MapData(); F_ChangeMap(WriteMap(currentMapData)); });
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
 
