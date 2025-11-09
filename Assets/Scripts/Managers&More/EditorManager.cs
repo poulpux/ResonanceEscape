@@ -93,7 +93,9 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     public void F_ChangeMap(string codeMap, bool player = true)
     {
-        if(allObject.Count != 0)
+        shapes.transform.localScale = Vector3.one;
+        shapes.transform.position = Vector3.zero;
+        if (allObject.Count != 0)
         {
             for (int i = allObject.Count - 1; i >= 0; i--)
             {
@@ -109,6 +111,11 @@ public class EditorManager : MonoSingleton<EditorManager>
 
         currentMapData = ReadMap(codeMap);
         InstantiateAllMap(player);
+        if (currentMapData._mapTypeC1 != 0 && GameManager.I._state != EGameState.EDITOR && GameManager.I._state != EGameState.MENUEDITORMODE)
+        {
+            shapes.transform.localScale = Vector3.one * 0.5f;
+            shapes.transform.position = Vector3.right * 0.8f;
+        }
     }
 
     private void Erase()

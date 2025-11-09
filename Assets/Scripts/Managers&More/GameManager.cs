@@ -33,7 +33,7 @@ public class GameManager : MonoSingleton<GameManager>
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
         _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; });
 
-        InputSystem_.I._r._event.AddListener(() => PlayPlayMode());
+        InputSystem_.I._r._event.AddListener(() => { if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH) PlayPlayMode(); });
         InputSystem_.I._leftClick._event.AddListener(() => { if (_replay) { GoBackToMenu(); _replay = false; } });
 
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
@@ -88,7 +88,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         print("passe ici");
         EditorManager.I.F_ChangeMap(GUIUtility.systemCopyBuffer);
-        _state = EGameState.MENUEDITORMODE;
+        _state = EGameState.EDITOR;
         _enterInEditModePastEvent.Invoke();
     }
 
