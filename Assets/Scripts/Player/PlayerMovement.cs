@@ -57,7 +57,6 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 //_dashDistance -= Vector3.Distance(posToGO, transform.position);
                 _dashDistance = GV.GameSO._maxJumpDistance;
                 Vector2 inertie = transform.position - startpos;
-                print(inertie);
                 rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
                 lastThingWasAMove = false;
             }
@@ -76,6 +75,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (timer < 0.2f)
                 return;
             
+            if(timer > GV.GameSO._pulseIntervale + 0.2f)
+            {
+                GameManager.I._pulseEvent.Invoke();
+                timer = 0.2f;
+            }    
             transform.position = gostAllFrames[indexGhost];
 
             if (indexGhost == gostAllFrames.Count - 1)
