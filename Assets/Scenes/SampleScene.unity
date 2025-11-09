@@ -4956,9 +4956,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6041599664502334154, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       insertIndex: 2
       addedObject: {fileID: 1542423099}
-    - targetCorrespondingSourceObject: {fileID: 6041599664502334154, guid: 91c94680982410340a61de4b61e093fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 91c94680982410340a61de4b61e093fa, type: 3}
 --- !u!4 &630217185 stripped
 Transform:
@@ -10375,9 +10372,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1221653371}
-    - targetCorrespondingSourceObject: {fileID: 6041599664502334154, guid: 91c94680982410340a61de4b61e093fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 91c94680982410340a61de4b61e093fa, type: 3}
 --- !u!4 &1221653369 stripped
 Transform:
@@ -12916,7 +12910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f884d1fd0d736943acd885b961a86b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shapes: {fileID: 1496868590}
+  _shapes: {fileID: 1496868590}
   currentMapData:
     _mapTypeC1: 0
     _playerPosC2: {x: 0, y: 0}

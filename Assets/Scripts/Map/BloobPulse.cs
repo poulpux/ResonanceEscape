@@ -33,7 +33,7 @@ public class BloobPulse : MonoBehaviour
         }
 
         invoque.transform.position = transform.position;
-        invoque.transform.localScale = transform.parent.localScale;
+        //invoque.transform.localScale = transform.parent.localScale;
         EditorManager.I._allObject.Add(invoque);
         EditorManager.I._allObject.Remove(gameObject);
         Destroy(gameObject);

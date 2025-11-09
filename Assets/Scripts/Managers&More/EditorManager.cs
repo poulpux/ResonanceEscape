@@ -259,42 +259,42 @@ public class EditorManager : MonoSingleton<EditorManager>
                 GameObject tile = null;
                 if (selectionType == EEditorSelectionType.WALL)
                 {
-                    tile = Instantiate(GV.PrefabSO._wall);
+                    tile = Instantiate(GV.PrefabSO._wall, _shapes.transform);
                     currentMapData._wallPosList.Add(pos);
                 }
                 else if(selectionType == EEditorSelectionType.SEMIWALL)
                 {
-                    tile = Instantiate(GV.PrefabSO._semiWall);
+                    tile = Instantiate(GV.PrefabSO._semiWall, _shapes.transform);
                     tile.transform.eulerAngles = Vector3.forward * 90 * indexRotate;
                 }
                 else if(selectionType == EEditorSelectionType.WALLBLOOB)
                 {
-                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide);
+                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, _shapes.transform);
                     currentMapData._murBlobPosList.Add((indexRotate, pos));
                 }
                 else if(selectionType == EEditorSelectionType.BLOOB)
                 {
-                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide);
+                    tile = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, _shapes.transform);
                     currentMapData._blobPosList.Add((indexRotate, pos));
                 }
                 else if(selectionType == EEditorSelectionType.SPIKS)
                 {
-                    tile = Instantiate(GV.PrefabSO._piks);
+                    tile = Instantiate(GV.PrefabSO._piks, _shapes.transform);
                     currentMapData._piksPosList.Add(pos);
                 }
                 else if(selectionType == EEditorSelectionType.PROJECTILE)
                 {
-                    tile = Instantiate(GV.PrefabSO._projectile);
+                    tile = Instantiate(GV.PrefabSO._projectile, _shapes.transform);
                     currentMapData._projectilePosList.Add((indexRotate, pos));
                 }
                 else if(selectionType == EEditorSelectionType.INERTIEBOOST)
                 {
-                    tile = Instantiate(GV.PrefabSO._inertieBoost);
+                    tile = Instantiate(GV.PrefabSO._inertieBoost, _shapes.transform);
                     currentMapData._inertieBoostPosList.Add(pos);
                 }
                 else if(selectionType == EEditorSelectionType.BLACKHOLE)
                 {
-                    tile = Instantiate(GV.PrefabSO._blackHole);
+                    tile = Instantiate(GV.PrefabSO._blackHole, _shapes.transform);
                     currentMapData._blackHolePosList.Add(pos);
                 }
 
