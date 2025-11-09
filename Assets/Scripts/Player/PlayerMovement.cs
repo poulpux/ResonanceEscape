@@ -107,7 +107,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
         lastThingWasAMove = true;
         rigidBody.gravityScale = 0f;
-        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        Vector3 mousePos = new Vector3(
+     Mathf.Clamp(UnityEngine.Input.mousePosition.x, 0, Screen.width),
+     Mathf.Clamp(UnityEngine.Input.mousePosition.y, 0, Screen.height),
+     UnityEngine.Input.mousePosition.z
+ );
         mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         startpos = transform.position;
