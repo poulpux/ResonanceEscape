@@ -9,12 +9,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     bool canMove, canDie;
     bool lastThingWasAMove, isDead;
     public Vector3 startpos, posToGO, lastPos;
-    [SerializeField] MMF_Player moveFeedback;
+    [SerializeField] MMF_Player moveFeedback, inertieFeedback;
+    [SerializeField] TrailRenderer trailInertie;
 
     Rigidbody2D rigidBody;
     public float _dashDistance;
     float timer;
-   public  List<Vector2> gostAllFrames = new List<Vector2>();
+    public  List<Vector2> gostAllFrames = new List<Vector2>();
+    public  List<Vector2> gostAllFeedback = new List<Vector2>();
     int indexGhost;
     void Start()
     {
@@ -26,11 +28,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
         GameManager.I._winTheLevelEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); });
-        GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
+        GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
 
         InputSystem_.I._leftClick._event.AddListener(()=> { if (!GameManager.I._replay) TryMove(); });  
         InputSystem_.I._space._event.AddListener(()=> { if (!GameManager.I._replay) TryInertie(); });
-        InputSystem_.I._r._event.AddListener(()=> { if (!GameManager.I._replay) ResetLV(); gostAllFrames.Clear(); });
+        InputSystem_.I._r._event.AddListener(()=> { if (!GameManager.I._replay) ResetLV(); gostAllFrames.Clear(); gostAllFeedback.Clear(); });
 
 
         //moveFeedback.FeedbacksList[0].FeedbackDuration = GV.GameSO._pulseIntervale;
@@ -81,6 +83,12 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 timer = 0.2f;
             }    
             transform.position = gostAllFrames[indexGhost];
+            if (gostAllFeedback[indexGhost] == Vector2.one * 99f && indexGhost != gostAllFrames.Count - 1)
+                inertieFeedback.PlayFeedbacks();
+            else
+            {
+                StopInertieFeedback();
+            }
 
             if (indexGhost == gostAllFrames.Count - 1)
             {
@@ -96,6 +104,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (GameManager.I._state == EGameState.ACT)
             {
                 gostAllFrames.Add(transform.position);
+                if (lastThingWasAMove)
+                    gostAllFeedback.Add(transform.position);
+                else
+                    gostAllFeedback.Add(Vector2.one * 99f);
             }
         }
     }
@@ -112,6 +124,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
      Mathf.Clamp(UnityEngine.Input.mousePosition.y, 0, Screen.height),
      UnityEngine.Input.mousePosition.z
  );
+        StopInertieFeedback();
         mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         startpos = transform.position;
@@ -135,6 +148,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         isDead = false;
         if (!canMove) return;
 
+        inertieFeedback.PlayFeedbacks();
         //if(!GameManager.I._replay)
         //    gostActionList.Add(Vector2.one * -99f);
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
@@ -155,6 +169,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             return;
 
         moveFeedback.StopFeedbacks();
+        StopInertieFeedback();
         canDie = false;
         canMove= false;
         isDead = true;
@@ -234,5 +249,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         }
 
         //BlackHole
+    }
+
+    private void StopInertieFeedback()
+    {
+        inertieFeedback.StopFeedbacks();
+        trailInertie.Clear();
     }
 }
