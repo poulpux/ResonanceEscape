@@ -88,6 +88,7 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._menuInsta);
         InstantiateOneTag(GV.TagSO._menuFiverr);
         InstantiateOneTag(GV.TagSO._menuLangage);
+        InstantiateOneTag(GV.TagSO._menuCloseHelpWindow);
     }
     private void Click() =>
         HandleRaycast(UI, TwoD, ThreeD, true);
