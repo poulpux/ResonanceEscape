@@ -52,5 +52,6 @@ public class TagSO : ScriptableObject
         _menuInsta,
         _menuFiverr,
         _menuLangage,
+        _menuCloseHelpWindow,
         _quitParamter;
 }

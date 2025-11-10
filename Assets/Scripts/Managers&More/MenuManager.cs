@@ -9,7 +9,7 @@ public class MenuManager : MonoSingleton<MenuManager>
 {
     public int _indexMapPlayMode = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
-    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter;
+    [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter, UIHelp;
     [SerializeField] CinemachineCamera  camer;
 
     void Start()
@@ -20,6 +20,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeRightLevel]._click2DEvent.AddListener(() => RightClickLevel());
         RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => ClickOnPlay());
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => ReturnToMenu());
+        RaycastManager_.I.allTag[GV.TagSO._menuHelp]._click2DEvent.AddListener(() => UIHelp.SetActive(true));
         //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu()); 

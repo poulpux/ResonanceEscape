@@ -52,6 +52,7 @@ TagManager:
   - MenuInsta
   - MenuFiverr
   - MenuLangage
+  - MenuCloseHelpWindow
   layers:
   - Default
   - TransparentFX
