@@ -662,7 +662,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         }
 
         playerObject.transform.position = pos;
-        playerObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        PlayerMovement.I._rigidBody.bodyType = RigidbodyType2D.Kinematic;
         _allObject.Add(player);
     }
 }

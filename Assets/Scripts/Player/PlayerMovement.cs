@@ -12,7 +12,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     [SerializeField] MMF_Player moveFeedback, inertieFeedback, wallCollisionFeedback;
     [SerializeField] TrailRenderer trailInertie;
 
-    Rigidbody2D rigidBody;
+    public Rigidbody2D _rigidBody;
     public float _dashDistance;
     float timer;
     public  List<Vector2> gostAllFrames = new List<Vector2>();
@@ -24,11 +24,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         //{
         //    PlayerPrefs.SetFloat(i.ToString(), 99.99f);
         //}
-        rigidBody = GetComponent<Rigidbody2D>();
+
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
         GameManager.I._winTheLevelEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); });
-        GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
+        GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; _rigidBody.bodyType = RigidbodyType2D.Kinematic; _rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
 
         InputSystem_.I._leftClick._event.AddListener(()=> { if (!GameManager.I._replay) TryMove(); });  
         InputSystem_.I._space._event.AddListener(()=> { if (!GameManager.I._replay) TryInertie(); });
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             return;
 
         if (timer < GV.GameSO._pulseIntervale && lastThingWasAMove)
-            rigidBody.MovePosition(startpos + (timer / GV.GameSO._pulseIntervale) * (posToGO - startpos));
+            _rigidBody.MovePosition(startpos + (timer / GV.GameSO._pulseIntervale) * (posToGO - startpos));
 
         if (lastThingWasAMove)
         {
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 //_dashDistance -= Vector3.Distance(posToGO, transform.position);
                 _dashDistance = GV.GameSO._maxJumpDistance;
                 Vector2 inertie = transform.position - startpos;
-                rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
+                _rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
                 lastThingWasAMove = false;
             }
         }
@@ -120,9 +120,9 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         isDead = false;
         if(!canMove || _dashDistance >= GV.GameSO._maxJumpDistance) return;
-        rigidBody.bodyType = RigidbodyType2D.Dynamic;
+        _rigidBody.bodyType = RigidbodyType2D.Dynamic;
         lastThingWasAMove = true;
-        rigidBody.gravityScale = 0f;
+        _rigidBody.gravityScale = 0f;
         Vector3 mousePos = new Vector3(
      Mathf.Clamp(UnityEngine.Input.mousePosition.x, 0, Screen.width),
      Mathf.Clamp(UnityEngine.Input.mousePosition.y, 0, Screen.height),
@@ -138,7 +138,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         canMove = false;
         //if(!GameManager.I._replay)
         //    gostActionList.Add(posToGO);
-        rigidBody.velocity = Vector2.zero;
+        _rigidBody.velocity = Vector2.zero;
 
         
         //moveFeedback.transform.position = posToGO;
@@ -157,13 +157,13 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         moveFeedback.StopFeedbacks();
         //if(!GameManager.I._replay)
         //    gostActionList.Add(Vector2.one * -99f);
-        rigidBody.bodyType = RigidbodyType2D.Dynamic;
-        rigidBody.gravityScale = 1f;
+        _rigidBody.bodyType = RigidbodyType2D.Dynamic;
+        _rigidBody.gravityScale = 1f;
         if (lastThingWasAMove)
         {
             Vector2 inertie = posToGO - startpos;
-            rigidBody.velocity = Vector2.zero;
-            rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
+            _rigidBody.velocity = Vector2.zero;
+            _rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
             lastThingWasAMove= false;
         }
         GameManager.I._playerActEvent.Invoke();
@@ -185,8 +185,8 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         indexGhost = 0;
         timer = 0f;
         StartCoroutine(WaitPlayAnimation());
-        rigidBody.bodyType = RigidbodyType2D.Kinematic; 
-        rigidBody.velocity = Vector2.zero; 
+        _rigidBody.bodyType = RigidbodyType2D.Kinematic; 
+        _rigidBody.velocity = Vector2.zero; 
         EditorManager.I.F_SetGoodPlayPlayer();
     }
 
@@ -200,7 +200,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         if(collision.transform.tag == GV.TagSO._gameWallCollision)
         {
-            if(lastThingWasAMove || rigidBody.velocity.magnitude > 12f)
+            if(lastThingWasAMove || _rigidBody.velocity.magnitude > 12f)
                 wallCollisionFeedback.PlayFeedbacks();
         }
         if(collision.transform.tag == GV.TagSO._gameWallCollision && lastThingWasAMove)
@@ -208,8 +208,8 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             moveFeedback.StopFeedbacks();
             //_dashDistance -= Vector3.Distance(posToGO, transform.position);
             Vector2 inertie = posToGO - startpos;
-            rigidBody.velocity = Vector2.zero;
-            rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
+            _rigidBody.velocity = Vector2.zero;
+            _rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
             lastThingWasAMove = false;
         }
         else if(collision.transform.tag == GV.TagSO._gameDie && canDie)
@@ -231,7 +231,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         else if(collision.transform.tag == GV.TagSO._gameInertieBoost)
         {
             if(!lastThingWasAMove)
-                rigidBody.AddForce(rigidBody.velocity, ForceMode2D.Impulse);
+                _rigidBody.AddForce(_rigidBody.velocity, ForceMode2D.Impulse);
         }
         else if(collision.transform.tag == GV.TagSO._gameStar)
         {
@@ -244,10 +244,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         if (collision.transform.tag == GV.TagSO._gameBlackHole)
         {
-            if (rigidBody == null || rigidBody.isKinematic) return;
+            if (_rigidBody == null || _rigidBody.isKinematic) return;
 
             // Direction vers le centre
-            Vector2 direction = (Vector2)collision.transform.position - rigidBody.position;
+            Vector2 direction = (Vector2)collision.transform.position - _rigidBody.position;
             float distance = direction.magnitude;
 
             // On évite les divisions nulles
@@ -257,7 +257,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             float forceMagnitude = GV.GameSO._blackHolePower / Mathf.Pow(distance, 2f);
 
             // Applique la force proportionnelle à la distance et à la direction
-            rigidBody.AddForce(direction.normalized * forceMagnitude, ForceMode2D.Force);
+            _rigidBody.AddForce(direction.normalized * forceMagnitude, ForceMode2D.Force);
         }
 
         //BlackHole
