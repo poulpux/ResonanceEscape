@@ -333,7 +333,7 @@ MonoBehaviour:
               m_RotationOrder: 4
             AttackTime: 0
             SustainTime: 0.05
-            DecayTime: 0.255
+            DecayTime: 0.24
             ScaleWithImpact: 1
             HoldForever: 0
           ImpactRadius: 100
