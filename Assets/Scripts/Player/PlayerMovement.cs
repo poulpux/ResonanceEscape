@@ -84,10 +84,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             }    
             transform.position = gostAllFrames[indexGhost];
             if (gostAllFeedback[indexGhost] == Vector2.one * 99f && indexGhost != gostAllFrames.Count - 1)
+            {
                 inertieFeedback.PlayFeedbacks();
+                moveFeedback.StopFeedbacks();
+            }
             else
             {
                 StopInertieFeedback();
+                moveFeedback.PlayFeedbacks();
             }
 
             if (indexGhost == gostAllFrames.Count - 1)
@@ -115,7 +119,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private void TryMove()
     {
         isDead = false;
-        if(!canMove && _dashDistance < GV.GameSO._maxJumpDistance) return;
+        if(!canMove || _dashDistance >= GV.GameSO._maxJumpDistance) return;
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
         lastThingWasAMove = true;
         rigidBody.gravityScale = 0f;
@@ -125,6 +129,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
      UnityEngine.Input.mousePosition.z
  );
         StopInertieFeedback();
+        moveFeedback.PlayFeedbacks();
         mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         startpos = transform.position;
@@ -149,6 +154,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         if (!canMove) return;
 
         inertieFeedback.PlayFeedbacks();
+        moveFeedback.StopFeedbacks();
         //if(!GameManager.I._replay)
         //    gostActionList.Add(Vector2.one * -99f);
         rigidBody.bodyType = RigidbodyType2D.Dynamic;
@@ -170,6 +176,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
         moveFeedback.StopFeedbacks();
         StopInertieFeedback();
+        //moveFeedback.PlayFeedbacks();
         canDie = false;
         canMove= false;
         isDead = true;
