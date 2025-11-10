@@ -9,7 +9,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     bool canMove, canDie;
     bool lastThingWasAMove, isDead;
     public Vector3 startpos, posToGO, lastPos;
-    [SerializeField] MMF_Player moveFeedback, inertieFeedback;
+    [SerializeField] MMF_Player moveFeedback, inertieFeedback, wallCollisionFeedback;
     [SerializeField] TrailRenderer trailInertie;
 
     Rigidbody2D rigidBody;
@@ -198,6 +198,11 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.transform.tag == GV.TagSO._gameWallCollision)
+        {
+            if(lastThingWasAMove || rigidBody.velocity.magnitude > 12f)
+                wallCollisionFeedback.PlayFeedbacks();
+        }
         if(collision.transform.tag == GV.TagSO._gameWallCollision && lastThingWasAMove)
         {
             moveFeedback.StopFeedbacks();
