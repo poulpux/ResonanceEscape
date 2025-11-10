@@ -83,16 +83,16 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 timer = 0.2f;
             }    
             transform.position = gostAllFrames[indexGhost];
-            if (gostAllFeedback[indexGhost] == Vector2.one * 99f && indexGhost != gostAllFrames.Count - 1)
-            {
-                inertieFeedback.PlayFeedbacks();
-                moveFeedback.StopFeedbacks();
-            }
-            else
-            {
-                StopInertieFeedback();
-                moveFeedback.PlayFeedbacks();
-            }
+            //if (gostAllFeedback[indexGhost] == Vector2.one * 99f && indexGhost != gostAllFrames.Count - 1)
+            //{
+            //    inertieFeedback.PlayFeedbacks();
+            //    moveFeedback.StopFeedbacks();
+            //}
+            //else
+            //{
+            //    StopInertieFeedback();
+            //    moveFeedback.PlayFeedbacks();
+            //}
 
             if (indexGhost == gostAllFrames.Count - 1)
             {
