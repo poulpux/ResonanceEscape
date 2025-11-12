@@ -14,6 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
     public bool _replay;
     [Header("Feedbacks")]
     [SerializeField] MMF_Player pulseFeedback;
+    [SerializeField] MMF_Player winFeedback;
     #endregion
 
     #region Events
@@ -35,10 +36,10 @@ public class GameManager : MonoSingleton<GameManager>
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
-        _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; });
+        _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; winFeedback.PlayFeedbacks(); });
 
         InputSystem_.I._r._event.AddListener(() => { if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH) PlayPlayMode(); });
-        InputSystem_.I._leftClick._event.AddListener(() => { if (_replay) { GoBackToMenu(); _replay = false; } });
+        InputSystem_.I._leftClick._event.AddListener(() => { if (_replay && PlayerMovement.I._timer > 1.5f) { GoBackToMenu(); _replay = false; } });
 
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.EDITOR; _enterInEditModeEvent.Invoke(); });
