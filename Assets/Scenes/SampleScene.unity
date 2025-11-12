@@ -2515,8 +2515,7 @@ Transform:
   m_LocalPosition: {x: -2.11, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 751480406}
+  m_Children: []
   m_Father: {fileID: 885621314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &251622769
@@ -8443,12 +8442,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751480405}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.11, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 251622768}
+  m_Father: {fileID: 1465196528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &751480407
 MonoBehaviour:
@@ -8562,7 +8561,7 @@ MonoBehaviour:
     - rid: 4018906595748478977
       type: {class: MMF_ColorGrading, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 726783229
         Label: Color Grading
         ChannelMode: 0
@@ -8633,7 +8632,7 @@ MonoBehaviour:
           ButtonText: Automatic Shaker Setup
         Owner: {fileID: 751480407}
         DebugActive: 0
-        ShakeDuration: 0.3
+        ShakeDuration: 0.15
         RelativeIntensity: 1
         ResetShakerValuesAfterShake: 1
         ResetTargetValuesAfterShake: 1
@@ -8882,7 +8881,7 @@ MonoBehaviour:
           ButtonText: Automatic Shaker Setup
         Owner: {fileID: 751480407}
         DebugActive: 0
-        Duration: 0.3
+        Duration: 0.15
         ResetShakerValuesAfterShake: 1
         ResetTargetValuesAfterShake: 1
         RelativeIntensity: 0
@@ -8929,11 +8928,11 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapIntensityZero: 0
-        RemapIntensityOne: 8
+        RemapIntensityOne: 15
     - rid: 4018906595748478981
       type: {class: MMF_DepthOfField, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 1172719305
         Label: Depth Of Field
         ChannelMode: 0
@@ -17607,6 +17606,7 @@ Transform:
   m_Children:
   - {fileID: 2076961951}
   - {fileID: 1930832335}
+  - {fileID: 751480406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1465196530
@@ -17640,6 +17640,7 @@ MonoBehaviour:
   _langueActuelle: 2
   _state: 4
   _replay: 0
+  pulseFeedback: {fileID: 751480407}
   _waitingToActEvent:
     m_PersistentCalls:
       m_Calls: []

@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class GameManager : MonoSingleton<GameManager>
     public ELangues _langueActuelle = ELangues.ENGLISH;
     public EGameState _state = EGameState.MENUPLAYMODE;
     public bool _replay;
+    [Header("Feedbacks")]
+    [SerializeField] MMF_Player pulseFeedback;
     #endregion
 
     #region Events
@@ -46,6 +49,7 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
         RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
 
+        _pulseEvent.AddListener(() => pulseFeedback.PlayFeedbacks());
         //RaycastManager_.I.allTag[GV.TagSO.menupl]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
         //_state = EGameState.EDITOR;
     }

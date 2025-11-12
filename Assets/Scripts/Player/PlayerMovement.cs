@@ -192,7 +192,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     private IEnumerator WaitPlayAnimation()
     {
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(GV.GameSO._pulseIntervale);
         canMove = true; canDie = true; isDead = false;
     }
 
