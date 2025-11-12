@@ -8549,8 +8549,8 @@ MonoBehaviour:
         m_Calls: []
   DebugActive: 0
   FeedbacksList:
-  - rid: 4018906595748478977
   - rid: 4018906595748478979
+  - rid: 4018906595748478977
   - rid: 4018906595748478981
   KeepPlayModeChanges: 0
   PerformanceMode: 0
@@ -8929,7 +8929,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapIntensityZero: 0
-        RemapIntensityOne: 20
+        RemapIntensityOne: 8
     - rid: 4018906595748478981
       type: {class: MMF_DepthOfField, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
       data:
@@ -9042,7 +9042,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapFocusDistanceZero: 4
-        RemapFocusDistanceOne: 50
+        RemapFocusDistanceOne: 150
         ShakeAperture:
           serializedVersion: 2
           m_Curve:
@@ -14883,7 +14883,7 @@ MonoBehaviour:
   PlayOnAwake: 0
   PermanentShake: 0
   Interruptible: 1
-  AlwaysResetTargetValuesAfterShake: 0
+  AlwaysResetTargetValuesAfterShake: 1
   OnlyUseShakerValues: 0
   CooldownBetweenShakes: 0
   Shaking: 0
