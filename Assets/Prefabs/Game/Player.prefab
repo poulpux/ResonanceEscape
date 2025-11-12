@@ -341,7 +341,7 @@ MonoBehaviour:
           DissipationMode: 2
           DissipationDistance: 100
           PropagationSpeed: 343
-        Velocity: {x: 5, y: 5, z: 5}
+        Velocity: {x: 5, y: 5, z: 0}
         ClearImpulseOnStop: 0
         DrawGizmos: 0
     - rid: 4018906548760739855
@@ -935,6 +935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16f09620565d414e81005ecfb20ae4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lastThingWasAMove: 0
   startpos: {x: 0, y: 0, z: 0}
   posToGO: {x: 0, y: 0, z: 0}
   lastPos: {x: 0, y: 0, z: 0}
