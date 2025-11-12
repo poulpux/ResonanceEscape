@@ -18,6 +18,9 @@ public class GameManager : MonoSingleton<GameManager>
     #endregion
 
     #region Events
+
+    [HideInInspector] public UnityEvent _setRightLanguageEvent = new UnityEvent();
+
     [HideInInspector] public UnityEvent _waitingToActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _overwatchEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
@@ -51,6 +54,8 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
 
         _pulseEvent.AddListener(() => pulseFeedback.PlayFeedbacks());
+
+        StartCoroutine(WaitASecond());
         //RaycastManager_.I.allTag[GV.TagSO.menupl]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
         //_state = EGameState.EDITOR;
     }
@@ -104,7 +109,7 @@ public class GameManager : MonoSingleton<GameManager>
     private IEnumerator WaitASecond()
     {
         yield return new WaitForEndOfFrame();
-        F_WaitingAction();
+        _setRightLanguageEvent.Invoke();
     }
 
     private void PlayPlayMode()

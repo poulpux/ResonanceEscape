@@ -305,6 +305,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: POLSKI
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -323,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (3)
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5366,6 +5370,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "\u7B80\u4F53\u4E2D\u6587"
+      objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2658690313723614736, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -5384,7 +5408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (13)
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5426,6 +5450,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8481504531217581483, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2658690313723614736, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5451,6 +5479,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "\u7E41\u9AD4\u4E2D\u6587"
+      objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2658690313723614736, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -5469,7 +5517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (12)
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5511,6 +5559,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8481504531217581483, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2658690313723614736, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6110,6 +6162,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "\u65E5\u672C\u8A9E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2658690313723614736, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -6128,7 +6200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (4)
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6170,6 +6242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8481504531217581483, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2658690313723614736, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6668,6 +6744,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: ENGLISH
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -6686,7 +6766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (11)
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9338,6 +9418,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "FRAN\xC7AIS"
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -9356,7 +9440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (6)
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10803,6 +10887,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "T\xDCRK\xC7E"
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -10821,7 +10909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (5)
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11694,6 +11782,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: DEUTSCH
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -11712,7 +11804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (7)
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12657,6 +12749,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "ESPA\xD1OL"
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -12675,7 +12771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (9)
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14031,6 +14127,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "PORTUGU\xCAS "
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -14049,7 +14149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (8)
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18791,6 +18891,9 @@ MonoBehaviour:
   _replay: 0
   pulseFeedback: {fileID: 751480407}
   winFeedback: {fileID: 214121750}
+  _setRightLanguageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _waitingToActEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -21339,6 +21442,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: ITALIANO
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -21357,7 +21464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (2)
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21424,6 +21531,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_text
+      value: "\u0420\u0423\u0421\u0421\u041A\u0418\u0419"
+      objectReference: {fileID: 0}
+    - target: {fileID: 61636324628701806, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2755239562177119665, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -21442,7 +21557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6126018555571497663, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_Name
-      value: Langage Button (10)
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6909156490909560662, guid: 6b25ec8b99cc8ed4d93fe79f2676c223, type: 3}
       propertyPath: m_LocalPosition.x
