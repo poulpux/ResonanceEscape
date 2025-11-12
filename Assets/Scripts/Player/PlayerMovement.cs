@@ -6,15 +6,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoSingleton<PlayerMovement>
 {
-    bool canMove, canDie;
-    bool lastThingWasAMove, isDead;
+    bool canMove, canDie, isDead;
+    public bool _lastThingWasAMove;
     public Vector3 startpos, posToGO, lastPos;
-    [SerializeField] MMF_Player moveFeedback, inertieFeedback, wallCollisionFeedback;
+    [SerializeField] MMF_Player moveFeedback, inertieFeedback, wallCollisionFeedback, winFeedback;
     [SerializeField] TrailRenderer trailInertie;
 
     public Rigidbody2D _rigidBody;
     public float _dashDistance;
-    float timer;
+    public float _timer;
     public  List<Vector2> gostAllFrames = new List<Vector2>();
     public  List<Vector2> gostAllFeedback = new List<Vector2>();
     int indexGhost;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; });
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
-        GameManager.I._winTheLevelEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); });
+        GameManager.I._winTheLevelEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); winFeedback.PlayFeedbacks(); });
         GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; _rigidBody.bodyType = RigidbodyType2D.Kinematic; _rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
 
         InputSystem_.I._leftClick._event.AddListener(()=> { if (!GameManager.I._replay) TryMove(); });  
@@ -41,14 +41,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
         if (isDead || GameManager.I._replay)
             return;
 
-        if (timer < GV.GameSO._pulseIntervale && lastThingWasAMove)
-            _rigidBody.MovePosition(startpos + (timer / GV.GameSO._pulseIntervale) * (posToGO - startpos));
+        if (_timer < GV.GameSO._pulseIntervale && _lastThingWasAMove)
+            _rigidBody.MovePosition(startpos + (_timer / GV.GameSO._pulseIntervale) * (posToGO - startpos));
 
-        if (lastThingWasAMove)
+        if (_lastThingWasAMove)
         {
             _dashDistance += Vector3.Distance(transform.position, lastPos);
             lastPos = transform.position;
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 _dashDistance = GV.GameSO._maxJumpDistance;
                 Vector2 inertie = transform.position - startpos;
                 _rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
-                lastThingWasAMove = false;
+                _lastThingWasAMove = false;
             }
         }
     }
@@ -74,13 +74,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         if (GameManager.I._replay)
         {
-            if (timer < 0.2f)
+            if (_timer < 1.5f)
                 return;
             
-            if(timer > GV.GameSO._pulseIntervale + 0.2f)
+            if(_timer > GV.GameSO._pulseIntervale + 1.5f)
             {
                 GameManager.I._pulseEvent.Invoke();
-                timer = 0.2f;
+                _timer = 1.5f;
+                _timer = 1.5f;
             }    
             transform.position = gostAllFrames[indexGhost];
             //if (gostAllFeedback[indexGhost] == Vector2.one * 99f && indexGhost != gostAllFrames.Count - 1)
@@ -96,7 +97,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
             if (indexGhost == gostAllFrames.Count - 1)
             {
-                timer = 0f;
+                _timer = 0f;
                 indexGhost = 0;
                 EditorManager.I.F_SetGoodPlayPlayer();
             }
@@ -108,7 +109,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (GameManager.I._state == EGameState.ACT)
             {
                 gostAllFrames.Add(transform.position);
-                if (lastThingWasAMove)
+                if (_lastThingWasAMove)
                     gostAllFeedback.Add(transform.position);
                 else
                     gostAllFeedback.Add(Vector2.one * 99f);
@@ -121,7 +122,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         isDead = false;
         if(!canMove || _dashDistance >= GV.GameSO._maxJumpDistance) return;
         _rigidBody.bodyType = RigidbodyType2D.Dynamic;
-        lastThingWasAMove = true;
+        _lastThingWasAMove = true;
         _rigidBody.gravityScale = 0f;
         Vector3 mousePos = new Vector3(
      Mathf.Clamp(UnityEngine.Input.mousePosition.x, 0, Screen.width),
@@ -143,7 +144,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         
         //moveFeedback.transform.position = posToGO;
         //moveFeedback.PlayFeedbacks();
-        timer = 0f;
+        _timer = 0f;
 
         GameManager.I._playerActEvent.Invoke();
     }
@@ -159,12 +160,12 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         //    gostActionList.Add(Vector2.one * -99f);
         _rigidBody.bodyType = RigidbodyType2D.Dynamic;
         _rigidBody.gravityScale = 1f;
-        if (lastThingWasAMove)
+        if (_lastThingWasAMove)
         {
             Vector2 inertie = posToGO - startpos;
             _rigidBody.velocity = Vector2.zero;
             _rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
-            lastThingWasAMove= false;
+            _lastThingWasAMove= false;
         }
         GameManager.I._playerActEvent.Invoke();
     }
@@ -180,10 +181,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         canDie = false;
         canMove= false;
         isDead = true;
-        lastThingWasAMove = false;
+        _lastThingWasAMove = false;
         _dashDistance = 0f;
         indexGhost = 0;
-        timer = 0f;
+        _timer = 0f;
         StartCoroutine(WaitPlayAnimation());
         _rigidBody.bodyType = RigidbodyType2D.Kinematic; 
         _rigidBody.velocity = Vector2.zero; 
@@ -192,7 +193,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     private IEnumerator WaitPlayAnimation()
     {
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(GV.GameSO._pulseIntervale);
         canMove = true; canDie = true; isDead = false;
     }
 
@@ -200,17 +201,17 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         if(collision.transform.tag == GV.TagSO._gameWallCollision)
         {
-            if(lastThingWasAMove || _rigidBody.velocity.magnitude > 12f)
+            if(_lastThingWasAMove || _rigidBody.velocity.magnitude > 12f)
                 wallCollisionFeedback.PlayFeedbacks();
         }
-        if(collision.transform.tag == GV.TagSO._gameWallCollision && lastThingWasAMove)
+        if(collision.transform.tag == GV.TagSO._gameWallCollision && _lastThingWasAMove)
         {
             moveFeedback.StopFeedbacks();
             //_dashDistance -= Vector3.Distance(posToGO, transform.position);
             Vector2 inertie = posToGO - startpos;
             _rigidBody.velocity = Vector2.zero;
             _rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
-            lastThingWasAMove = false;
+            _lastThingWasAMove = false;
         }
         else if(collision.transform.tag == GV.TagSO._gameDie && canDie)
         {
@@ -230,7 +231,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         }
         else if(collision.transform.tag == GV.TagSO._gameInertieBoost)
         {
-            if(!lastThingWasAMove)
+            if(!_lastThingWasAMove)
                 _rigidBody.AddForce(_rigidBody.velocity, ForceMode2D.Impulse);
         }
         else if(collision.transform.tag == GV.TagSO._gameStar)

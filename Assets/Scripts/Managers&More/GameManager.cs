@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,15 @@ public class GameManager : MonoSingleton<GameManager>
     public ELangues _langueActuelle = ELangues.ENGLISH;
     public EGameState _state = EGameState.MENUPLAYMODE;
     public bool _replay;
+    [Header("Feedbacks")]
+    [SerializeField] MMF_Player pulseFeedback;
+    [SerializeField] MMF_Player winFeedback;
     #endregion
 
     #region Events
+
+    [HideInInspector] public UnityEvent _setRightLanguageEvent = new UnityEvent();
+
     [HideInInspector] public UnityEvent _waitingToActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _overwatchEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
@@ -32,10 +39,10 @@ public class GameManager : MonoSingleton<GameManager>
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
-        _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; });
+        _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; winFeedback.PlayFeedbacks(); });
 
         InputSystem_.I._r._event.AddListener(() => { if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH) PlayPlayMode(); });
-        InputSystem_.I._leftClick._event.AddListener(() => { if (_replay) { GoBackToMenu(); _replay = false; } });
+        InputSystem_.I._leftClick._event.AddListener(() => { if (_replay && PlayerMovement.I._timer >= 0.5f) { GoBackToMenu(); _replay = false; } });
 
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.EDITOR; _enterInEditModeEvent.Invoke(); });
@@ -46,6 +53,9 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
         RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
 
+        _pulseEvent.AddListener(() => pulseFeedback.PlayFeedbacks());
+
+        StartCoroutine(WaitASecond());
         //RaycastManager_.I.allTag[GV.TagSO.menupl]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
         //_state = EGameState.EDITOR;
     }
@@ -99,7 +109,7 @@ public class GameManager : MonoSingleton<GameManager>
     private IEnumerator WaitASecond()
     {
         yield return new WaitForEndOfFrame();
-        F_WaitingAction();
+        _setRightLanguageEvent.Invoke();
     }
 
     private void PlayPlayMode()
