@@ -14,7 +14,6 @@ public class LanguageSupportSO : ScriptableObject
         _spanish,
         _breazilian,
         _german,
-        _korean,
         _french,
         _turkish,
         _japanese,
@@ -31,7 +30,6 @@ public class LanguageSupportSO : ScriptableObject
         else if (GameManager.I._langueActuelle == ELangues.SPANISH) return _spanish;
         else if (GameManager.I._langueActuelle == ELangues.BREAZILIAN) return _breazilian;
         else if (GameManager.I._langueActuelle == ELangues.GERMAN) return _german;
-        else if (GameManager.I._langueActuelle == ELangues.KOREAN) return _korean;
         else if (GameManager.I._langueActuelle == ELangues.FRENCH) return _french;
         else if (GameManager.I._langueActuelle == ELangues.TURKISH) return _turkish;
         else if (GameManager.I._langueActuelle == ELangues.JAPANESE) return _japanese;
