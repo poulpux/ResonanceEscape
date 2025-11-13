@@ -1,6 +1,8 @@
 using MoreMountains.Feedbacks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -52,12 +54,12 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise.mt/"));
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
         RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
+        RaycastManager_.I.allTag[GV.TagSO._menuLangageSelectionCase]._click2DGameObjectEvent.AddListener((objet) => SelectLanguage(objet)) ;
 
         _pulseEvent.AddListener(() => pulseFeedback.PlayFeedbacks());
 
+        _langueActuelle = (ELangues)Enum.Parse(typeof(ELangues), PlayerPrefs.GetInt("langue", 2).ToString());
         StartCoroutine(WaitASecond());
-        //RaycastManager_.I.allTag[GV.TagSO.menupl]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
-        //_state = EGameState.EDITOR;
     }
     #endregion
 
@@ -125,6 +127,14 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _state = EGameState.MENUPLAYMODE;
         _goToMenuEvent.Invoke();
+    }
+
+    private void SelectLanguage(GameObject objet)
+    {
+        ELangues newLangue = (ELangues)Enum.Parse(typeof(ELangues), objet.name);
+        _langueActuelle = newLangue;
+        _setRightLanguageEvent.Invoke();
+        PlayerPrefs.SetInt("langue",int.Parse(objet.name));
     }
 
     #endregion

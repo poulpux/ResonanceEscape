@@ -53,6 +53,7 @@ TagManager:
   - MenuFiverr
   - MenuLangage
   - MenuCloseHelpWindow
+  - MenuLangageSelectionCase
   layers:
   - Default
   - TransparentFX

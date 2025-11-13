@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: EditorMode
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u7F16\u8F91\u5668\u6A21\u5F0F"
+  _english: EDITOR MODE
+  _russian: "\u0420\u0415\u0416\u0418\u041C \u0420\u0415\u0414\u0410\u041A\u0422\u041E\u0420\u0410"
+  _spanish: MODO EDITOR
+  _breazilian: MODO EDITOR
+  _german: EDITOR-MODUS
+  _french: "MODE \xC9DITEUR"
+  _turkish: "D\xDCZENLEY\u0130C\u0130 MODU"
+  _japanese: "\u30A8\u30C7\u30A3\u30BF\u30FC\u30E2\u30FC\u30C9"
+  _polish: TRYB EDYTORA
+  _traditionnalChinese: "\u7DE8\u8F2F\u5668\u6A21\u5F0F"
+  _italian: "MODALIT\xC0 EDITORE"

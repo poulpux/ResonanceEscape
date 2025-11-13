@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: Credit
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u5236\u4F5C\u4EBA\u5458"
+  _english: CREDITS
+  _russian: "\u0422\u0418\u0422\u0420\u042B"
+  _spanish: "CR\xC9DITOS"
+  _breazilian: "CR\xC9DITOS"
+  _german: CREDITS
+  _french: "CR\xC9DITS"
+  _turkish: "K\xDCNYE"
+  _japanese: "\u30AF\u30EC\u30B8\u30C3\u30C8"
+  _polish: "NAPISY KO\u0143COWE"
+  _traditionnalChinese: "\u88FD\u4F5C\u4EBA\u54E1"
+  _italian: CREDITI

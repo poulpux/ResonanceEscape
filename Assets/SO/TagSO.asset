@@ -59,4 +59,5 @@ MonoBehaviour:
   _menuFiverr: MenuFiverr
   _menuLangage: MenuLangage
   _menuCloseHelpWindow: MenuCloseHelpWindow
+  _menuLangageSelectionCase: MenuLangageSelectionCase
   _quitParamter: QuitParameter
