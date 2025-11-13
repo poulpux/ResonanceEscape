@@ -53,5 +53,6 @@ public class TagSO : ScriptableObject
         _menuFiverr,
         _menuLangage,
         _menuCloseHelpWindow,
+        _menuLangageSelectionCase,
         _quitParamter;
 }
