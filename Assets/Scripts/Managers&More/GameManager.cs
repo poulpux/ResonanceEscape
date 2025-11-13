@@ -2,6 +2,7 @@ using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -57,9 +58,8 @@ public class GameManager : MonoSingleton<GameManager>
 
         _pulseEvent.AddListener(() => pulseFeedback.PlayFeedbacks());
 
+        _langueActuelle = (ELangues)Enum.Parse(typeof(ELangues), PlayerPrefs.GetInt("langue", 2).ToString());
         StartCoroutine(WaitASecond());
-        //RaycastManager_.I.allTag[GV.TagSO.menupl]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
-        //_state = EGameState.EDITOR;
     }
     #endregion
 
@@ -134,6 +134,7 @@ public class GameManager : MonoSingleton<GameManager>
         ELangues newLangue = (ELangues)Enum.Parse(typeof(ELangues), objet.name);
         _langueActuelle = newLangue;
         _setRightLanguageEvent.Invoke();
+        PlayerPrefs.SetInt("langue",int.Parse(objet.name));
     }
 
     #endregion
