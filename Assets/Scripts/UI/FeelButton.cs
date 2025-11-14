@@ -19,7 +19,7 @@ public class FeelButton : MonoBehaviour
 
     void Start()
     {
-        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => Survole());
+        RaycastManager_.I.allTag[/*gameObject.tag*/GV.TagSO._menuPlayMode]._survole2DEvent.AddListener(() => Survole());
     }
 
     void FixedUpdate()
@@ -29,8 +29,10 @@ public class FeelButton : MonoBehaviour
 
     private void VerifSurvoleback()
     {
-        if(!survole && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 45f)
+        if (!survole && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) < 0.1f)
+        {
             feedbackSurvoleBack.PlayFeedbacks();
+        }
         survole = false;
     }
 
