@@ -74,7 +74,7 @@ public partial class RaycastManager_
                     allTag[hit.transform.tag]._click2DGameObjectEvent.Invoke(hit.transform.gameObject);
                 }
                 else
-                    allTag[hit.transform.tag]._survoleUIEvent.Invoke();
+                    allTag[hit.transform.tag]._survole2DEvent.Invoke();
                 return true;
             }
         }

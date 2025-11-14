@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnergyBar : MonoBehaviour
 {
     [SerializeField] Rectangle filledLine, feedbackLine, preshootLine;
-    [SerializeField] MMF_Player feedbackJump;
+    //[SerializeField] MMF_Player feedbackJump;
 
     AnimatingCurve curve;
 
@@ -26,14 +26,14 @@ public class EnergyBar : MonoBehaviour
     {
         if (GameManager.I._state == EGameState.ACT)
         {
-            if (PlayerMovement.I._lastThingWasAMove)
-            {
+            //if (PlayerMovement.I._lastThingWasAMove)
+            //{
                 float height = 0f;
                 Tools.PlayCurve(ref curve, ref height);
                 feedbackLine.Height = height;
                 if (Tools.isCurveFinish(curve))
                     feedbackLine.Height = curve.endValueF;
-            }
+            //}
         }
         //La ligne la plus claire
         if(GameManager.I._state == EGameState.OVERWATCH || GameManager.I._state == EGameState.WAITINGACTION)
