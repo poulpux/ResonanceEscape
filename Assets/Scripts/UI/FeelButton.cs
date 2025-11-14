@@ -29,7 +29,7 @@ public class FeelButton : MonoBehaviour
 
     private void VerifSurvoleback()
     {
-        if (!survole && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) < 0.1f)
+        if (!survole && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) < 0.1f && !isSelected)
         {
             feedbackSurvoleBack.PlayFeedbacks();
         }
@@ -39,7 +39,7 @@ public class FeelButton : MonoBehaviour
     private void Survole()
     {
         survole = true;
-        if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 0f)
+        if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 0f && !isSelected)
             feedbackSurvole.PlayFeedbacks();
     }
 
