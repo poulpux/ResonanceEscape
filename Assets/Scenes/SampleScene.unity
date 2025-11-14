@@ -989,7 +989,7 @@ Transform:
   m_GameObject: {fileID: 113239755}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 0, z: -0.16666667}
+  m_LocalPosition: {x: -0.3, y: 0, z: -0.001}
   m_LocalScale: {x: 1.6666666, y: 1.6666666, z: 1.6666666}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8014,6 +8014,12 @@ MonoBehaviour:
   feedbackSurvoleBack: {fileID: 521895287}
   feedbackSelect: {fileID: 87160285}
   feedbackSelectBack: {fileID: 601274679}
+  cubeUnselectColor: {r: 0.37254903, g: 0.43137258, b: 0.909804, a: 1}
+  cubeSelectColor: {r: 0.37254903, g: 0.78823537, b: 0.9058824, a: 1}
+  outlineCubeUnselectColor: {r: 0.26666668, g: 0.2784314, b: 0.45882356, a: 1}
+  outlineCubeSelectColor: {r: 0.9921569, g: 0.9960785, b: 0.5372549, a: 1}
+  lineUnselectColor: {r: 0.9921569, g: 0.9960785, b: 0.5372549, a: 0}
+  lineSelectColor: {r: 0.9921569, g: 0.9960785, b: 0.5372549, a: 1}
 --- !u!1 &601274677
 GameObject:
   m_ObjectHideFlags: 0
@@ -25812,7 +25818,7 @@ Transform:
   m_GameObject: {fileID: 1889753493}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.28, y: 0, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0, z: -0.001}
   m_LocalScale: {x: 1.6666666, y: 1.6666666, z: 1.6666666}
   m_ConstrainProportionsScale: 0
   m_Children: []

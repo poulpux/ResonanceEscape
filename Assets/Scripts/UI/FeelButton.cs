@@ -20,7 +20,7 @@ public class FeelButton : MonoBehaviour
     [ColorPalette("Resonnance")]
     [SerializeField] Color cubeUnselectColor, cubeSelectColor, outlineCubeUnselectColor, outlineCubeSelectColor, lineUnselectColor, lineSelectColor;
 
-    AnimatingCurve curveCube, curseOutlineCube, curveLine;
+    AnimatingCurve curveCube, curveOutlineCube, curveLine;
 
     void Start()
     {
@@ -30,16 +30,16 @@ public class FeelButton : MonoBehaviour
 
 
 
-        //if (gameObject.tag == GV.TagSO._menuPlayMode)
-        //{
-        //    Select();
-        //    //RaycastManager_.I.allTag[GV.TagSO.edi]._click2DEvent
-        //}
+        if (gameObject.tag == GV.TagSO._menuPlayMode)
+        {
+            Select();
+            //RaycastManager_.I.allTag[GV.TagSO.edi]._click2DEvent
+        }
     }
 
     void FixedUpdate()
     {
-        //PlayCurve();
+        PlayCurve();
         VerifSurvoleback();
     }
 
@@ -57,9 +57,21 @@ public class FeelButton : MonoBehaviour
         carré1.Color = new Color(colorCurveCube.x, colorCurveCube.y, colorCurveCube.z, 1f);
         carré2.Color = new Color(colorCurveCube.x, colorCurveCube.y, colorCurveCube.z, 1f);
         
-        Tools.PlayCurve(ref curseOutlineCube, ref colorCurveOutlineCube);
+        Tools.PlayCurve(ref curveOutlineCube, ref colorCurveOutlineCube);
         outline1.Color = new Color(colorCurveOutlineCube.x, colorCurveOutlineCube.y, colorCurveOutlineCube.z, 1f);
         outline2.Color = new Color(colorCurveOutlineCube.x, colorCurveOutlineCube.y, colorCurveOutlineCube.z, 1f);
+
+        if(Tools.isCurveFinish(curveLine))
+        {
+            line1.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, 1f);
+            line2.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, 1f);
+
+            carré1.Color = new Color(curveCube.endValue.x, curveCube.endValue.y, curveCube.endValue.z, 1f);
+            carré2.Color = new Color(curveCube.endValue.x, curveCube.endValue.y, curveCube.endValue.z, 1f);
+
+            outline1.Color = new Color(curveOutlineCube.endValue.x, curveOutlineCube.endValue.y, curveOutlineCube.endValue.z, 1f);
+            outline2.Color = new Color(curveOutlineCube.endValue.x, curveOutlineCube.endValue.y, curveOutlineCube.endValue.z, 1f);
+        }
     }
 
     private void VerifSurvoleback()
@@ -82,12 +94,12 @@ public class FeelButton : MonoBehaviour
     {
         if (!isSelected && !feedbackSelect.IsPlaying && !feedbackSelectBack.IsPlaying)
         {
-            curveLine = new AnimatingCurve(0, 1, 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
+            curveLine = new AnimatingCurve(0f, 1f, 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveCube = new AnimatingCurve(new Vector3(cubeUnselectColor.r, cubeUnselectColor.g, cubeUnselectColor.b), new Vector3(cubeSelectColor.r, cubeSelectColor.g, cubeSelectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
-            curseOutlineCube = new AnimatingCurve(new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
+            curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             feedbackSelect.PlayFeedbacks();
-            isSelected = true;
             Survole();
+            isSelected = true;
         }
     }
 
@@ -97,7 +109,7 @@ public class FeelButton : MonoBehaviour
         {
             curveLine = new AnimatingCurve(1f, 0f, 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveCube = new AnimatingCurve(new Vector3(cubeSelectColor.r, cubeSelectColor.g, cubeSelectColor.b), new Vector3(cubeUnselectColor.r, cubeUnselectColor.g, cubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
-            curseOutlineCube = new AnimatingCurve(new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
+            curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             feedbackSelectBack.PlayFeedbacks();
             isSelected = false;
             VerifSurvoleback();
