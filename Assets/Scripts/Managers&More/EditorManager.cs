@@ -71,9 +71,9 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private void FixedUpdate()
     {
-        if (InputSystem_.I._leftClick._pressed)
+        if (InputSystem_.I._leftClick._pressed && GameManager.I._state == EGameState.EDITOR)
             LeftClick();
-        if (InputSystem_.I._rightClick._pressed)
+        if (InputSystem_.I._rightClick._pressed && GameManager.I._state == EGameState.EDITOR)
             Erase();
     }
 
@@ -222,8 +222,6 @@ public class EditorManager : MonoSingleton<EditorManager>
 
     private void LeftClick()
     {
-        if (GameManager.I._state != EGameState.EDITOR) return;
-
         if (selectionType == EEditorSelectionType.PLAYER)
             VerifAllPlayerAndWin(1, ref playerObject);
         else if (selectionType == EEditorSelectionType.WINCONDITION)

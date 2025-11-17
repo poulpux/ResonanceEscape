@@ -17,6 +17,7 @@ public partial class RaycastManager_
         public UnityEvent _click3DEvent = new UnityEvent();
         public UnityEvent _survoleUIEvent = new UnityEvent();
         public UnityEvent _survole2DEvent = new UnityEvent();
+        public UnityEvent<GameObject> _survole2DGameObjectEvent = new UnityEvent<GameObject>();
         public UnityEvent _survole3DEvent = new UnityEvent();
 
         public RaycastTag(string tag)
@@ -74,7 +75,10 @@ public partial class RaycastManager_
                     allTag[hit.transform.tag]._click2DGameObjectEvent.Invoke(hit.transform.gameObject);
                 }
                 else
+                {
                     allTag[hit.transform.tag]._survole2DEvent.Invoke();
+                    allTag[hit.transform.tag]._survole2DGameObjectEvent.Invoke(hit.transform.gameObject);
+                }
                 return true;
             }
         }

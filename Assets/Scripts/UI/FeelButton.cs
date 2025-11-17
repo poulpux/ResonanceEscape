@@ -1,6 +1,7 @@
 using MoreMountains.Feedbacks;
 using Shapes;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,13 +10,12 @@ using UnityEngine;
 public class FeelButton : MonoBehaviour
 {
     [SerializeField] EINTERACTIONTYPE interactionType;
-    [SerializeField] ETAGTYPE tagType;
     [SerializeField] Rectangle carré1, carré2, outline1, outline2;
     [SerializeField] TextMeshPro text;
     [SerializeField] Line line1, line2;
-    [SerializeField] MMF_Player feedbackSurvole, feedbackSurvoleBack, feedbackSelect, feedbackSelectBack;
+    [SerializeField] MMF_Player feedbackSurvole, feedbackSurvoleBack;
     bool isSelected;
-    bool survole;
+    bool survole, firstCurve;
 
     [ColorPalette("Resonnance")]
     [SerializeField] Color cubeUnselectColor, cubeSelectColor, outlineCubeUnselectColor, outlineCubeSelectColor, lineUnselectColor, lineSelectColor;
@@ -25,8 +25,17 @@ public class FeelButton : MonoBehaviour
     void Start()
     {
         //La base
-        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => Survole());
-        RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(()=> Select());
+        if (gameObject.tag != GV.TagSO._menuLangageSelectionCase)
+        {
+            RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => Survole());
+            //RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => Select());
+        }
+        else
+        {
+            GameManager.I._setRightLanguageEvent.AddListener(() => { if (!isSelected && (ELangues)Enum.Parse(typeof(ELangues), gameObject.name) == GameManager.I._langueActuelle) Select(); else if(isSelected) Unselect(); });
+            RaycastManager_.I.allTag[gameObject.tag]._survole2DGameObjectEvent.AddListener((objet) => { if (gameObject.name == objet.name) Survole(); });
+            //RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { { if (!isSelected && gameObject.name == objet.name) Select(); else if (isSelected && gameObject.name == objet.name) Unselect(); } });
+        }
 
 
 
@@ -34,6 +43,10 @@ public class FeelButton : MonoBehaviour
         {
             Select();
             //RaycastManager_.I.allTag[GV.TagSO.edi]._click2DEvent
+        }
+        else if(gameObject.tag == GV.TagSO._menuLangage)
+        {
+            RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { if (!isSelected) Select(); else Unselect(); });
         }
     }
 
@@ -45,6 +58,9 @@ public class FeelButton : MonoBehaviour
 
     private void PlayCurve()
     {
+        if (!firstCurve)
+            return;///
+
         float alphaCurveLine = 0f;
         Vector3 colorCurveCube = Vector3.zero;
         Vector3 colorCurveOutlineCube = Vector3.zero;
@@ -92,25 +108,24 @@ public class FeelButton : MonoBehaviour
 
     private void Select()
     {
-        if (!isSelected && !feedbackSelect.IsPlaying && !feedbackSelectBack.IsPlaying)
+        if (!isSelected)
         {
             curveLine = new AnimatingCurve(0f, 1f, 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveCube = new AnimatingCurve(new Vector3(cubeUnselectColor.r, cubeUnselectColor.g, cubeUnselectColor.b), new Vector3(cubeSelectColor.r, cubeSelectColor.g, cubeSelectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
-            feedbackSelect.PlayFeedbacks();
             Survole();
             isSelected = true;
+            firstCurve = true;
         }
     }
 
     private void Unselect()
     {
-        if (isSelected && !feedbackSelect.IsPlaying && !feedbackSelectBack.IsPlaying)
+        if (isSelected)
         {
             curveLine = new AnimatingCurve(1f, 0f, 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveCube = new AnimatingCurve(new Vector3(cubeSelectColor.r, cubeSelectColor.g, cubeSelectColor.b), new Vector3(cubeUnselectColor.r, cubeUnselectColor.g, cubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
-            feedbackSelectBack.PlayFeedbacks();
             isSelected = false;
             VerifSurvoleback();
         }
@@ -120,18 +135,5 @@ public class FeelButton : MonoBehaviour
     {
         SELECTIONNABLE,
         CLIQUABLE
-    }
-
-    enum ETAGTYPE
-    {
-        MENUPLAY,
-        MENUPLAYMODE,
-        MENUEDITORMODE,
-        MENUPASTCODE,
-        MENUHELP,
-        MENUCREDIT,
-        MENUSUPPORT,
-        MENULANGAGE,
-        MENULANGAGECASES
     }
 }
