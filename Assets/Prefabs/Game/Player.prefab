@@ -949,7 +949,7 @@ MonoBehaviour:
   _dashDistance: 0
   _timer: 0
   gostAllFrames: []
-  gostAllFeedback: []
+  gostAllFeedback: 
 --- !u!212 &1223518871680760237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6721,7 +6721,7 @@ MonoBehaviour:
     - rid: 4018906554878394368
       type: {class: MMF_FreezeFrame, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 170266536
         Label: Freeze Frame
         ChannelMode: 0

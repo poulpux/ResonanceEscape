@@ -32,7 +32,7 @@ public class FeelButton : MonoBehaviour
         }
         else
         {
-            GameManager.I._setRightLanguageEvent.AddListener(() => { if (!isSelected && (ELangues)Enum.Parse(typeof(ELangues), gameObject.name) == GameManager.I._langueActuelle) Select(); else if(isSelected) Unselect(); });
+            GameManager.I._setRightLanguageEvent.AddListener(() => { if ((ELangues)Enum.Parse(typeof(ELangues), gameObject.name) == GameManager.I._langueActuelle) Select(); else if(isSelected) Unselect(); });
             RaycastManager_.I.allTag[gameObject.tag]._survole2DGameObjectEvent.AddListener((objet) => { if (gameObject.name == objet.name) Survole(); });
             //RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { { if (!isSelected && gameObject.name == objet.name) Select(); else if (isSelected && gameObject.name == objet.name) Unselect(); } });
         }
@@ -54,6 +54,13 @@ public class FeelButton : MonoBehaviour
     {
         PlayCurve();
         VerifSurvoleback();
+        VerifSelectedPourSurvole();
+    }
+
+    private void VerifSelectedPourSurvole()
+    {
+        if (isSelected && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) > 0.1f)
+            feedbackSurvole.PlayFeedbacks();
     }
 
     private void PlayCurve()
@@ -79,8 +86,8 @@ public class FeelButton : MonoBehaviour
 
         if(Tools.isCurveFinish(curveLine))
         {
-            line1.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, 1f);
-            line2.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, 1f);
+            line1.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, curveLine.endValueF);
+            line2.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, curveLine.endValueF);
 
             carré1.Color = new Color(curveCube.endValue.x, curveCube.endValue.y, curveCube.endValue.z, 1f);
             carré2.Color = new Color(curveCube.endValue.x, curveCube.endValue.y, curveCube.endValue.z, 1f);
