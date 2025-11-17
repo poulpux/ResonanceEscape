@@ -19308,7 +19308,7 @@ Transform:
   m_GameObject: {fileID: 513914819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9, y: 0, z: -0.001}
+  m_LocalPosition: {x: -1.7, y: 0, z: -0.001}
   m_LocalScale: {x: 1.6666666, y: 1.6666666, z: 1.6666666}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19378,7 +19378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendMode: 1
   scaleMode: 0
-  color: {r: 0.9921569, g: 0.9960785, b: 0.5372549, a: 1}
+  color: {r: 0.9921569, g: 0.9960785, b: 0.5372549, a: 0}
   detailLevel: 2
   culling: 0
   boundsPadding: 0
@@ -20913,7 +20913,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 516284259}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 1962518263}
+        AnimateRotationTarget: {fileID: 1580909158}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -21163,7 +21163,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 516284259}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 1277813517}
+        AnimateRotationTarget: {fileID: 1419716418}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -21413,7 +21413,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 516284259}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 904766870}
+        AnimateRotationTarget: {fileID: 931644458}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -21663,7 +21663,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 516284259}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 59131452}
+        AnimateRotationTarget: {fileID: 1599793806}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -38972,6 +38972,11 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         AllowAdditivePlays: 0
+--- !u!4 &931644458 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7795764720001361326, guid: 91c94680982410340a61de4b61e093fa, type: 3}
+  m_PrefabInstance: {fileID: 1654899944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &931644461 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2494040590692758043, guid: 91c94680982410340a61de4b61e093fa, type: 3}
@@ -55503,7 +55508,7 @@ Transform:
   m_GameObject: {fileID: 1409558861}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 0, z: -0.001}
+  m_LocalPosition: {x: 1.7, y: 0, z: -0.001}
   m_LocalScale: {x: 1.6666666, y: 1.6666666, z: 1.6666666}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55573,7 +55578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendMode: 1
   scaleMode: 0
-  color: {r: 0.9921569, g: 0.9960785, b: 0.5372549, a: 1}
+  color: {r: 0.9921569, g: 0.9960785, b: 0.5372549, a: 0}
   detailLevel: 2
   culling: 0
   boundsPadding: 0
@@ -55941,6 +55946,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5565a25b841a60741b4b1bbaf746424b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1419716418 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7900889745364198887, guid: 91c94680982410340a61de4b61e093fa, type: 3}
+  m_PrefabInstance: {fileID: 1654899944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1419716421 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3548030201066141243, guid: 91c94680982410340a61de4b61e093fa, type: 3}
@@ -59648,6 +59658,11 @@ Transform:
   - {fileID: 2006630705}
   m_Father: {fileID: 132995094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1580909158 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8366757336447044974, guid: 91c94680982410340a61de4b61e093fa, type: 3}
+  m_PrefabInstance: {fileID: 1654899944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1580909161 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5968597075878711797, guid: 91c94680982410340a61de4b61e093fa, type: 3}
@@ -61097,6 +61112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f210828086c1a4398856e1ba65627c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1599793806 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2305638428474804874, guid: 91c94680982410340a61de4b61e093fa, type: 3}
+  m_PrefabInstance: {fileID: 1654899944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1599793809 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7473083658255333316, guid: 91c94680982410340a61de4b61e093fa, type: 3}
@@ -68016,7 +68036,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.028083146, y: -0.0000009536743}
+  m_Offset: {x: 0.041603565, y: -0.0000009536743}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -68027,7 +68047,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.023268, y: 1}
+  m_Size: {x: 8.176549, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &1654899951
 MonoBehaviour:
@@ -70989,7 +71009,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 1806928581}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 1962518263}
+        AnimateRotationTarget: {fileID: 1580909158}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -71239,7 +71259,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 1806928581}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 904766870}
+        AnimateRotationTarget: {fileID: 931644458}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -71489,7 +71509,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 1806928581}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 1277813517}
+        AnimateRotationTarget: {fileID: 1599793806}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -71739,7 +71759,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 1806928581}
         DebugActive: 0
-        AnimateRotationTarget: {fileID: 59131452}
+        AnimateRotationTarget: {fileID: 1419716418}
         Mode: 0
         RotationSpace: 0
         AnimateRotationDuration: 0.35
@@ -71989,7 +72009,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 1806928581}
         DebugActive: 0
-        TargetTMPText: {fileID: 955573377}
+        TargetTMPText: {fileID: 1764112624}
         ColorMode: 2
         Duration: 0.35
         InstantColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
