@@ -9,7 +9,6 @@ using UnityEngine;
 public class FeelButton : MonoBehaviour
 {
     [SerializeField] EINTERACTIONTYPE interactionType;
-    [SerializeField] ETAGTYPE tagType;
     [SerializeField] Rectangle carré1, carré2, outline1, outline2;
     [SerializeField] TextMeshPro text;
     [SerializeField] Line line1, line2;
@@ -118,18 +117,5 @@ public class FeelButton : MonoBehaviour
     {
         SELECTIONNABLE,
         CLIQUABLE
-    }
-
-    enum ETAGTYPE
-    {
-        MENUPLAY,
-        MENUPLAYMODE,
-        MENUEDITORMODE,
-        MENUPASTCODE,
-        MENUHELP,
-        MENUCREDIT,
-        MENUSUPPORT,
-        MENULANGAGE,
-        MENULANGAGECASES
     }
 }
