@@ -1,6 +1,7 @@
 using MoreMountains.Feedbacks;
 using Shapes;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -31,8 +32,9 @@ public class FeelButton : MonoBehaviour
         }
         else
         {
+            GameManager.I._setRightLanguageEvent.AddListener(() => { if (!isSelected && (ELangues)Enum.Parse(typeof(ELangues), gameObject.name) == GameManager.I._langueActuelle) Select(); else if(isSelected) Unselect(); });
             RaycastManager_.I.allTag[gameObject.tag]._survole2DGameObjectEvent.AddListener((objet) => { if (gameObject.name == objet.name) Survole(); });
-            RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { if (gameObject.name == objet.name) Select(); });
+            //RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { { if (!isSelected && gameObject.name == objet.name) Select(); else if (isSelected && gameObject.name == objet.name) Unselect(); } });
         }
 
 
