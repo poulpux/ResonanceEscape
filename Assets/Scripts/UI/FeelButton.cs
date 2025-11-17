@@ -13,7 +13,7 @@ public class FeelButton : MonoBehaviour
     [SerializeField] Rectangle carré1, carré2, outline1, outline2;
     [SerializeField] TextMeshPro text;
     [SerializeField] Line line1, line2;
-    [SerializeField] MMF_Player feedbackSurvole, feedbackSurvoleBack, feedbackSelect, feedbackSelectBack;
+    [SerializeField] MMF_Player feedbackSurvole, feedbackSurvoleBack;
     bool isSelected;
     bool survole;
 
@@ -92,12 +92,11 @@ public class FeelButton : MonoBehaviour
 
     private void Select()
     {
-        if (!isSelected && !feedbackSelect.IsPlaying && !feedbackSelectBack.IsPlaying)
+        if (!isSelected)
         {
             curveLine = new AnimatingCurve(0f, 1f, 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveCube = new AnimatingCurve(new Vector3(cubeUnselectColor.r, cubeUnselectColor.g, cubeUnselectColor.b), new Vector3(cubeSelectColor.r, cubeSelectColor.g, cubeSelectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
-            feedbackSelect.PlayFeedbacks();
             Survole();
             isSelected = true;
         }
@@ -105,12 +104,11 @@ public class FeelButton : MonoBehaviour
 
     private void Unselect()
     {
-        if (isSelected && !feedbackSelect.IsPlaying && !feedbackSelectBack.IsPlaying)
+        if (isSelected)
         {
             curveLine = new AnimatingCurve(1f, 0f, 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveCube = new AnimatingCurve(new Vector3(cubeSelectColor.r, cubeSelectColor.g, cubeSelectColor.b), new Vector3(cubeUnselectColor.r, cubeUnselectColor.g, cubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
-            feedbackSelectBack.PlayFeedbacks();
             isSelected = false;
             VerifSurvoleback();
         }
