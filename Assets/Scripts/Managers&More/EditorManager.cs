@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -121,16 +121,16 @@ public class EditorManager : MonoSingleton<EditorManager>
     private void Erase()
     {
         Vector3 mousePos = UnityEngine.Input.mousePosition;
-        mousePos.z = 10f; // profondeur depuis la caméra
+        mousePos.z = 10f; // profondeur depuis la camÃ©ra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        // Décale ton repère pour viser le centre de chaque tile
+        // DÃ©cale ton repÃ¨re pour viser le centre de chaque tile
         worldPos.x = Mathf.Floor(worldPos.x)/* + 0.5f*/;
         worldPos.y = Mathf.Floor(worldPos.y) /*+ 0.5f*/;
 
         Vector2 posInt = new Vector2(worldPos.x, worldPos.y);
 
-        // Supprime un élément d'une liste sans casser le foreach
+        // Supprime un Ã©lÃ©ment d'une liste sans casser le foreach
         void SafeRemove<T>(List<T> list, Predicate<T> match)
         {
             for (int i = list.Count - 1; i >= 0; i--)
@@ -147,7 +147,7 @@ public class EditorManager : MonoSingleton<EditorManager>
                 Vector2 pos = getPos(list[i]);
                 if (Vector2.Distance(pos, posInt) < 0.3f)
                 {
-                    // Trouve l’objet correspondant et détruit-le
+                    // Trouve lâ€™objet correspondant et dÃ©truit-le
                     for (int j = _allObject.Count - 1; j >= 0; j--)
                     {
                         var obj = _allObject[j];
@@ -162,7 +162,7 @@ public class EditorManager : MonoSingleton<EditorManager>
                     }
 
                     list.RemoveAt(i);
-                    return; // on peut arrêter ici
+                    return; // on peut arrÃªter ici
                 }
             }
         }
@@ -184,7 +184,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
                 if (Vector2.Distance(posByAdding, posInt) < 0.3f)
                 {
-                    // Trouve l’objet correspondant et détruit-le
+                    // Trouve lâ€™objet correspondant et dÃ©truit-le
                     for (int j = _allObject.Count - 1; j >= 0; j--)
                     {
                         var obj = _allObject[j];
@@ -199,12 +199,12 @@ public class EditorManager : MonoSingleton<EditorManager>
                     }
 
                     list.RemoveAt(i);
-                    return; // on peut arrêter ici
+                    return; // on peut arrÃªter ici
                 }
             }
         }
 
-        // Efface tous les types d’éléments
+        // Efface tous les types dâ€™Ã©lÃ©ments
         EraseFromList(currentMapData._wallPosList, p => p);
         EraseFromListSemiWall(currentMapData._semiWallPosList, p => p.pos, p => p.type);
         EraseFromList(currentMapData._piksPosList, p => p);
@@ -249,10 +249,10 @@ public class EditorManager : MonoSingleton<EditorManager>
     private void VerifAllWallAndOther()
     {
         Vector3 mousePos = UnityEngine.Input.mousePosition;
-        mousePos.z = 10f; // profondeur depuis la caméra
+        mousePos.z = 10f; // profondeur depuis la camÃ©ra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        // Décale ton repère pour viser le centre de chaque tile
+        // DÃ©cale ton repÃ¨re pour viser le centre de chaque tile
         worldPos.x = Mathf.Floor(worldPos.x)/* + 0.5f*/;
         worldPos.y = Mathf.Floor(worldPos.y) /*+ 0.5f*/;
 
@@ -324,7 +324,7 @@ public class EditorManager : MonoSingleton<EditorManager>
     private void VerifAllPlayerAndWin(int thikness, ref GameObject objectToMove)
     {
         Vector3 mousePos = UnityEngine.Input.mousePosition;
-        mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
+        mousePos.z = 10f; // distance du plan que tu veux viser depuis la camÃ©ra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector2Int posInt = new Vector2Int(Mathf.RoundToInt(worldPos.x), Mathf.RoundToInt(worldPos.y));
         if (CanMovePlayer(posInt, thikness))
@@ -542,120 +542,129 @@ public class EditorManager : MonoSingleton<EditorManager>
         string cat2 = $"{data._playerPosC2.x},{data._playerPosC2.y}";
         string cat3 = $"{data._winConditionC2.x},{data._winConditionC2.y}";
 
-        string cat4 = string.Join("€", data._wallPosList.ConvertAll(v => $"{v.x},{v.y}"));
+        string cat4 = string.Join("â‚¬", data._wallPosList.ConvertAll(v => $"{v.x},{v.y}"));
 
-        string cat5 = string.Join("€", data._semiWallPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
-        string cat6 = string.Join("€", data._murBlobPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
-        string cat7 = string.Join("€", data._blobPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
+        string cat5 = string.Join("â‚¬", data._semiWallPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
+        string cat6 = string.Join("â‚¬", data._murBlobPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
+        string cat7 = string.Join("â‚¬", data._blobPosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
 
-        string cat8 = string.Join("€", data._piksPosList.ConvertAll(v => $"{v.x},{v.y}"));
+        string cat8 = string.Join("â‚¬", data._piksPosList.ConvertAll(v => $"{v.x},{v.y}"));
 
-        string cat9 = string.Join("€", data._projectilePosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
+        string cat9 = string.Join("â‚¬", data._projectilePosList.ConvertAll(e => $"{e.type},{e.pos.x},{e.pos.y}"));
 
-        string cat10 = string.Join("€", data._inertieBoostPosList.ConvertAll(v => $"{v.x},{v.y}"));
-        string cat11 = string.Join("€", data._blackHolePosList.ConvertAll(v => $"{v.x},{v.y}"));
+        string cat10 = string.Join("â‚¬", data._inertieBoostPosList.ConvertAll(v => $"{v.x},{v.y}"));
+        string cat11 = string.Join("â‚¬", data._blackHolePosList.ConvertAll(v => $"{v.x},{v.y}"));
 
         return $"{cat1}${cat2}${cat3}${cat4}${cat5}${cat6}${cat7}${cat8}${cat9}${cat10}${cat11}";
     }
 
     public static MapData ReadMap(string mapString)
     {
-        string[] parts = mapString.Split('$');
-        MapData data = new MapData();
+        try
+        {
+            string[] parts = mapString.Split('$');
+            MapData data = new MapData();
 
-        if (parts.Length > 0) data._mapTypeC1 = int.Parse(parts[0]);
-        if (parts.Length > 1)
-        {
-            string[] v = parts[1].Split(',');
-            data._playerPosC2 = new Vector2(float.Parse(v[0]), float.Parse(v[1]));
-        }
-        if (parts.Length > 2)
-        {
-            string[] v = parts[2].Split(',');
-            data._winConditionC2 = new Vector2(float.Parse(v[0]), float.Parse(v[1]));
-        }
-        if (parts.Length > 3)
-        {
-            string[] entries = parts[3].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 0) data._mapTypeC1 = int.Parse(parts[0]);
+            if (parts.Length > 1)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 2)
-                    data._wallPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                string[] v = parts[1].Split(',');
+                data._playerPosC2 = new Vector2(float.Parse(v[0]), float.Parse(v[1]));
             }
-        }
-        if (parts.Length > 4)
-        {
-            string[] entries = parts[4].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 2)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 3)
-                    data._semiWallPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                string[] v = parts[2].Split(',');
+                data._winConditionC2 = new Vector2(float.Parse(v[0]), float.Parse(v[1]));
             }
-        }
-        if (parts.Length > 5)
-        {
-            string[] entries = parts[5].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 3)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 3)
-                    data._murBlobPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                string[] entries = parts[3].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 2)
+                        data._wallPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                }
             }
-        }
-        if (parts.Length > 6)
-        {
-            string[] entries = parts[6].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 4)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 3)
-                    data._blobPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                string[] entries = parts[4].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 3)
+                        data._semiWallPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                }
             }
-        }
-        if (parts.Length > 7)
-        {
-            string[] entries = parts[7].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 5)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 2)
-                    data._piksPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                string[] entries = parts[5].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 3)
+                        data._murBlobPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                }
             }
-        }
-        if (parts.Length > 8)
-        {
-            string[] entries = parts[8].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 6)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 3)
-                    data._projectilePosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                string[] entries = parts[6].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 3)
+                        data._blobPosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                }
             }
-        }
-        if (parts.Length > 9)
-        {
-            string[] entries = parts[9].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 7)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 2)
-                    data._inertieBoostPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                string[] entries = parts[7].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 2)
+                        data._piksPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                }
             }
-        }
-        if (parts.Length > 9)
-        {
-            string[] entries = parts[10].Split('€');
-            foreach (string entry in entries)
+            if (parts.Length > 8)
             {
-                string[] v = entry.Split(',');
-                if (v.Length == 2)
-                    data._blackHolePosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                string[] entries = parts[8].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 3)
+                        data._projectilePosList.Add((int.Parse(v[0]), new Vector2(float.Parse(v[1]), float.Parse(v[2]))));
+                }
             }
-        }
+            if (parts.Length > 9)
+            {
+                string[] entries = parts[9].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 2)
+                        data._inertieBoostPosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                }
+            }
+            if (parts.Length > 9)
+            {
+                string[] entries = parts[10].Split('â‚¬');
+                foreach (string entry in entries)
+                {
+                    string[] v = entry.Split(',');
+                    if (v.Length == 2)
+                        data._blackHolePosList.Add(new Vector2(float.Parse(v[0]), float.Parse(v[1])));
+                }
+            }
 
-        return data;
+            return data;
+        }
+        catch 
+        {
+            // ðŸ”´ Invoquer un event dâ€™erreur
+            GameManager.I._pastErrorEvent?.Invoke();
+            return null;
+        }
     }
 
     private void InstantiatePlayer(Vector3 pos)

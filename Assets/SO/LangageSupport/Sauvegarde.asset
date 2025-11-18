@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: Sauvegarde
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u5B58\u6863 "
+  _english: SAVE
+  _russian: "\u0421\u041E\u0425\u0420\u0410\u041D\u0415\u041D\u0418\u0415"
+  _spanish: GUARDADO
+  _breazilian: SALVAMENTO
+  _german: SPEICHERSTAND
+  _french: SAUVEGARDE
+  _turkish: KAYIT
+  _japanese: "\u30BB\u30FC\u30D6"
+  _polish: ZAPIS
+  _traditionnalChinese: "\u5B58\u6A94"
+  _italian: SALVATAGGIO

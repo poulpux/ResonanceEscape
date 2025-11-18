@@ -33,6 +33,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _goToMenuEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _pulseEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _saveEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _pastErrorEvent = new UnityEvent();
     #endregion
 
     #region Callbacks

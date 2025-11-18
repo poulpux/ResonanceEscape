@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: CodePressePapierIncorect
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u7C98\u8D34\u7684\u4EE3\u7801\u65E0\u6548"
+  _english: INVALID PASTED CODE
+  _russian: "\u041D\u0415\u0412\u0415\u0420\u041D\u041E \u0412\u0421\u0422\u0410\u0412\u041B\u0415\u041D\u041D\u042B\u0419
+    \u041A\u041E\u0414"
+  _spanish: "C\xD3DIGO PEGADO INCORRECTO"
+  _breazilian: "C\xD3DIGO COLADO INCORRETO"
+  _german: "EINGEF\xDCGTER CODE UNG\xDCLTIG"
+  _french: CODE PRESSE-PAPIER INCORRECT
+  _turkish: "YAPI\u015ETIRILAN KOD GE\xC7ERS\u0130Z"
+  _japanese: "\u8CBC\u308A\u4ED8\u3051\u305F\u30B3\u30FC\u30C9\u304C\u7121\u52B9\u3067\u3059"
+  _polish: "WKLEJONY KOD JEST NIEPRAWID\u0141OWY"
+  _traditionnalChinese: "\u8CBC\u4E0A\u7684\u4EE3\u78BC\u7121\u6548"
+  _italian: CODICE INCOLLATO NON VALIDO
