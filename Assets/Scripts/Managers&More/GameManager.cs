@@ -32,6 +32,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _enterInEditModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _goToMenuEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _pulseEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _saveEvent = new UnityEvent();
     #endregion
 
     #region Callbacks

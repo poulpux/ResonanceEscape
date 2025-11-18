@@ -53,8 +53,8 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorStar]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.STAR));
         RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => SelectNewCase(EEditorSelectionType.BLACKHOLE));
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
-        RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => GUIUtility.systemCopyBuffer = WriteMap(currentMapData));
-        RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => { if (lines != null) { lines.SetActive(false); GUIUtility.systemCopyBuffer = WriteMap(currentMapData); _shapes.transform.localScale = Vector3.one * (currentMapData._mapTypeC1 == 0 ? 1f : 0.5f); } });
+        RaycastManager_.I.allTag[GV.TagSO._editorSave]._click2DEvent.AddListener(() => SaveMap());
+        RaycastManager_.I.allTag[GV.TagSO._menuPlay]._click2DEvent.AddListener(() => { if (lines != null) { lines.SetActive(false); SaveMap(); _shapes.transform.localScale = Vector3.one * (currentMapData._mapTypeC1 == 0 ? 1f : 0.5f); } });
         RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => { indexMapType = currentMapData._mapTypeC1; currentMapData = new MapData(); indexMapType = indexMapType == 2 ? 0 : indexMapType += 1; currentMapData._mapTypeC1 = indexMapType; F_ChangeMap(WriteMap(currentMapData)); });
         RaycastManager_.I.allTag[GV.TagSO._editorClean]._click2DEvent.AddListener(() => { currentMapData = new MapData(); F_ChangeMap(WriteMap(currentMapData)); });
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
@@ -218,6 +218,12 @@ public class EditorManager : MonoSingleton<EditorManager>
     private void SelectNewCase(EEditorSelectionType selectionType)
     {
         this.selectionType = selectionType;
+    }
+
+    private void SaveMap()
+    {
+        GUIUtility.systemCopyBuffer = WriteMap(currentMapData);
+        GameManager.I._saveEvent.Invoke();
     }
 
     private void LeftClick()
