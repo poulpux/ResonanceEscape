@@ -9,6 +9,6 @@ public class FeelSave : MonoBehaviour
 
     void Start()
     {
-        GameManager.I._saveEvent.AddListener(() => feedbackSave.PlayFeedbacks());
+        GameManager.I._saveEvent.AddListener(() => { if(!feedbackSave.IsPlaying) feedbackSave.PlayFeedbacks(); });
     }
 }
