@@ -29,7 +29,7 @@ public class EditorManager : MonoSingleton<EditorManager>
     public MapData currentMapData = new MapData();
 
 
-    GameObject playerObject, winconditionObject, lines;
+    GameObject playerObject, winconditionObject, lines, feedback;
     public List<GameObject> _allObject = new List<GameObject>();
     int indexRotate = 0;
     int indexMapType;
@@ -64,7 +64,10 @@ public class EditorManager : MonoSingleton<EditorManager>
         //InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());
         //InputSystem_.I._rightClick._eventMaintain.AddListener(() => Erase());
         InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_ResetMap(false);});
-        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1;  });
+        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.EDITOR) indexRotate = indexRotate == 3 ? 0 : indexRotate += 1; SelectNewCase(selectionType); });
+
+
+        SelectNewCase(EEditorSelectionType.PLAYER);
 
         F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
     }
@@ -75,9 +78,58 @@ public class EditorManager : MonoSingleton<EditorManager>
             LeftClick();
         if (InputSystem_.I._rightClick._pressed && GameManager.I._state == EGameState.EDITOR)
             Erase();
+
+        print(feedback);
+        if(GameManager.I._state == EGameState.EDITOR)
+            DrawFeedback();
+        else
+            feedback.transform.position = Vector2.one * -200f;
     }
 
+    private void DrawFeedback()
+    {
+        Vector3 mousePos = UnityEngine.Input.mousePosition;
+        mousePos.z = 10f; // profondeur depuis la caméra
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
+        // Décale ton repère pour viser le centre de chaque tile
+        worldPos.x = Mathf.Floor(worldPos.x)/* + 0.5f*/;
+        worldPos.y = Mathf.Floor(worldPos.y) /*+ 0.5f*/;
+
+        Vector2 pos = new Vector2(worldPos.x, worldPos.y);
+         
+        if(!VerifLimitMap(pos, 1))
+        {
+            feedback.transform.position = Vector2.one * -200f;
+            return;
+        }
+
+        if (selectionType == EEditorSelectionType.SEMIWALL)
+        {
+            feedback.transform.eulerAngles = Vector3.forward * 90 * indexRotate;
+        }
+
+        if (selectionType == EEditorSelectionType.PLAYER || selectionType == EEditorSelectionType.WINCONDITION)
+        {
+            Vector3 mousePos1 = UnityEngine.Input.mousePosition;
+            mousePos1.z = 10f; // distance du plan que tu veux viser depuis la caméra
+            Vector3 worldPos1 = Camera.main.ScreenToWorldPoint(mousePos1);
+            Vector2Int posInt = new Vector2Int(Mathf.RoundToInt(worldPos1.x), Mathf.RoundToInt(worldPos1.y));
+            feedback.transform.position = new Vector3(posInt.x, posInt.y, -0.4f + 1f * 0.1f);
+        }
+        else
+            feedback.transform.position = new Vector3(pos.x, pos.y, 0f);
+
+        if (selectionType == EEditorSelectionType.SEMIWALL)
+        {
+            if (indexRotate == 1)
+                feedback.transform.position += Vector3.right;
+            else if (indexRotate == 2)
+                feedback.transform.position += Vector3.right + Vector3.up;
+            else if (indexRotate == 3)
+                feedback.transform.position += Vector3.up;
+        }
+    }
 
     public void F_SetGoodPlayPlayer()
     {
@@ -218,6 +270,29 @@ public class EditorManager : MonoSingleton<EditorManager>
     private void SelectNewCase(EEditorSelectionType selectionType)
     {
         this.selectionType = selectionType;
+        if(feedback != null)
+            Destroy(feedback);
+
+        if(selectionType == EEditorSelectionType.PLAYER)
+            feedback = Instantiate(GV.PrefabSO._previsuPlayer, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.WINCONDITION)
+            feedback = Instantiate(GV.PrefabSO._previsuWinCondition, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.WALL)
+            feedback = Instantiate(GV.PrefabSO._wall, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.SEMIWALL)
+            feedback = Instantiate(GV.PrefabSO._semiWall, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.WALLBLOOB)
+            feedback = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._murBloobPlein : GV.PrefabSO._murBloobVide, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.BLOOB)
+            feedback = Instantiate(indexRotate % 2 == 0 ? GV.PrefabSO._bloobPlein : GV.PrefabSO._bloobVide, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.SPIKS)
+            feedback = Instantiate(GV.PrefabSO._piks, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.PROJECTILE)
+            feedback = Instantiate(GV.PrefabSO._projectile, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.INERTIEBOOST)
+            feedback = Instantiate(GV.PrefabSO._inertieBoost, _shapes.transform);
+        else if (selectionType == EEditorSelectionType.BLACKHOLE)
+            feedback = Instantiate(GV.PrefabSO._blackHole, _shapes.transform);
     }
 
     private void SaveMap(bool playmode = false)

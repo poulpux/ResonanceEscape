@@ -31,3 +31,5 @@ MonoBehaviour:
   _inertieBoost: {fileID: 5702950842945341683, guid: e21fcd9af8bd3e54698d45660dffa604, type: 3}
   _star: {fileID: 8544964069443269058, guid: 2ff40d4d3a1efc94da04a055ff781153, type: 3}
   _blackHole: {fileID: 3660228167173254812, guid: 40d641e5d1c60cf428dd4ca91d299ebc, type: 3}
+  _previsuPlayer: {fileID: 6085435589950509100, guid: 2e152069138f7a044b4425e7c083d003, type: 3}
+  _previsuWinCondition: {fileID: 4244083778218863383, guid: fbdc4b9c47e4d5945ac2bb0ecd98873f, type: 3}
