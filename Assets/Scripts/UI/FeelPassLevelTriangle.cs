@@ -7,11 +7,23 @@ using UnityEngine;
 public class FeelPassLevelTriangle : MonoBehaviour
 {
     [SerializeField] Triangle triangle;
-    [SerializeField] MMF_Player feedbackSurvole, feedbackClick;
-    // Start is called before the first frame update
+    [SerializeField] MMF_Player feedbackClick;
+
+    bool survole;
+
+    [SerializeField] Color colorUnclicked, colorClicked;
+
     void Start()
     {
         RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => feedbackClick.PlayFeedbacks());
-        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => feedbackSurvole.PlayFeedbacks());
+        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => { survole = true; triangle.Color = colorClicked; });
+    }
+
+    private void FixedUpdate()
+    {
+        if(!survole)
+            triangle.Color = colorUnclicked;
+
+        survole = false;
     }
 }
