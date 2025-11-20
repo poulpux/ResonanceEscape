@@ -72,9 +72,12 @@ public class FeelButton : MonoBehaviour
         Vector3 colorCurveCube = Vector3.zero;
         Vector3 colorCurveOutlineCube = Vector3.zero;
 
-        Tools.PlayCurve(ref curveLine, ref alphaCurveLine);
-        line1.Color = new Color(line1.Color.r , line1.Color.g, line1.Color.b ,alphaCurveLine);
-        line2.Color = new Color(line1.Color.r , line1.Color.g, line1.Color.b ,alphaCurveLine);
+        if (line1 != null)
+        {
+            Tools.PlayCurve(ref curveLine, ref alphaCurveLine);
+            line1.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, alphaCurveLine);
+            line2.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, alphaCurveLine);
+        }
 
         Tools.PlayCurve(ref curveCube, ref colorCurveCube);
         carré1.Color = new Color(colorCurveCube.x, colorCurveCube.y, colorCurveCube.z, 1f);
@@ -86,8 +89,11 @@ public class FeelButton : MonoBehaviour
 
         if(Tools.isCurveFinish(curveLine))
         {
-            line1.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, curveLine.endValueF);
-            line2.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, curveLine.endValueF);
+            if (line1 != null)
+            {
+                line1.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, curveLine.endValueF);
+                line2.Color = new Color(line1.Color.r, line1.Color.g, line1.Color.b, curveLine.endValueF);
+            }
 
             carré1.Color = new Color(curveCube.endValue.x, curveCube.endValue.y, curveCube.endValue.z, 1f);
             carré2.Color = new Color(curveCube.endValue.x, curveCube.endValue.y, curveCube.endValue.z, 1f);
@@ -96,7 +102,7 @@ public class FeelButton : MonoBehaviour
             outline2.Color = new Color(curveOutlineCube.endValue.x, curveOutlineCube.endValue.y, curveOutlineCube.endValue.z, 1f);
         }
     }
-
+    
     private void VerifSurvoleback()
     {
         if (!isSelected && !survole && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) < 0.1f)
@@ -135,6 +141,19 @@ public class FeelButton : MonoBehaviour
             curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             isSelected = false;
             VerifSurvoleback();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if(!isSelected)
+        {
+            carré1.transform.localEulerAngles = Vector3.zero;
+            carré2.transform.localEulerAngles = Vector3.zero;
+            outline1.transform.localEulerAngles = Vector3.zero;
+            outline2.transform.localEulerAngles = Vector3.zero;
+
+            text.color = Color.white;
         }
     }
 
