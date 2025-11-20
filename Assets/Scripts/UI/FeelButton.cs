@@ -148,12 +148,8 @@ public class FeelButton : MonoBehaviour
     {
         if(!isSelected)
         {
-            carré1.transform.localEulerAngles = Vector3.zero;
-            carré2.transform.localEulerAngles = Vector3.zero;
-            outline1.transform.localEulerAngles = Vector3.zero;
-            outline2.transform.localEulerAngles = Vector3.zero;
-
-            text.color = Color.white;
+            feedbackSurvole.StopFeedbacks();
+            feedbackSurvoleBack.StopFeedbacks();
         }
     }
 
