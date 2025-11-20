@@ -79,7 +79,6 @@ public class EditorManager : MonoSingleton<EditorManager>
         if (InputSystem_.I._rightClick._pressed && GameManager.I._state == EGameState.EDITOR)
             Erase();
 
-        print(feedback);
         if(GameManager.I._state == EGameState.EDITOR)
             DrawFeedback();
         else
