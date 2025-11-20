@@ -10,7 +10,9 @@ public class FeelMapTypeButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => SetRightFeedback());
+        EditorManager.I._editorMapTypeFeedbackEvent.AddListener(() => SetRightFeedback());
+        GameManager.I._enterInEditModeEvent.AddListener(()=> SetRightFeedback());
+        GameManager.I._enterInEditModePastEvent.AddListener(()=> SetRightFeedback());
     }
 
     private void SetRightFeedback()
