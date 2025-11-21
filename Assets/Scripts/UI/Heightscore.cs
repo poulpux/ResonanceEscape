@@ -6,6 +6,7 @@ using UnityEngine;
 public class Heightscore : MonoBehaviour
 {
     TextMeshPro text;
+    [SerializeField] LanguageSupportSO langue;
     void Start()
     {
         text = GetComponent<TextMeshPro>();
@@ -18,6 +19,6 @@ public class Heightscore : MonoBehaviour
     private void SetRightHightscore()
     {
         float time = PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f);
-        text.text = "HIGHTSCORE : "+ $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
+        text.text = langue.F_GetTextTranslation()+" : "+ $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
     }
 }
