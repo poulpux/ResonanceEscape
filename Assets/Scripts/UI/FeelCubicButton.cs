@@ -9,11 +9,12 @@ using UnityEngine;
 
 public class FeelCubicButton : MonoBehaviour
 {
+    [SerializeField] bool selectible = false;
+
     [SerializeField] Rectangle carré1, outline1;
     [SerializeField] MMF_Player feedbackSurvole, feedbackSurvoleBack;
     bool isSelected;
     bool survole, firstCurve;
-
     [ColorPalette("Resonnance")]
     [SerializeField] Color cubeUnselectColor, cubeSelectColor, outlineCubeUnselectColor, outlineCubeSelectColor;
 
@@ -27,14 +28,25 @@ public class FeelCubicButton : MonoBehaviour
             RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => Survole());
             //RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => Select());
         }
+
+        if(!selectible)
+            RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => StartCoroutine(ClickOnButtonCoroutine()));
         else
         {
-            GameManager.I._setRightLanguageEvent.AddListener(() => { if ((ELangues)Enum.Parse(typeof(ELangues), gameObject.name) == GameManager.I._langueActuelle) Select(); else if (isSelected) Unselect(); });
-            RaycastManager_.I.allTag[gameObject.tag]._survole2DGameObjectEvent.AddListener((objet) => { if (gameObject.name == objet.name) Survole(); });
-            //RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { { if (!isSelected && gameObject.name == objet.name) Select(); else if (isSelected && gameObject.name == objet.name) Unselect(); } });
+            RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorBloob]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorBloobWall]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorSpike]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => Unselect());
+
+            RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => Select());
         }
 
-        RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => StartCoroutine(ClickOnButtonCoroutine()));
+        GameManager.I._enterInEditModeEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
+        GameManager.I._enterInEditModePastEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
     }
 
     void FixedUpdate()
@@ -53,7 +65,7 @@ public class FeelCubicButton : MonoBehaviour
 
     private void VerifSelectedPourSurvole()
     {
-        if (isSelected && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) > 0.1f)
+        if (feedbackSurvole != null && isSelected && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) > 0.1f)
             feedbackSurvole.PlayFeedbacks();
     }
 
@@ -82,7 +94,7 @@ public class FeelCubicButton : MonoBehaviour
 
     private void VerifSurvoleback()
     {
-        if (!isSelected && !survole && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) < 0.1f)
+        if (!isSelected && !survole && feedbackSurvole != null && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.eulerAngles.z - 45f) < 0.1f)
         {
             feedbackSurvoleBack.PlayFeedbacks();
         }
@@ -92,7 +104,7 @@ public class FeelCubicButton : MonoBehaviour
     private void Survole()
     {
         survole = true;
-        if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 0f && !isSelected)
+        if (feedbackSurvole != null && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 0f && !isSelected)
             feedbackSurvole.PlayFeedbacks();
     }
 
@@ -115,13 +127,13 @@ public class FeelCubicButton : MonoBehaviour
             curveCube = new AnimatingCurve(new Vector3(cubeSelectColor.r, cubeSelectColor.g, cubeSelectColor.b), new Vector3(cubeUnselectColor.r, cubeUnselectColor.g, cubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             curveOutlineCube = new AnimatingCurve(new Vector3(outlineCubeSelectColor.r, outlineCubeSelectColor.g, outlineCubeSelectColor.b), new Vector3(outlineCubeUnselectColor.r, outlineCubeUnselectColor.g, outlineCubeUnselectColor.b), 0.3f, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
             isSelected = false;
-            VerifSurvoleback();
+            //VerifSurvoleback();
         }
     }
 
     private void OnEnable()
     {
-        if (!isSelected)
+        if (feedbackSurvole != null && !isSelected)
         {
             feedbackSurvole.StopFeedbacks();
             feedbackSurvoleBack.StopFeedbacks();

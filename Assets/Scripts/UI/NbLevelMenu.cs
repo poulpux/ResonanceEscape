@@ -22,7 +22,7 @@ public class NbLevelMenu : MonoBehaviour
 
     private void AssignText()
     {
-        text.text = "LV " + MenuManager.I._indexMapPlayMode.ToString();
+        text.text = "LV " + (MenuManager.I._indexMapPlayMode + 1).ToString();
     }
 
 }

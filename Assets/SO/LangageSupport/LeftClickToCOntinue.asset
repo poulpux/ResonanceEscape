@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: LeftClickToCOntinue
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u5DE6\u952E\u5355\u51FB\u4EE5\u7EE7\u7EED"
+  _english: LEFT CLICK TO CONTINUE
+  _russian: "\u041B\u0415\u0412\u042B\u0419 \u041A\u041B\u0418\u041A, \u0427\u0422\u041E\u0411\u042B
+    \u041F\u0420\u041E\u0414\u041E\u041B\u0416\u0418\u0422\u042C"
+  _spanish: CLIC IZQUIERDO PARA CONTINUAR
+  _breazilian: CLIQUE ESQUERDO PARA CONTINUAR
+  _german: LINKS KLICKEN, UM FORTZUFAHREN
+  _french: CLIC GAUCHE POUR CONTINUER
+  _turkish: "DEVAM ETMEK \u0130\xC7\u0130N SOL TIKLAYIN"
+  _japanese: "\u5DE6\u30AF\u30EA\u30C3\u30AF\u3067\u7D9A\u884C"
+  _polish: "KLIKNIJ LEWYM, ABY KONTYNUOWA\u0106"
+  _traditionnalChinese: "\u5DE6\u9375\u9EDE\u64CA\u4EE5\u7E7C\u7E8C"
+  _italian: CLIC SINISTRO PER CONTINUARE

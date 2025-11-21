@@ -461,11 +461,11 @@ public class EditorManager : MonoSingleton<EditorManager>
         {
             Vector2 posByAdding = pos;
             if (item.type == 1)
-                posByAdding -= Vector2.right;
+                posByAdding += Vector2.right ;
             else if (item.type == 2)
-                posByAdding -= Vector2.right + Vector2.up;
+                posByAdding += (Vector2.right + Vector2.up);
             else if (item.type == 3)
-                posByAdding -= Vector2.up;
+                posByAdding += Vector2.up;
             if (Vector2.Distance(item.pos, posByAdding) < (float)thinkness)
                 return false;
         }
