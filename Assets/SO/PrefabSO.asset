@@ -21,7 +21,7 @@ MonoBehaviour:
   _player: {fileID: 6085435589950509100, guid: bab3b45dda4f36f47b69c12e5aca49c7, type: 3}
   _winCondition: {fileID: 4244083778218863383, guid: 98b36142b381fb64f902825656c1fa2f, type: 3}
   _wall: {fileID: 8952185345663898900, guid: e49172da5f23cad488935697a6ce07ce, type: 3}
-  _semiWall: {fileID: 4808832756562603759, guid: ccf35c4c13a2d0c4c989413b255086d6, type: 3}
+  _semiWall: {fileID: 2468488801077654023, guid: ccf35c4c13a2d0c4c989413b255086d6, type: 3}
   _murBloobPlein: {fileID: 3585779396572784480, guid: 66b292c0e0cdf064cb737b09c9092a87, type: 3}
   _murBloobVide: {fileID: 5333126346209759430, guid: 51bada9c103ce744eb84bb2ca743ef81, type: 3}
   _bloobPlein: {fileID: 335175836358599538, guid: 688dc1c95cc6d9b409763b437d1f9f46, type: 3}
