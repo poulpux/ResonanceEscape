@@ -20,14 +20,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     int indexGhost, indexFeedback;
     void Start()
     {
-        //for (int i = 0; i < 15; i++)
-        //{
-        //    PlayerPrefs.SetFloat(i.ToString(), 99.99f);
-        //}
+        for (int i = 0; i < 15; i++)
+        {
+            PlayerPrefs.SetFloat(i.ToString(), 99.99f);
+        }
 
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; if (_dashDistance >= GV.GameSO._maxJumpDistance) TryInertie();});
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
-        GameManager.I._winTheLevelEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); winFeedback.PlayFeedbacks(); });
+        GameManager.I._winTheLevelFeedbackEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); winFeedback.PlayFeedbacks(); });
         GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; _rigidBody.bodyType = RigidbodyType2D.Kinematic; _rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
 
         InputSystem_.I._leftClick._event.AddListener(()=> { if (!GameManager.I._replay) TryMove(); });  
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             }
 
             EFeedbackType feedbackType = gostAllFeedback[indexFeedback];
-            if (feedbackType != EFeedbackType.PASS)
+            while (feedbackType != EFeedbackType.PASS)
             {
                 if (feedbackType == EFeedbackType.MOVEFEEDBACKPLAY)
                     moveFeedback.PlayFeedbacks();
@@ -114,6 +114,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                     wallCollisionFeedback.PlayFeedbacks();
 
                 indexFeedback++;
+                feedbackType = gostAllFeedback[indexFeedback];
             }
             indexFeedback++;
         }
@@ -225,7 +226,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             _rigidBody.AddForce(inertie * 4f, ForceMode2D.Impulse);
             _lastThingWasAMove = false;
         }
-        else if(collision.transform.tag == GV.TagSO._gameDie && canDie)
+        else if(collision.transform.tag == GV.TagSO._gameDie && canDie && !GameManager.I._replay)
         {
             isDead = true;
             InputSystem_.I._r._event.Invoke();
@@ -239,7 +240,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         {
             //écran de victoire et choix entre plein de trucs
             //Je veux juste revenir au menu pour le moment
-            GameManager.I._winTheLevelEvent.Invoke();
+            if (!GameManager.I._replay)
+            {
+                gostAllFeedback.Add(EFeedbackType.MOVEFEEDBACKSTOP);
+                gostAllFeedback.Add(EFeedbackType.INERTIEFEEDBACKSTOP);
+                gostAllFeedback.Add(EFeedbackType.PASS);
+                GameManager.I._winTheLevelEvent.Invoke();
+                GameManager.I._winTheLevelFeedbackEvent.Invoke();
+            }
         }
         else if(collision.transform.tag == GV.TagSO._gameInertieBoost)
         {

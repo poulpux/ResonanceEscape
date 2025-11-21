@@ -13,7 +13,7 @@ public class Heightscore : MonoBehaviour
         SetRightHightscore();
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeLeftLevel]._click2DEvent.AddListener(() => SetRightHightscore());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeRightLevel]._click2DEvent.AddListener(() => SetRightHightscore());
-        GameManager.I._winTheLevelEvent.AddListener(() => SetRightHightscore());
+        GameManager.I._winTheLevelFeedbackEvent.AddListener(() => SetRightHightscore());
     }
 
     private void SetRightHightscore()

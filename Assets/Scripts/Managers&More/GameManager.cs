@@ -28,6 +28,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playPlayModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _winTheLevelEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _winTheLevelFeedbackEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModePastEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _goToMenuEvent = new UnityEvent();
@@ -43,7 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
-        _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; winFeedback.PlayFeedbacks(); });
+        _winTheLevelFeedbackEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; winFeedback.PlayFeedbacks(); });
 
         InputSystem_.I._r._event.AddListener(() => { if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH) PlayPlayMode(); });
         InputSystem_.I._leftClick._event.AddListener(() => { if (_replay && PlayerMovement.I._timer >= 0.5f) { GoBackToMenu(); _replay = false; } });

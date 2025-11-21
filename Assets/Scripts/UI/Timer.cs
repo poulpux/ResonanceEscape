@@ -12,7 +12,6 @@ public class Timer : MonoBehaviour
     {
         text = GetComponent<TextMeshPro>();
         InputSystem_.I._r._event.AddListener(() => REsetTimer());
-        InputSystem_.I._r._event.AddListener(() => REsetTimer());
         GameManager.I._overwatchEvent.AddListener(()=> REsetTimer());
         GameManager.I._winTheLevelEvent.AddListener(()=> SaveTimer());
     }
@@ -25,12 +24,16 @@ public class Timer : MonoBehaviour
             time += Time.deltaTime;
             text.text = $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
         }
+
+        if (GameManager.I._replay && GameManager.I._state == EGameState.OVERWATCH)
+            text.text = "";
     }
 
     private void SaveTimer()
     {
-        if (time < PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f))
+        if (time < PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f) && time != 0f)
         {
+            print("new heightScore "+time);
             PlayerPrefs.SetFloat(MenuManager.I._indexMapPlayMode.ToString(), time);
         }
     }
