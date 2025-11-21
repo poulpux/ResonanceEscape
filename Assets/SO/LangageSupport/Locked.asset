@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
   m_Name: Locked
   m_EditorClassIdentifier: 
-  _simplifiedChinese: 
-  _english: 
-  _russian: 
-  _spanish: 
-  _breazilian: 
-  _german: 
-  _french: 
-  _turkish: 
-  _japanese: 
-  _polish: 
-  _traditionnalChinese: 
-  _italian: 
+  _simplifiedChinese: "\u5DF2\u9501\u5B9A"
+  _english: LOCKED
+  _russian: "\u0417\u0410\u0411\u041B\u041E\u041A\u0418\u0420\u041E\u0412\u0410\u041D\u041E"
+  _spanish: BLOQUEADO
+  _breazilian: BLOQUEADO
+  _german: GESPERRT
+  _french: "VERROUILL\xC9"
+  _turkish: "K\u0130L\u0130TL\u0130"
+  _japanese: "\u30ED\u30C3\u30AF\u6E08\u307F"
+  _polish: ZABLOKOWANE
+  _traditionnalChinese: "\u5DF2\u9396\u5B9A"
+  _italian: BLOCCATO
