@@ -73,7 +73,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         if (GameManager.I._replay)
         {
             if (_timer < 1.5f)
+            {
+                moveFeedback.StopFeedbacks();
                 return;
+            }
             
             if(_timer > GV.GameSO._pulseIntervale + 1.5f)
             {
@@ -89,6 +92,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 indexFeedback = 0;
                 StopInertieFeedback();
                 EditorManager.I.F_SetGoodPlayPlayer();
+                return;
             }
             else
                 indexGhost++;
