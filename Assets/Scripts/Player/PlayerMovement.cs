@@ -20,10 +20,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     int indexGhost, indexFeedback;
     void Start()
     {
-        for (int i = 0; i < 15; i++)
-        {
-            PlayerPrefs.SetFloat(i.ToString(), 99.99f);
-        }
+        //for (int i = 0; i < 15; i++)
+        //{
+        //    PlayerPrefs.SetFloat(i.ToString(), 99.99f);
+        //}
 
         GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; if (_dashDistance >= GV.GameSO._maxJumpDistance) TryInertie();});
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
