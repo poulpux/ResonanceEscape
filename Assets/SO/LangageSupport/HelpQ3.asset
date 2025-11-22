@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: HelpQ3
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "3. \u5982\u4F55\u83B7\u53D6\u5DF2\u4FDD\u5B58\u7684\u5730\u56FE\uFF1F"
+  _english: '3. How to get your saved map?  '
+  _russian: "3. \u041A\u0430\u043A \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
+    \u0441\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u0443\u044E \u043A\u0430\u0440\u0442\u0443? "
+  _spanish: "3. \xBFC\xF3mo obtener tu mapa guardado?  "
+  _breazilian: '3. Como acessar o seu mapa salvo? '
+  _german: "3. Wie erh\xE4lt man seine gespeicherte Karte?  "
+  _french: "3. Comment r\xE9cup\xE9rer votre carte sauvegard\xE9e ? "
+  _turkish: "3. Kaydedilmi\u015F haritan\u0131z\u0131 nas\u0131l alabilirsiniz?"
+  _japanese: "3. \u4FDD\u5B58\u3057\u305F\u30DE\u30C3\u30D7\u3092\u53D6\u5F97\u3059\u308B\u306B\u306F\uFF1F  "
+  _polish: "3. Jak uzyska\u0107 zapisany map\u0119?"
+  _traditionnalChinese: "3. \u5982\u4F55\u53D6\u5F97\u5DF2\u4FDD\u5B58\u7684\u5730\u5716\uFF1F "
+  _italian: 3. Come recuperare la tua mappa salvata?

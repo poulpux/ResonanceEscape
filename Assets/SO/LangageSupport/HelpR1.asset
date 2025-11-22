@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: HelpR1
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u53EA\u9700\u70B9\u51FB\u201C\u7F16\u8F91\u5668\u6A21\u5F0F\u201D\u6309\u94AE\u3002"
+  _english: Just click on the "EDITOR MODE" button.
+  _russian: "\u041F\u0440\u043E\u0441\u0442\u043E \u043D\u0430\u0436\u043C\u0438\u0442\u0435
+    \u043A\u043D\u043E\u043F\u043A\u0443 \"\u0420\u0415\u0416\u0418\u041C \u0420\u0415\u0414\u0410\u041A\u0422\u041E\u0420\u0410\"."
+  _spanish: "Solo haz clic en el bot\xF3n \"MODO EDITOR\"."
+  _breazilian: "Basta clicar no bot\xE3o \"MODO EDITOR\"."
+  _german: "Klicken Sie einfach auf die Schaltfl\xE4che \u201EEDITOR-MODUS\u201C."
+  _french: "Il suffit de cliquer sur le bouton \"MODE \xC9DITEUR\"."
+  _turkish: "\"D\xDCZENLEY\u0130C\u0130 MODU\" d\xFC\u011Fmesine t\u0131klaman\u0131z
+    yeterlidir."
+  _japanese: "\u30A8\u30C7\u30A3\u30BF\u30FC\u30E2\u30FC\u30C9 \u300D\u30DC\u30BF\u30F3\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3060\u3051\u3067\u3059\u3002"
+  _polish: "Wystarczy klikn\u0105\u0107 przycisk \u201ETRYB EDYTORA\"."
+  _traditionnalChinese: "\u53EA\u9700\u9EDE\u64CA\u300C\u7DE8\u8F2F\u5668\u6A21\u5F0F
+    \u300D\u6309\u9215\u3002"
+  _italian: "Basta fare clic sul pulsante \"MODALIT\xC0 EDITORE\"."

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: Replay
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u56DE\u653E"
+  _english: REPLAY
+  _russian: "\u041F\u041E\u0412\u0422\u041E\u0420"
+  _spanish: REPRODUCIR DE NUEVO
+  _breazilian: REPLAY
+  _german: WIEDERHOLUNG
+  _french: REPLAY
+  _turkish: "TEKRAR \u0130ZLE"
+  _japanese: "\u30EA\u30D7\u30EC\u30A4"
+  _polish: "POWT\xD3RKA"
+  _traditionnalChinese: "\u56DE\u653E"
+  _italian: REPLAY

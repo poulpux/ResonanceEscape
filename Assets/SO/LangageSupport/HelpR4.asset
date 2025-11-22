@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: HelpR4
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u70B9\u51FB\u201C\u7C98\u8D34\u4EE3\u7801\u201D\u6309\u94AE\uFF0C\u5B83\u4F1A\u626B\u63CF\u4F60\u7684\u526A\u8D34\u677F\u5E76\u751F\u6210\u4F60\u7684\u5730\u56FE\u3002"
+  _english: 'Just click on the "PAST CODE" button, it will scan your clipboard and
+    generate your map.  '
+  _russian: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443
+    \xAB\u0412\u0421\u0422\u0410\u0412\u0418\u0422\u042C \u041A\u041E\u0414\xBB,
+    \u0447\u0442\u043E\u0431\u044B \u0441\u043A\u0430\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C
+    \u0431\u0443\u0444\u0435\u0440 \u043E\u0431\u043C\u0435\u043D\u0430 \u0438 \u0441\u0433\u0435\u043D\u0435\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C
+    \u043A\u0430\u0440\u0442\u0443."
+  _spanish: "Haz clic en el bot\xF3n \xABPEGAR C\xD3DIGO\xBB, escanear\xE1 tu portapapeles
+    y generar\xE1 tu mapa.  "
+  _breazilian: "Clique no bot\xE3o \xABCOLAR C\xD3DIGO\xBB, ele ir\xE1 escanear sua
+    \xE1rea de transfer\xEAncia e gerar seu mapa.  \r\n"
+  _german: "Klicken Sie auf die Schaltfl\xE4che \u201EEINGEF\xDCGTER CODE\u201C,
+    sie scannt Ihre Zwischenablage und erstellt Ihre Karte. "
+  _french: "Cliquez sur le bouton COLLE CODE, il scannera votre presse-papier et
+    g\xE9n\xE9rera votre carte.  "
+  _turkish: "\"YAPI\u015ETIRILAN KOD\" d\xFC\u011Fmesine t\u0131klay\u0131n, panonuzu
+    tarayacak ve haritan\u0131z\u0131 olu\u015Fturacakt\u0131r."
+  _japanese: "\u300C\u8CBC\u308A\u4ED8\u3051\u305F\u30B3\u30FC\u30C9\u300D\u30DC\u30BF\u30F3\u3092\u30AF\u30EA\u30C3\u30AF\u3059\u308B\u3068\u3001\u30AF\u30EA\u30C3\u30D7\u30DC\u30FC\u30C9\u3092\u30B9\u30AD\u30E3\u30F3\u3057\u3066\u30DE\u30C3\u30D7\u304C\u751F\u6210\u3055\u308C\u307E\u3059\u3002"
+  _polish: "Kliknij przycisk \u201EWKLEJ KOD\u201D, aby przeskanowa\u0107 schowek
+    i wygenerowa\u0107 map\u0119.  "
+  _traditionnalChinese: "\u9EDE\u64CA\u300C\u8CBC\u4E0A\u4EE3\u78BC\u300D\u6309\u9215\uFF0C\u5B83\u6703\u6383\u63CF\u4F60\u7684\u526A\u8CBC\u7C3F\u4E26\u751F\u6210\u4F60\u7684\u5730\u5716\u3002"
+  _italian: "Fai clic sul pulsante \xABINCOLLA CODICE\xBB, scansioner\xE0 gli appunti
+    e generer\xE0 la tua mappa."

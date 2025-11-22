@@ -28,6 +28,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public UnityEvent _playerActEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _playPlayModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _winTheLevelEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _winTheLevelFeedbackEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModePastEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _enterInEditModeEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _goToMenuEvent = new UnityEvent();
@@ -43,7 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
-        _winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; winFeedback.PlayFeedbacks(); });
+        _winTheLevelFeedbackEvent.AddListener(() => /*GoBackToMenu()*/ { PlayPlayMode(); _replay = true; winFeedback.PlayFeedbacks(); });
 
         InputSystem_.I._r._event.AddListener(() => { if (_state == EGameState.WAITINGACTION || _state == EGameState.ACT || _state == EGameState.OVERWATCH) PlayPlayMode(); });
         InputSystem_.I._leftClick._event.AddListener(() => { if (_replay && PlayerMovement.I._timer >= 0.5f) { GoBackToMenu(); _replay = false; } });
@@ -53,7 +54,8 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuPastCode]._click2DEvent.AddListener(() =>  PastBoutonMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayMode]._click2DEvent.AddListener(() => _state = EGameState.MENUPLAYMODE);
         RaycastManager_.I.allTag[GV.TagSO._menuSupport]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
-        RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise.mt/"));
+        RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise_marquet/"));
+        RaycastManager_.I.allTag[GV.TagSO._menuKoFi]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
         RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
         RaycastManager_.I.allTag[GV.TagSO._menuLangageSelectionCase]._click2DGameObjectEvent.AddListener((objet) => SelectLanguage(objet)) ;

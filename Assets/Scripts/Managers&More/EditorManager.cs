@@ -61,7 +61,8 @@ public class EditorManager : MonoSingleton<EditorManager>
         RaycastManager_.I.allTag[GV.TagSO._editorMapType]._click2DEvent.AddListener(() => { indexMapType = currentMapData._mapTypeC1; currentMapData = new MapData(); indexMapType = indexMapType == 2 ? 0 : indexMapType += 1; currentMapData._mapTypeC1 = indexMapType; F_ChangeMap(WriteMap(currentMapData)); _editorMapTypeFeedbackEvent.Invoke(); });
         RaycastManager_.I.allTag[GV.TagSO._editorClean]._click2DEvent.AddListener(() => { currentMapData = new MapData(); F_ChangeMap(WriteMap(currentMapData)); });
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
-        GameManager.I._winTheLevelEvent.AddListener(() => F_SetGoodPlayPlayer());
+        GameManager.I._goToMenuEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
+        GameManager.I._winTheLevelFeedbackEvent.AddListener(() => F_SetGoodPlayPlayer());
 
         //Faire une option pour maintenir
         //InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());
@@ -138,6 +139,9 @@ public class EditorManager : MonoSingleton<EditorManager>
         playerObject.transform.localPosition = currentMapData._playerPosC2;
         Rigidbody2D playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
         playerRigidBody.velocity = Vector3.zero;
+        playerRigidBody.angularVelocity = 0f;
+        playerRigidBody.rotation = 0f;
+        playerObject.transform.eulerAngles = Vector3.zero;
     }
 
     public void F_ResetMap(bool player = true)
