@@ -54,5 +54,6 @@ public class TagSO : ScriptableObject
         _menuLangage,
         _menuCloseHelpWindow,
         _menuLangageSelectionCase,
+        _menuKoFi,
         _quitParamter;
 }

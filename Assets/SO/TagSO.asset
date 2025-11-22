@@ -60,4 +60,5 @@ MonoBehaviour:
   _menuLangage: MenuLangage
   _menuCloseHelpWindow: MenuCloseHelpWindow
   _menuLangageSelectionCase: MenuLangageSelectionCase
+  _menuKoFi: MenuKoFi
   _quitParamter: QuitParameter

@@ -54,6 +54,7 @@ TagManager:
   - MenuLangage
   - MenuCloseHelpWindow
   - MenuLangageSelectionCase
+  - MenuKoFi
   layers:
   - Default
   - TransparentFX
