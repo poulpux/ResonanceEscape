@@ -166,7 +166,7 @@ Material:
     - _Glow: 10
     - _GlowGlobal: 1
     - _GradBlend: 1
-    - _GradBoostX: 2.31
+    - _GradBoostX: 1.08
     - _GradBoostY: 1.2
     - _GradIsRadial: 1
     - _GrassManualAnim: 1
