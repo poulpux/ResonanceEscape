@@ -14,11 +14,12 @@ public class Heightscore : MonoBehaviour
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeLeftLevel]._click2DEvent.AddListener(() => SetRightHightscore());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayModeRightLevel]._click2DEvent.AddListener(() => SetRightHightscore());
         GameManager.I._winTheLevelFeedbackEvent.AddListener(() => SetRightHightscore());
+        GameManager.I._setRightLanguageEvent.AddListener(() => SetRightHightscore());
     }
 
     private void SetRightHightscore()
     {
         float time = PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f);
-        text.text = langue.F_GetTextTranslation()+" : "+ $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
+        text.text = langue.F_GetTextTranslation()+" : "+ $"{(int)time}.{Mathf.Floor((time % 1f) * 100f):00}";
     }
 }

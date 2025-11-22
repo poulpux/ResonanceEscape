@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: HelpR2
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u70B9\u51FB\u201C\u64AD\u653E\u201D\u6216\u201C\u590D\u5236\u201D\u6309\u94AE\u5C06\u5730\u56FE\u4FDD\u5B58\u5230\u526A\u8D34\u677F\u3002"
+  _english: Click on the "PLAY" or "COPY" button to save the map to the clipboard.
+  _russian: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443
+    \xAB\u0418\u0413\u0420\u0410\u0422\u042C\xBB \u0438\u043B\u0438 \xAB\u041A\u041E\u041F\u0418\u0420\u041E\u0412\u0410\u0422\u042C\xBB,
+    \u0447\u0442\u043E\u0431\u044B \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C
+    \u043A\u0430\u0440\u0442\u0443 \u0432 \u0431\u0443\u0444\u0435\u0440 \u043E\u0431\u043C\u0435\u043D\u0430."
+  _spanish: "Haz clic en el bot\xF3n \xABJUGAR\xBB o \xABCOPIAR\xBB para guardar
+    el mapa en el portapapeles."
+  _breazilian: "Clique no bot\xE3o \xABJOGAR\xBB ou \xABCOPIAR\xBB para salvar o
+    mapa na \xE1rea de transfer\xEAncia."
+  _german: "Klicken Sie auf die Schaltfl\xE4che \u201ESPIELEN\u201C oder \u201EKOPIEREN\u201C,
+    um die Karte in die Zwischenablage zu speichern."
+  _french: Cliquez sur le bouton JOUER ou COPIER pour sauvegarder la carte dans le
+    presse-papier.
+  _turkish: "Haritay\u0131 panoya kaydetmek i\xE7in \xABOYNA\xBB veya \xABKOPYALA\xBB
+    d\xFC\u011Fmesine t\u0131klay\u0131n."
+  _japanese: "\u300C\u30D7\u30EC\u30A4\u300D\u307E\u305F\u306F\u300C\u30B3\u30D4\u30FC\u300D\u30DC\u30BF\u30F3\u3092\u30AF\u30EA\u30C3\u30AF\u3057\u3066\u3001\u30DE\u30C3\u30D7\u3092\u30AF\u30EA\u30C3\u30D7\u30DC\u30FC\u30C9\u306B\u4FDD\u5B58\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  _polish: "Kliknij przycisk \u201EGRAJ\u201D lub \u201EKOPIUJ\u201D, aby zapisa\u0107
+    map\u0119 do schowka."
+  _traditionnalChinese: "\u9EDE\u64CA\u300C\u64AD\u653E\u300D\u6216\u300C\u8907\u88FD\u300D\u6309\u9215\u5C07\u5730\u5716\u4FDD\u5B58\u5230\u526A\u8CBC\u7C3F\u3002"
+  _italian: "Fai clic sul pulsante \xABGIOCARE\xBB o \xABCOPIA\xBB per salvare la
+    mappa negli appunti.\r"

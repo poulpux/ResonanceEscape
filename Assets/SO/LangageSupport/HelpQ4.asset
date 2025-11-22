@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: HelpQ4
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "4. \u5982\u4F55\u6E38\u73A9\u5DF2\u4FDD\u5B58\u7684\u5730\u56FE\uFF1F"
+  _english: '4. How to play a saved map?  '
+  _russian: "4. \u041A\u0430\u043A \u0438\u0433\u0440\u0430\u0442\u044C \u043D\u0430
+    \u0441\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u043E\u0439 \u043A\u0430\u0440\u0442\u0435?  "
+  _spanish: "4. \xBFC\xF3mo jugar un mapa guardado?  "
+  _breazilian: '4. Como jogar um mapa salvo?  '
+  _german: '4. Wie spielt man eine gespeicherte Karte? '
+  _french: "4. Comment jouer \xE0 une carte sauvegard\xE9e ?  "
+  _turkish: "4. Kaydedilmi\u015F bir harita nas\u0131l oynan\u0131r?  "
+  _japanese: "4. \u4FDD\u5B58\u3057\u305F\u30DE\u30C3\u30D7\u3092\u904A\u3076\u306B\u306F\uFF1F  "
+  _polish: "4. Jak zagra\u0107 w zapisan\u0105 map\u0119?  "
+  _traditionnalChinese: "4. \u5982\u4F55\u904A\u73A9\u5DF2\u4FDD\u5B58\u7684\u5730\u5716\uFF1F"
+  _italian: 4. Come giocare a una mappa salvata?
