@@ -13155,9 +13155,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1752627712}
-    - targetCorrespondingSourceObject: {fileID: 6041599664502334154, guid: 91c94680982410340a61de4b61e093fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 91c94680982410340a61de4b61e093fa, type: 3}
 --- !u!4 &134464084 stripped
 Transform:
@@ -28289,7 +28286,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379639542}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -39806,7 +39803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163422394015822753, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3672715997863472061, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_text
@@ -74850,11 +74847,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 289300996308111944, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 547106526940536539, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Name
@@ -74870,7 +74867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1869709348487161234, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2305638428474804874, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74938,7 +74935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163422394015822753, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3672715997863472061, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_text
@@ -74978,7 +74975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932207514683573722, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -89289,7 +89286,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506134120}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -104042,7 +104039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1731849200
 Transform:
   m_ObjectHideFlags: 0
@@ -111155,7 +111152,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947265478}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -117713,7 +117710,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019481852}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -118094,9 +118091,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 902107140473052934, guid: 91c94680982410340a61de4b61e093fa, type: 3}
       insertIndex: 1
       addedObject: {fileID: 2034931266}
-    - targetCorrespondingSourceObject: {fileID: 6041599664502334154, guid: 91c94680982410340a61de4b61e093fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 91c94680982410340a61de4b61e093fa, type: 3}
 --- !u!4 &2034931262 stripped
 Transform:
