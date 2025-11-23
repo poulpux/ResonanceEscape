@@ -39,4 +39,9 @@ public class SimpleTextTraduction : MonoBehaviour
         }
         
     }
+
+    private void OnEnable()
+    {
+        SetAll();
+    }
 }
