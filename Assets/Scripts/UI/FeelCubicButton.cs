@@ -60,6 +60,8 @@ public class FeelCubicButton : MonoBehaviour
 
     private IEnumerator ClickOnButtonCoroutine()
     {
+        if(!gameObject.activeSelf)
+            yield break;
         Select();
         yield return new WaitForSeconds(0.3f);
         Unselect();
@@ -106,7 +108,7 @@ public class FeelCubicButton : MonoBehaviour
     private void Survole()
     {
         survole = true;
-        if (feedbackSurvole != null && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && MathF.Abs(carré1.transform.localEulerAngles.z) <= 0.1f && !isSelected)
+        if (gameObject.activeSelf && feedbackSurvole != null && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && MathF.Abs(carré1.transform.localEulerAngles.z) <= 0.1f && !isSelected)
         {
             feedbackSurvole.PlayFeedbacks();
             SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole);
