@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using Shapes;
 using Sirenix.OdinInspector;
 using System;
@@ -48,6 +49,8 @@ public class FeelButton : MonoBehaviour
         {
             RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { if (!isSelected) Select(); else Unselect(); });
         }
+
+        RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole));
     }
 
     void FixedUpdate()
@@ -115,8 +118,11 @@ public class FeelButton : MonoBehaviour
     private void Survole()
     {
         survole = true;
-        if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 0f && !isSelected)
+        if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && MathF.Abs(carré1.transform.localEulerAngles.z) <= 0.1f && !isSelected)
+        {
             feedbackSurvole.PlayFeedbacks();
+            SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole);
+        }
     }
 
     private void Select()
@@ -152,6 +158,11 @@ public class FeelButton : MonoBehaviour
             feedbackSurvoleBack.StopFeedbacks();
         }
     }
+
+    //private void OnDisable()
+    //{
+    //    StopCoroutine(coroutine);
+    //}
 
     enum EINTERACTIONTYPE
     {

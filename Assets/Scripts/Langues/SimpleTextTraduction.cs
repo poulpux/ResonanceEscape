@@ -39,4 +39,15 @@ public class SimpleTextTraduction : MonoBehaviour
         }
         
     }
+
+    private void OnEnable()
+    {
+        StartCoroutine(WaitCoroutine());
+    } 
+
+    private IEnumerator WaitCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        SetAll();
+    }
 }

@@ -7,5 +7,6 @@ public class CloseHelpWindow : MonoBehaviour
     void Start()
     {
         RaycastManager_.I.allTag[GV.TagSO._menuCloseHelpWindow]._click2DEvent.AddListener(()=> transform.parent.gameObject.SetActive(false));
+        RaycastManager_.I.allTag[GV.TagSO._menuCloseHelpWindow]._click2DEvent.AddListener(()=> SoundManager.I.F_PlaySound(GV.SoundSO._exitUI));
     }
 }
