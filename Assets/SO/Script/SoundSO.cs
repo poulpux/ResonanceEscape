@@ -24,5 +24,5 @@ public class SoundSO : ScriptableObject
     
     [Header("Game")]
     public AudioCustom _moove;
-    public AudioCustom _inertia, _death, _pulse, _win, _dropTileEditor, _reset;
+    public AudioCustom _inertia, _death, _pulse, _win, _dropTileEditor, _eraseTileEditor, _reset;
 }

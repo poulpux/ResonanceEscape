@@ -52,7 +52,10 @@ MonoBehaviour:
     _clip: {fileID: 0}
     _volume: 1
   _dropTileEditor:
-    _clip: {fileID: 0}
+    _clip: {fileID: 8300000, guid: 27fdb3901aa5a4c73be687a0257e25fe, type: 3}
+    _volume: 1
+  _eraseTileEditor:
+    _clip: {fileID: 8300000, guid: 201d3f062eb8a4b6e95b84b12a9dd8f8, type: 3}
     _volume: 1
   _reset:
     _clip: {fileID: 8300000, guid: 59a4d31bd597c804ca69fc5e2f616e7d, type: 3}
