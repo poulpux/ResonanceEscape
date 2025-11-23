@@ -194,7 +194,9 @@ public class EditorManager : MonoSingleton<EditorManager>
             for (int i = list.Count - 1; i >= 0; i--)
             {
                 if (match(list[i]))
+                {
                     list.RemoveAt(i);
+                }
             }
         }
 
@@ -220,6 +222,7 @@ public class EditorManager : MonoSingleton<EditorManager>
                     }
 
                     list.RemoveAt(i);
+                    SoundManager.I.F_PlaySound(GV.SoundSO._eraseTileEditor);
                     return; // on peut arrêter ici
                 }
             }
@@ -397,6 +400,7 @@ public class EditorManager : MonoSingleton<EditorManager>
 
                     currentMapData._semiWallPosList.Add((indexRotate, (Vector2)tile.transform.position));
                 }
+                SoundManager.I.F_PlaySound(GV.SoundSO._dropTileEditor);
                 _allObject.Add(tile);
             }
         }

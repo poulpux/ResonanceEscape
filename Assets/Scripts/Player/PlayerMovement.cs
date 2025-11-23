@@ -107,7 +107,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             while (feedbackType != EFeedbackType.PASS)
             {
                 if (feedbackType == EFeedbackType.MOVEFEEDBACKPLAY)
+                {
                     moveFeedback.PlayFeedbacks();
+                    SoundManager.I.F_PlaySound(GV.SoundSO._moove);
+                }
                 else if (feedbackType == EFeedbackType.MOVEFEEDBACKSTOP)
                     moveFeedback.StopFeedbacks();
                 else if (feedbackType == EFeedbackType.INERTIEFEEDBACKPLAY)
@@ -147,6 +150,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         StopInertieFeedback(); 
         gostAllFeedback.Add(EFeedbackType.INERTIEFEEDBACKSTOP);
         moveFeedback.PlayFeedbacks();
+        SoundManager.I.F_PlaySound(GV.SoundSO._moove);
         gostAllFeedback.Add(EFeedbackType.MOVEFEEDBACKPLAY);
         mousePos.z = 10f; // distance du plan que tu veux viser depuis la caméra
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -217,6 +221,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
             if (_lastThingWasAMove || _rigidBody.velocity.magnitude > 12f)
             {
                 wallCollisionFeedback.PlayFeedbacks();
+                SoundManager.I.F_PlaySound(GV.SoundSO._collsion);
                 if(!GameManager.I._replay)
                     gostAllFeedback.Add(EFeedbackType.COLLISIONFEEDBACK);
             }
@@ -232,6 +237,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         }
         else if(collision.transform.tag == GV.TagSO._gameDie && canDie && !GameManager.I._replay)
         {
+            SoundManager.I.F_PlaySound(GV.SoundSO._death);
             isDead = true;
             InputSystem_.I._r._event.Invoke();
             //Feedback You Dead

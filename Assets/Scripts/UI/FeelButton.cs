@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using Shapes;
 using Sirenix.OdinInspector;
 using System;
@@ -120,6 +121,7 @@ public class FeelButton : MonoBehaviour
         if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 0f && !isSelected)
         {
             feedbackSurvole.PlayFeedbacks();
+            print("passe ici "+ carré1.transform.eulerAngles.z);
             SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole);
         }
     }
@@ -157,6 +159,11 @@ public class FeelButton : MonoBehaviour
             feedbackSurvoleBack.StopFeedbacks();
         }
     }
+
+    //private void OnDisable()
+    //{
+    //    StopCoroutine(coroutine);
+    //}
 
     enum EINTERACTIONTYPE
     {
