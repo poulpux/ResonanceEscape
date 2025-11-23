@@ -19,9 +19,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     #region Functions
     public void F_PlaySound(AudioCustom audio)
     {
-        sound.clip = audio._clip;
         sound.volume = audio._volume * soundFXVolume;
-        sound.Play();
+        sound.PlayOneShot(audio._clip);
     }
 
     private void F_PlayMusic(AudioCustom audio, bool loop)

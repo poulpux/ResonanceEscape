@@ -22,8 +22,8 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 6d3d1bddb185c3547a5f46aeb7459d61, type: 3}
     _volume: 1
   _boutonSurvole:
-    _clip: {fileID: 8300000, guid: fdbebb6ba0c6f674288494179e158032, type: 3}
-    _volume: 1
+    _clip: {fileID: 8300000, guid: 3d5675187c0e842a18163767eed3a98a, type: 3}
+    _volume: 0.5
   _clicSurvole:
     _clip: {fileID: 8300000, guid: 1b02ab9c5c8c41340ac4944e56ba7cd8, type: 3}
     _volume: 1

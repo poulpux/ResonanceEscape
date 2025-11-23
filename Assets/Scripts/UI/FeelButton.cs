@@ -48,6 +48,8 @@ public class FeelButton : MonoBehaviour
         {
             RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { if (!isSelected) Select(); else Unselect(); });
         }
+
+        RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole));
     }
 
     void FixedUpdate()
@@ -116,7 +118,10 @@ public class FeelButton : MonoBehaviour
     {
         survole = true;
         if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && carré1.transform.eulerAngles.z == 0f && !isSelected)
+        {
             feedbackSurvole.PlayFeedbacks();
+            SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole);
+        }
     }
 
     private void Select()
