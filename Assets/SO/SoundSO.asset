@@ -12,3 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bfbddcd2cfb944e90950f25e6fa3a2, type: 3}
   m_Name: SoundSO
   m_EditorClassIdentifier: 
+  _menuMusic:
+    _clip: {fileID: 8300000, guid: db4206a4bdb0e5748afcefd983906fc9, type: 3}
+    _volume: 1
+  _introGameMusic:
+    _clip: {fileID: 8300000, guid: c9cc0bfcede98c448bc953ad40cde113, type: 3}
+    _volume: 1
+  _loopGameMusic:
+    _clip: {fileID: 8300000, guid: 6d3d1bddb185c3547a5f46aeb7459d61, type: 3}
+    _volume: 1
+  _boutonSurvole:
+    _clip: {fileID: 8300000, guid: fdbebb6ba0c6f674288494179e158032, type: 3}
+    _volume: 1
+  _clicSurvole:
+    _clip: {fileID: 8300000, guid: 1b02ab9c5c8c41340ac4944e56ba7cd8, type: 3}
+    _volume: 1
+  _exitUI:
+    _clip: {fileID: 8300000, guid: ed4d5a34832b6634a8c3a7729246758e, type: 3}
+    _volume: 1
+  _windowSpawn:
+    _clip: {fileID: 8300000, guid: fb97d0d831fae5a48ab6831f0c4f2991, type: 3}
+    _volume: 1
+  _errorPast:
+    _clip: {fileID: 8300000, guid: fdbebb6ba0c6f674288494179e158032, type: 3}
+    _volume: 1
+  _moove:
+    _clip: {fileID: 8300000, guid: 2a17588f4a74be7478b32f9136e65222, type: 3}
+    _volume: 1
+  _inertia:
+    _clip: {fileID: 0}
+    _volume: 1
+  _death:
+    _clip: {fileID: 8300000, guid: 22f9ce749689b5d429dc8451e4519484, type: 3}
+    _volume: 1
+  _pulse:
+    _clip: {fileID: 8300000, guid: fb6be15c91ba6ad4cab64fb628d851b7, type: 3}
+    _volume: 1
+  _win:
+    _clip: {fileID: 0}
+    _volume: 1
+  _dropTileEditor:
+    _clip: {fileID: 0}
+    _volume: 1
+  _reset:
+    _clip: {fileID: 8300000, guid: 59a4d31bd597c804ca69fc5e2f616e7d, type: 3}
+    _volume: 1

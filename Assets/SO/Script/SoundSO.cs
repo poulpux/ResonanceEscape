@@ -17,4 +17,12 @@ public class SoundSO : ScriptableObject
     [Header("Music")]
     public AudioCustom _menuMusic;
     public AudioCustom _introGameMusic, _loopGameMusic;
+
+    [Header("UI")]
+    public AudioCustom _boutonSurvole;
+    public AudioCustom _clicSurvole, _exitUI, _windowSpawn, _errorPast;
+    
+    [Header("Game")]
+    public AudioCustom _moove;
+    public AudioCustom _inertia, _death, _pulse, _win, _dropTileEditor, _reset;
 }
