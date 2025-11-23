@@ -31,6 +31,7 @@ public class Timer : MonoBehaviour
 
     private void SaveTimer()
     {
+        print("currentRecord = " + PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f));
         if (time < PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f) && time != 0f && EditorManager.WriteMap(EditorManager.I.currentMapData) == GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode])
         {
             print("new heightScore "+time);

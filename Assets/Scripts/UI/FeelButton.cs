@@ -121,7 +121,6 @@ public class FeelButton : MonoBehaviour
         if (!feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && MathF.Abs(carré1.transform.localEulerAngles.z) <= 0.1f && !isSelected)
         {
             feedbackSurvole.PlayFeedbacks();
-            print("passe ici "+ carré1.transform.localEulerAngles.z);
             SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole);
         }
     }
