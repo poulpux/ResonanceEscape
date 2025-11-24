@@ -16,7 +16,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         RaycastManager_.I.allTag[GV.TagSO._menuHelp]._click2DEvent.AddListener(() => F_PlaySound(GV.SoundSO._windowSpawn));
         GameManager.I._pastErrorEvent.AddListener(() => F_PlaySound(GV.SoundSO._errorPast));
         GameManager.I._winTheLevelFeedbackEvent.AddListener(() => F_PlaySound(GV.SoundSO._win));
-        InputSystem_.I._r._event.AddListener(() => { if (GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH) F_PlaySound(GV.SoundSO._reset);  });
+        InputSystem_.I._r._event.AddListener(() => { if (!PlayerMovement.I._isDead &&(GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH)) { F_PlaySound(GV.SoundSO._reset); print("passe"); } });
         GameManager.I._pulseEvent.AddListener(()=> F_PlaySound(GV.SoundSO._pulse));
     }
 

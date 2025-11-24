@@ -37,19 +37,19 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: fdbebb6ba0c6f674288494179e158032, type: 3}
     _volume: 1
   _moove:
-    _clip: {fileID: 8300000, guid: bf12de87c6c763f4baa29c06d416e3b6, type: 3}
+    _clip: {fileID: 8300000, guid: b3141bdf689c7264ca8e3e69ba163e92, type: 3}
     _volume: 0.2
   _inertia:
     _clip: {fileID: 0}
     _volume: 1
   _death:
-    _clip: {fileID: 8300000, guid: aefe7bdf7c1e4ac45aeec57e190311ad, type: 3}
+    _clip: {fileID: 8300000, guid: 31d8acf45d1c6e14a8d59e5378181239, type: 3}
     _volume: 1
   _pulse:
     _clip: {fileID: 8300000, guid: fb6be15c91ba6ad4cab64fb628d851b7, type: 3}
     _volume: 1
   _win:
-    _clip: {fileID: 8300000, guid: 77275385ef8e0fd44a7c01fc2879aead, type: 3}
+    _clip: {fileID: 8300000, guid: ea3087a846d814647a73efa181ca51ed, type: 3}
     _volume: 1
   _dropTileEditor:
     _clip: {fileID: 8300000, guid: 27fdb3901aa5a4c73be687a0257e25fe, type: 3}
@@ -61,5 +61,5 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 58a86cc3e2fc8b44bb1c25affc7b1cf6, type: 3}
     _volume: 1
   _collsion:
-    _clip: {fileID: 0}
+    _clip: {fileID: 8300000, guid: 4533e2aac4e12764591db65ae8bbcdd7, type: 3}
     _volume: 1

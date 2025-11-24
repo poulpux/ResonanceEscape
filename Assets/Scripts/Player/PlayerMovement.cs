@@ -3,10 +3,12 @@ using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoSingleton<PlayerMovement>
 {
-    bool canMove, canDie, isDead;
+    bool canMove, canDie;
+    public bool _isDead;
     public bool _lastThingWasAMove;
     public Vector3 startpos, posToGO, lastPos;
     [SerializeField] MMF_Player moveFeedback, inertieFeedback, wallCollisionFeedback, winFeedback;
@@ -18,6 +20,8 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     public  List<Vector2> gostAllFrames = new List<Vector2>();
     public  List<EFeedbackType> gostAllFeedback = new List<EFeedbackType>();
     int indexGhost, indexFeedback;
+
+    [HideInInspector] public UnityEvent _deathEvent = new UnityEvent();
     void Start()
     {
         //for (int i = 0; i < 15; i++)
@@ -39,7 +43,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     void Update()
     {
         _timer += Time.deltaTime;
-        if (isDead || GameManager.I._replay)
+        if (_isDead || GameManager.I._replay)
             return;
 
         if (_timer < GV.GameSO._pulseIntervale && _lastThingWasAMove)
@@ -118,7 +122,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 else if (feedbackType == EFeedbackType.INERTIEFEEDBACKSTOP)
                     StopInertieFeedback();
                 else if (feedbackType == EFeedbackType.COLLISIONFEEDBACK)
+                {
+                    SoundManager.I.F_PlaySound(GV.SoundSO._collsion);
                     wallCollisionFeedback.PlayFeedbacks();
+                }
 
                 indexFeedback++;
                 feedbackType = gostAllFeedback[indexFeedback];
@@ -137,7 +144,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     private void TryMove()
     {
-        isDead = false;
+        _isDead = false;
         if(!canMove || _dashDistance >= GV.GameSO._maxJumpDistance) return;
         _rigidBody.bodyType = RigidbodyType2D.Dynamic;
         _lastThingWasAMove = true;
@@ -166,7 +173,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     private void TryInertie()
     {
-        isDead = false;
+        _isDead = false;
         if (!canMove) return;
 
         inertieFeedback.PlayFeedbacks();
@@ -196,7 +203,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         StopInertieFeedback();
         canDie = false;
         canMove= false;
-        isDead = true;
+        _isDead = true;
         _lastThingWasAMove = false;
         _dashDistance = 0f;
         indexGhost = 0;
@@ -211,7 +218,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private IEnumerator WaitPlayAnimation()
     {
         yield return new WaitForSecondsRealtime(GV.GameSO._pulseIntervale);
-        canMove = true; canDie = true; isDead = false;
+        canMove = true; canDie = true; _isDead = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -238,7 +245,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         else if(collision.transform.tag == GV.TagSO._gameDie && canDie && !GameManager.I._replay)
         {
             SoundManager.I.F_PlaySound(GV.SoundSO._death);
-            isDead = true;
+            _isDead = true;
             InputSystem_.I._r._event.Invoke();
             //Feedback You Dead
         }
