@@ -11,8 +11,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     public bool _isDead;
     public bool _lastThingWasAMove;
     public Vector3 startpos, posToGO, lastPos;
-    [SerializeField] MMF_Player moveFeedback, inertieFeedback, wallCollisionFeedback, winFeedback;
+    [SerializeField] MMF_Player moveFeedback, inertieFeedback, wallCollisionFeedback, winFeedback, dieFeedback;
     [SerializeField] TrailRenderer trailInertie;
+    [SerializeField] GameObject dieParticle;
+
 
     public Rigidbody2D _rigidBody;
     public float _dashDistance;
@@ -245,6 +247,10 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         }
         else if(collision.transform.tag == GV.TagSO._gameDie && canDie && !GameManager.I._replay)
         {
+            GameObject particles = Instantiate(dieParticle);
+            particles.transform.position = transform.position;
+            particles.transform.localScale = transform.localScale;
+            dieFeedback.PlayFeedbacks();
             SoundManager.I.F_PlaySound(GV.SoundSO._death);
             _isDead = true;
             InputSystem_.I._r._event.Invoke();
