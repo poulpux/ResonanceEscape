@@ -6,6 +6,6 @@ public class RotateEnBoucle : MonoBehaviour
 {
     void FixedUpdate()
     {
-        transform.eulerAngles += Vector3.forward * 0.2f;
+        transform.eulerAngles += Vector3.forward * 0.025f;
     }
 }
