@@ -31,7 +31,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         //    PlayerPrefs.SetFloat(i.ToString(), 99.99f);
         //}
 
-        GameManager.I._waitingToActEvent.AddListener(() => { canMove = true; if (_dashDistance >= GV.GameSO._maxJumpDistance) TryInertie();});
+        GameManager.I._waitingToActEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();gostAllFeedback.Add(EFeedbackType.MOVEFEEDBACKSTOP); */canMove = true; if (_dashDistance >= GV.GameSO._maxJumpDistance) TryInertie();});
         GameManager.I._overwatchEvent.AddListener(() => { StartCoroutine(WaitPlayAnimation()); });
         GameManager.I._winTheLevelFeedbackEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); winFeedback.PlayFeedbacks(); });
         GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; _rigidBody.bodyType = RigidbodyType2D.Kinematic; _rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
