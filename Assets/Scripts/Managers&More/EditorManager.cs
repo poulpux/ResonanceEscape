@@ -64,6 +64,7 @@ public class EditorManager : MonoSingleton<EditorManager>
         MenuManager.I._changeLvEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._goToMenuEvent.AddListener(() => F_ChangeMap(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]));
         GameManager.I._winTheLevelFeedbackEvent.AddListener(() => F_SetGoodPlayPlayer());
+        GameManager.I._winTheLevelFeedbackEvent.AddListener(() => { F_ResetMap(false);});
 
         //Faire une option pour maintenir
         //InputSystem_.I._leftClick._eventMaintain.AddListener(() => LeftClick());

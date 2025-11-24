@@ -94,6 +94,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
                 _timer = 0f;
                 indexGhost = 0;
                 indexFeedback = 0;
+                EditorManager.I.F_ResetMap(false);
                 StopInertieFeedback();
                 EditorManager.I.F_SetGoodPlayPlayer();
                 return;
