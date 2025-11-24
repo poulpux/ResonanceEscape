@@ -17,10 +17,10 @@ MonoBehaviour:
     _volume: 1
   _introGameMusic:
     _clip: {fileID: 8300000, guid: c9cc0bfcede98c448bc953ad40cde113, type: 3}
-    _volume: 0.5
+    _volume: 0.2
   _loopGameMusic:
     _clip: {fileID: 8300000, guid: 6d3d1bddb185c3547a5f46aeb7459d61, type: 3}
-    _volume: 0.5
+    _volume: 0.2
   _boutonSurvole:
     _clip: {fileID: 8300000, guid: 3d5675187c0e842a18163767eed3a98a, type: 3}
     _volume: 0.8
@@ -62,4 +62,4 @@ MonoBehaviour:
     _volume: 1
   _collsion:
     _clip: {fileID: 8300000, guid: 4533e2aac4e12764591db65ae8bbcdd7, type: 3}
-    _volume: 1
+    _volume: 0.5

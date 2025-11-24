@@ -15,14 +15,16 @@ public class FeelPassLevelTriangle : MonoBehaviour
 
     void Start()
     {
-        RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => feedbackClick.PlayFeedbacks());
-        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => { survole = true; triangle.Color = colorClicked; });
+        RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole); feedbackClick.PlayFeedbacks(); });
+        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => { survole = true;if (triangle.Color != colorClicked) { SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole); triangle.Color = colorClicked; } });
     }
 
     private void FixedUpdate()
     {
-        if(!survole)
+        if (!survole)
+        {
             triangle.Color = colorUnclicked;
+        }
 
         survole = false;
     }
