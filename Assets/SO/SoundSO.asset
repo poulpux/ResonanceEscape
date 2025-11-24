@@ -17,16 +17,16 @@ MonoBehaviour:
     _volume: 1
   _introGameMusic:
     _clip: {fileID: 8300000, guid: c9cc0bfcede98c448bc953ad40cde113, type: 3}
-    _volume: 1
+    _volume: 0.5
   _loopGameMusic:
     _clip: {fileID: 8300000, guid: 6d3d1bddb185c3547a5f46aeb7459d61, type: 3}
-    _volume: 1
+    _volume: 0.5
   _boutonSurvole:
     _clip: {fileID: 8300000, guid: 3d5675187c0e842a18163767eed3a98a, type: 3}
-    _volume: 1
+    _volume: 0.8
   _clicSurvole:
     _clip: {fileID: 8300000, guid: 1b02ab9c5c8c41340ac4944e56ba7cd8, type: 3}
-    _volume: 1
+    _volume: 0.8
   _exitUI:
     _clip: {fileID: 8300000, guid: ed4d5a34832b6634a8c3a7729246758e, type: 3}
     _volume: 1
@@ -44,10 +44,10 @@ MonoBehaviour:
     _volume: 1
   _death:
     _clip: {fileID: 8300000, guid: 31d8acf45d1c6e14a8d59e5378181239, type: 3}
-    _volume: 1
+    _volume: 0.3
   _pulse:
     _clip: {fileID: 8300000, guid: fb6be15c91ba6ad4cab64fb628d851b7, type: 3}
-    _volume: 1
+    _volume: 0.5
   _win:
     _clip: {fileID: 8300000, guid: ea3087a846d814647a73efa181ca51ed, type: 3}
     _volume: 1

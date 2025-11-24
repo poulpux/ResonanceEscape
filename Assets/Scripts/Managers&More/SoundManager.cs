@@ -9,6 +9,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     [HideInInspector] public float musicVolume = 1f, soundFXVolume = 1f;
     [SerializeField] AudioSource sound;
     [SerializeField] AudioSource music;
+
+    Coroutine introMusicCoroutine;
     #endregion
     #region Callbacks
     void Start()
@@ -18,6 +20,10 @@ public class SoundManager : MonoSingleton<SoundManager>
         GameManager.I._winTheLevelFeedbackEvent.AddListener(() => F_PlaySound(GV.SoundSO._win));
         InputSystem_.I._r._event.AddListener(() => { if (!PlayerMovement.I._isDead &&(GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.ACT || GameManager.I._state == EGameState.OVERWATCH)) { F_PlaySound(GV.SoundSO._reset); print("passe"); } });
         GameManager.I._pulseEvent.AddListener(()=> F_PlaySound(GV.SoundSO._pulse));
+        GameManager.I._playPlayModeEvent.AddListener(() => introMusicCoroutine = StartCoroutine(TransitionCoroutine()));
+        GameManager.I._goToMenuEvent.AddListener(() => { F_PlayMusic(GV.SoundSO._menuMusic, true); StopCoroutine(introMusicCoroutine); });
+
+        F_PlayMusic(GV.SoundSO._menuMusic, true);
     }
 
     #endregion
@@ -38,5 +44,13 @@ public class SoundManager : MonoSingleton<SoundManager>
         music.Play();
     }
     #endregion
+
+    private IEnumerator TransitionCoroutine()
+    {
+        F_PlayMusic(GV.SoundSO._introGameMusic, false);
+        yield return new WaitForSeconds(GV.SoundSO._introGameMusic._clip.length);
+        F_PlayMusic(GV.SoundSO._loopGameMusic, true);
+
+    }
 }
 
