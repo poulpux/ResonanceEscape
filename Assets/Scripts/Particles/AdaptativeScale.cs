@@ -9,8 +9,8 @@ public class AdaptativeScale : MonoBehaviour
         transform.localScale = transform.parent.localScale;
     }
 
-    private void OnEnable()
-    {
-        transform.localScale = transform.parent.localScale;
-    }
+    //private void OnEnable()
+    //{
+    //    transform.localScale = transform.parent.localScale;
+    //}
 }

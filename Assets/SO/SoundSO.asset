@@ -62,4 +62,4 @@ MonoBehaviour:
     _volume: 1
   _collsion:
     _clip: {fileID: 8300000, guid: 4533e2aac4e12764591db65ae8bbcdd7, type: 3}
-    _volume: 1
+    _volume: 0.5
