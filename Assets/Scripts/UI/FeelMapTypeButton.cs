@@ -24,4 +24,9 @@ public class FeelMapTypeButton : MonoBehaviour
         else if (EditorManager.I.currentMapData._mapTypeC1 == 2)
             map2.PlayFeedbacks();
     }
+
+    private void OnEnable()
+    {
+        SetRightFeedback();
+    }
 }
