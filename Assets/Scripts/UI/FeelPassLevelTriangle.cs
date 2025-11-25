@@ -18,17 +18,19 @@ public class FeelPassLevelTriangle : MonoBehaviour
         RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole); feedbackClick.PlayFeedbacks(); });
         RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => 
         {
-            if (triangle.Color != colorClicked && timer > 0.2f) 
+            if (triangle.Color != colorClicked && timer > 0.1f) 
             { 
                 SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole); 
                 triangle.Color = colorClicked; 
-            } });
+            }
             timer = 0f;
+        });
+
     }
 
     private void FixedUpdate()
     {
-        if (timer<0.2f)
+        if (timer>0.1f)
         {
             triangle.Color = colorUnclicked;
         }
