@@ -16,6 +16,7 @@ public class Heightscore : MonoBehaviour
         GameManager.I._setRightLanguageEvent.AddListener(() => SetRightHightscore());
     }
 
+
     private void SetRightHightscore()
     {
         float time = MenuManager.I._heightScoreList[MenuManager.I._indexMapPlayMode];
