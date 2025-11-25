@@ -41,14 +41,14 @@ public class FeelCubicButton : MonoBehaviour
             gameObject.tag == GV.TagSO._editorSpike || gameObject.tag == GV.TagSO._editorPlayer ||
             gameObject.tag == GV.TagSO._editorWinCondition || gameObject.tag == GV.TagSO._editorWall)
         {
-            RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
-            RaycastManager_.I.allTag[GV.TagSO._editorBloob]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
-            RaycastManager_.I.allTag[GV.TagSO._editorBloobWall]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
-            RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
-            RaycastManager_.I.allTag[GV.TagSO._editorSpike]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
-            RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
-            RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
-            RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => {  if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); else Unselect(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorBloob]._click2DEvent.AddListener(() => {if (gameObject.tag == GV.TagSO._editorBloob) Select(); else Unselect(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorBloobWall]._click2DEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorBloobWall) Select(); else Unselect(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorSemiWall) Select(); else Unselect(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorSpike]._click2DEvent.AddListener(() => {  if (gameObject.tag == GV.TagSO._editorSpike) Select(); else Unselect(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => {  if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorWinCondition) Select(); else Unselect(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorWall) Select(); else Unselect(); });
 
             GameManager.I._enterInEditModeEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
             GameManager.I._enterInEditModePastEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
