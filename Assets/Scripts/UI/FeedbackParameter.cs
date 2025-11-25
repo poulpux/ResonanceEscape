@@ -11,6 +11,10 @@ public class FeedbackParameter : MonoBehaviour
     void Start()
     {
         RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => FeedbackPlay());
+        GameManager.I._goToMenuEvent.AddListener(() => Unselect());
+        GameManager.I._playPlayModeEvent.AddListener(() => Unselect());
+        GameManager.I._enterInEditModeEvent.AddListener(() => Unselect());
+        GameManager.I._enterInEditModePastEvent.AddListener(() => Unselect());
     }
 
     private void FeedbackPlay()
@@ -25,5 +29,11 @@ public class FeedbackParameter : MonoBehaviour
             isSelected = true;
             selectFeedback.PlayFeedbacks();
         }
+    }
+
+    private void Unselect()
+    {
+        isSelected = false;
+        unselectFeedback.PlayFeedbacks();
     }
 }

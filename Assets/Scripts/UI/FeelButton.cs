@@ -150,13 +150,14 @@ public class FeelButton : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        if(!isSelected)
-        {
-            feedbackSurvole.StopFeedbacks();
-            feedbackSurvoleBack.StopFeedbacks();
-        }
+        feedbackSurvole.StopFeedbacks();
+        feedbackSurvoleBack.StopFeedbacks();
+        carré1.transform.eulerAngles = Vector3.zero;
+        carré2.transform.eulerAngles = Vector3.zero;
+        outline1.transform.eulerAngles = Vector3.zero;
+        outline2.transform.eulerAngles = Vector3.zero;
     }
 
     //private void OnDisable()
