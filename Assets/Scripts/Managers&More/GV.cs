@@ -13,7 +13,7 @@ public static class GV
         {
             if (_config == null)
             {
-                _config = AssetDatabase.LoadAssetAtPath<GameConfig>("Assets/SO/GameConfig/GameConfig.asset");
+                _config = Resources.Load<GameConfig>("GameConfig");
                 if (_config == null)
                     Debug.LogError("⚠️ GameConfig.asset introuvable dans Resources !");
             }
