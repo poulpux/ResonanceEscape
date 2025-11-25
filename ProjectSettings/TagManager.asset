@@ -57,6 +57,7 @@ TagManager:
   - MenuKoFi
   - MenuSon
   - MenuMusic
+  - MenuParameter2
   layers:
   - Default
   - TransparentFX

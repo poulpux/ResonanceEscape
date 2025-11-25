@@ -23,7 +23,11 @@ public class FeelCubicButton : MonoBehaviour
     void Start()
     {
         //La base
-        if (gameObject.tag != GV.TagSO._menuLangageSelectionCase)
+        if(gameObject.tag == GV.TagSO._menuMusic || gameObject.tag == GV.TagSO._menuSon)
+        {
+            RaycastManager_.I.allTag[gameObject.tag]._survole2DGameObjectEvent.AddListener((objet) => { if (objet.name == gameObject.name) Survole(); });
+        }
+        else if (gameObject.tag != GV.TagSO._menuLangageSelectionCase)
         {
             RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => Survole());
             //RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => Select());
@@ -31,24 +35,32 @@ public class FeelCubicButton : MonoBehaviour
 
         if(!selectible)
             RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => /*coroutine =*/ StartCoroutine(ClickOnButtonCoroutine()));
-        else
+        else if(gameObject.tag == GV.TagSO._editorBlackHole || gameObject.tag == GV.TagSO._editorBloob ||
+            gameObject.tag == GV.TagSO._editorBloobWall || gameObject.tag == GV.TagSO._editorSemiWall ||
+            gameObject.tag == GV.TagSO._editorSpike || gameObject.tag == GV.TagSO._editorPlayer ||
+            gameObject.tag == GV.TagSO._editorWinCondition || gameObject.tag == GV.TagSO._editorWall)
         {
-            RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => Unselect());
-            RaycastManager_.I.allTag[GV.TagSO._editorBloob]._click2DEvent.AddListener(() => Unselect());
-            RaycastManager_.I.allTag[GV.TagSO._editorBloobWall]._click2DEvent.AddListener(() => Unselect());
-            RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => Unselect());
-            RaycastManager_.I.allTag[GV.TagSO._editorSpike]._click2DEvent.AddListener(() => Unselect());
-            RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => Unselect());
-            RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => Unselect());
-            RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => Unselect());
+            RaycastManager_.I.allTag[GV.TagSO._editorBlackHole]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorBloob]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorBloobWall]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorSemiWall]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorSpike]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorPlayer]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorWinCondition]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
+            RaycastManager_.I.allTag[GV.TagSO._editorWall]._click2DEvent.AddListener(() => { Unselect(); if (gameObject.tag == GV.TagSO._editorBlackHole) Select(); });
 
-            RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => Select());
+            GameManager.I._enterInEditModeEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
+            GameManager.I._enterInEditModePastEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
         }
-
+        else if (gameObject.tag == GV.TagSO._menuParameter)
+        {
+            //Je pense que la logique est pas bonne, car quand je déselectionne selectible, tout marche
+            isSelected = true;
+            RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { if (isSelected) Unselect(); else Select(); });
+        }
         RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole));
 
-        GameManager.I._enterInEditModeEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
-        GameManager.I._enterInEditModePastEvent.AddListener(() => { if (gameObject.tag == GV.TagSO._editorPlayer) Select(); else Unselect(); });
+       
     }
 
     void FixedUpdate()
@@ -100,6 +112,7 @@ public class FeelCubicButton : MonoBehaviour
     {
         if (!isSelected && !survole && feedbackSurvole != null && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.localEulerAngles.z - 45f) < 0.1f)
         {
+            print(isSelected);
             feedbackSurvoleBack.PlayFeedbacks();
         }
         survole = false;

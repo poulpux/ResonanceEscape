@@ -20,8 +20,25 @@ public class SoundManager : MonoSingleton<SoundManager>
         GameManager.I._pulseEvent.AddListener(()=> F_PlaySound(GV.SoundSO._pulse));
         GameManager.I._playPlayModeEvent.AddListener(() => StartCoroutine(TransitionCoroutine()));
         GameManager.I._goToMenuEvent.AddListener(() => { F_PlayMusic(GV.SoundSO._menuMusic, true); });
+        RaycastManager_.I.allTag[GV.TagSO._menuSon]._click2DGameObjectEvent.AddListener((objet) => SetSoundVolume(objet));
+        RaycastManager_.I.allTag[GV.TagSO._menuMusic]._click2DGameObjectEvent.AddListener((objet) => SetMusicVolume(objet));
 
         F_PlayMusic(GV.SoundSO._menuMusic, true);
+
+        soundFXVolume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
+        musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+    }
+
+    private void SetSoundVolume(GameObject objet)
+    {
+        soundFXVolume = int.Parse(objet.name) * 0.25f;
+        PlayerPrefs.SetFloat("soundVolume", soundFXVolume);
+    }
+
+    private void SetMusicVolume(GameObject objet)
+    {
+        musicVolume = int.Parse(objet.name) * 0.25f;
+        PlayerPrefs.SetFloat("musicVolume", musicVolume);
     }
 
     #endregion
