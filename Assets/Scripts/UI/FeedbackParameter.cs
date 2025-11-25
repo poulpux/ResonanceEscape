@@ -6,6 +6,7 @@ using UnityEngine;
 public class FeedbackParameter : MonoBehaviour
 {
     [SerializeField] MMF_Player selectFeedback, unselectFeedback;
+    [SerializeField] GameObject objet1, objet2;
     bool isSelected;
     // Start is called before the first frame update
     void Start()
@@ -35,5 +36,11 @@ public class FeedbackParameter : MonoBehaviour
     {
         isSelected = false;
         unselectFeedback.PlayFeedbacks();
+    }
+
+    private void OnEnable()
+    {
+        objet1.transform.position = 19.76f * Vector3.right - 1* Vector3.forward;
+        objet2.transform.position = 19.76f * Vector3.right - 1 * Vector3.forward - 1f *Vector3.up;
     }
 }

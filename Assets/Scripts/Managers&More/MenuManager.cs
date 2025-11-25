@@ -10,6 +10,7 @@ public class MenuManager : MonoSingleton<MenuManager>
     public int _indexMapPlayMode = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
     [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter, UIHelp;
+    public List<float> _heightScoreList = new List<float>();
     [SerializeField] CinemachineCamera  camer;
 
     void Start()
@@ -24,8 +25,11 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._menuHelp]._click2DEvent.AddListener(() => UIHelp.SetActive(true));
         //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
-        GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu()); 
+        GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu());
 
+
+        for (int i = 0; i < 10; i++)
+            _heightScoreList.Add(99.99f);
 
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
@@ -40,8 +44,8 @@ public class MenuManager : MonoSingleton<MenuManager>
 
     private void ClickOnPlay()
     {
-        if (!(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0))
-            return;
+        //if (!(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0))
+        //    return;
         UIMenu.SetActive(false);
         UIPlayMode.SetActive(false);
         UIReplay.SetActive(false);
@@ -76,16 +80,16 @@ public class MenuManager : MonoSingleton<MenuManager>
         _indexMapPlayMode = _indexMapPlayMode == 0 ? GV.GameSO._allMapList.Count-1 : _indexMapPlayMode -= 1;
 
         _changeLvEvent.Invoke();
-        lockedBackground.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
-        shapes.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode-1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
+        //lockedBackground.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
+        //shapes.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode-1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
     }
     
     private void RightClickLevel()
     {
         _indexMapPlayMode = _indexMapPlayMode == GV.GameSO._allMapList.Count - 1 ? 0 : _indexMapPlayMode += 1;
         _changeLvEvent.Invoke();
-        lockedBackground.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
-        shapes.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
+        //lockedBackground.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) == 99.99f && _indexMapPlayMode != 0);
+        //shapes.SetActive(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0);
     }
 
     private void ReturnToMenu()
