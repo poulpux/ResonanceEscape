@@ -187,8 +187,11 @@ public class FeelCubicButton : MonoBehaviour
         }
     }
 
-    //private void OnDisable()
-    //{
-    //    StopCoroutine(coroutine);
-    //}
+    private void OnDisable()
+    {
+        feedbackSurvole.StopFeedbacks();
+        feedbackSurvoleBack.StopFeedbacks();
+        carré1.transform.eulerAngles = Vector3.zero;
+        outline1.transform.eulerAngles = Vector3.zero;
+    }
 }

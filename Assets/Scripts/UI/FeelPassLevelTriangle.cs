@@ -9,23 +9,32 @@ public class FeelPassLevelTriangle : MonoBehaviour
     [SerializeField] Triangle triangle;
     [SerializeField] MMF_Player feedbackClick;
 
-    bool survole;
+    float timer;
 
     [SerializeField] Color colorUnclicked, colorClicked;
 
     void Start()
     {
         RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole); feedbackClick.PlayFeedbacks(); });
-        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => { survole = true;if (triangle.Color != colorClicked) { SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole); triangle.Color = colorClicked; } });
+        RaycastManager_.I.allTag[gameObject.tag]._survole2DEvent.AddListener(() => 
+        {
+            if (triangle.Color != colorClicked && timer > 0.1f) 
+            { 
+                SoundManager.I.F_PlaySound(GV.SoundSO._boutonSurvole); 
+                triangle.Color = colorClicked; 
+            }
+            timer = 0f;
+        });
+
     }
 
     private void FixedUpdate()
     {
-        if (!survole)
+        if (timer>0.1f)
         {
             triangle.Color = colorUnclicked;
         }
 
-        survole = false;
+        timer += Time.deltaTime;
     }
 }
