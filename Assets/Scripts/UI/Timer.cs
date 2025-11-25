@@ -31,11 +31,6 @@ public class Timer : MonoBehaviour
 
     private void SaveTimer()
     {
-        print(time < MenuManager.I._heightScoreList[MenuManager.I._indexMapPlayMode]);
-        print(time != 0f);
-        print(EditorManager.WriteMap(EditorManager.I.currentMapData) == GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
-        print(EditorManager.WriteMap(EditorManager.I.currentMapData));
-        print(GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode]);
         if (time < /*PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f) */MenuManager.I._heightScoreList[MenuManager.I._indexMapPlayMode] && time != 0f && EditorManager.WriteMap(EditorManager.I.currentMapData) == GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode])
         {
             print("save timer");
