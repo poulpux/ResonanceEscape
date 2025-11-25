@@ -39,6 +39,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         musicVolume = int.Parse(objet.name) * 0.25f;
         PlayerPrefs.SetFloat("musicVolume", musicVolume);
+        float volumClip = music.clip == GV.SoundSO._menuMusic._clip ? GV.SoundSO._menuMusic._volume : GV.SoundSO._loopGameMusic._volume;
+        music.volume = musicVolume * volumClip;
     }
 
     #endregion
