@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -55,23 +56,44 @@ public class FeelCubicButton : MonoBehaviour
         else if (gameObject.tag == GV.TagSO._menuParameter)
         {
             //Je pense que la logique est pas bonne, car quand je déselectionne selectible, tout marche
-            isSelected = true;
             RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { if (isSelected) Unselect(); else Select(); });
         }
         else if (gameObject.tag == GV.TagSO._menuMusic || gameObject.tag == GV.TagSO._menuSon)
         {
             //Pop
             RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { if (int.Parse(objet.name) >= int.Parse(gameObject.name) && 0 != int.Parse(gameObject.name)) Select(); else if(0 != int.Parse(gameObject.name)) Unselect(); if (int.Parse(objet.name) == 0 && 0 == int.Parse(gameObject.name)) Select(); else if(0 == int.Parse(gameObject.name)) Unselect(); });
-            //if (gameObject.tag == GV.TagSO._menuMusic) int.Parse(objet.name) >= int.Parse(gameObject.name)) Select(); else Unselect(); print(int.Parse(objet.name)); });
+            if (gameObject.tag == GV.TagSO._menuMusic)
+            {
+                int indexMusic = (int)(PlayerPrefs.GetFloat("musicVolume", 0.5f) * 4f);
+                if (indexMusic >= int.Parse(gameObject.name) && 0 != int.Parse(gameObject.name))
+                    Select();
+                else if (0 != int.Parse(gameObject.name))
+                    Unselect();
+                if (indexMusic == 0 && 0 == int.Parse(gameObject.name))
+                    Select();
+                else if (0 == int.Parse(gameObject.name))
+                    Unselect();
+            }
+            if (gameObject.tag == GV.TagSO._menuSon)
+            {
+                int indexMusic = (int)(PlayerPrefs.GetFloat("soundVolume", 0.5f) * 4f);
+                if (indexMusic >= int.Parse(gameObject.name) && 0 != int.Parse(gameObject.name))
+                    Select();
+                else if (0 != int.Parse(gameObject.name))
+                    Unselect();
+                if (indexMusic == 0 && 0 == int.Parse(gameObject.name))
+                    Select();
+                else if (0 == int.Parse(gameObject.name))
+                    Unselect();
+            }
+
         }
-
-        RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole));
+    RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => SoundManager.I.F_PlaySound(GV.SoundSO._clicSurvole));
     }
-
-    void FixedUpdate()
-    {
-        PlayCurve();
-        VerifSurvoleback();
+void FixedUpdate()
+{
+    PlayCurve();
+    VerifSurvoleback();
         VerifSelectedPourSurvole();
     }
 
