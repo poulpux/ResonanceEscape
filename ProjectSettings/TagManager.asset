@@ -55,6 +55,9 @@ TagManager:
   - MenuCloseHelpWindow
   - MenuLangageSelectionCase
   - MenuKoFi
+  - MenuSon
+  - MenuMusic
+  - MenuParameter2
   layers:
   - Default
   - TransparentFX

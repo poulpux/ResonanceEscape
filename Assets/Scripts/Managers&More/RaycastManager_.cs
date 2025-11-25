@@ -84,6 +84,7 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._menuPlayModeLeftLevel);
         InstantiateOneTag(GV.TagSO._menuPlayModeRightLevel);
         InstantiateOneTag(GV.TagSO._menuParameter);
+        InstantiateOneTag(GV.TagSO._menuParameter2);
         InstantiateOneTag(GV.TagSO._menuPlay);
         InstantiateOneTag(GV.TagSO._menuInsta);
         InstantiateOneTag(GV.TagSO._menuKoFi);
@@ -91,6 +92,8 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._menuLangage);
         InstantiateOneTag(GV.TagSO._menuCloseHelpWindow);
         InstantiateOneTag(GV.TagSO._menuLangageSelectionCase);
+        InstantiateOneTag(GV.TagSO._menuSon);
+        InstantiateOneTag(GV.TagSO._menuMusic);
     }
     private void Click() =>
         HandleRaycast(UI, TwoD, ThreeD, true);
