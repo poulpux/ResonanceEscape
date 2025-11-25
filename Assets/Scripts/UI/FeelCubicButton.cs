@@ -61,7 +61,7 @@ public class FeelCubicButton : MonoBehaviour
         else if (gameObject.tag == GV.TagSO._menuMusic || gameObject.tag == GV.TagSO._menuSon)
         {
             //Pop
-            RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { if (int.Parse(objet.name) >= int.Parse(gameObject.name) && 0 != int.Parse(gameObject.name)) Select(); else if(0 != int.Parse(gameObject.name)) Unselect(); print(int.Parse(objet.name)); if (int.Parse(objet.name) == 0 && 0 == int.Parse(gameObject.name)) Select(); else if(0 == int.Parse(gameObject.name)) Unselect(); });
+            RaycastManager_.I.allTag[gameObject.tag]._click2DGameObjectEvent.AddListener((objet) => { if (int.Parse(objet.name) >= int.Parse(gameObject.name) && 0 != int.Parse(gameObject.name)) Select(); else if(0 != int.Parse(gameObject.name)) Unselect(); if (int.Parse(objet.name) == 0 && 0 == int.Parse(gameObject.name)) Select(); else if(0 == int.Parse(gameObject.name)) Unselect(); });
             //if (gameObject.tag == GV.TagSO._menuMusic) int.Parse(objet.name) >= int.Parse(gameObject.name)) Select(); else Unselect(); print(int.Parse(objet.name)); });
         }
 
