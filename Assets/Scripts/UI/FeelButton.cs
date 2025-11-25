@@ -158,6 +158,7 @@ public class FeelButton : MonoBehaviour
         carré2.transform.eulerAngles = Vector3.zero;
         outline1.transform.eulerAngles = Vector3.zero;
         outline2.transform.eulerAngles = Vector3.zero;
+        text.color = Color.white;
     }
 
     //private void OnDisable()
