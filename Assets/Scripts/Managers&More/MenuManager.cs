@@ -13,6 +13,13 @@ public class MenuManager : MonoSingleton<MenuManager>
     public List<float> _heightScoreList = new List<float>();
     [SerializeField] CinemachineCamera  camer;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        for (int i = 0; i < 10; i++)
+            _heightScoreList.Add(99.99f);
+    }
+
     void Start()
     {
         RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() =>EnterEditor());
@@ -26,10 +33,6 @@ public class MenuManager : MonoSingleton<MenuManager>
         //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu());
-
-
-        for (int i = 0; i < 10; i++)
-            _heightScoreList.Add(99.99f);
 
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
