@@ -8,6 +8,7 @@ public class SimpleTextTraduction : MonoBehaviour
 {
     [SerializeField] LanguageSupportSO langue;
     [SerializeField] TextMeshPro text;
+    [SerializeField] bool inCredit;
     void Start()
     {
         GameManager.I._setRightLanguageEvent.AddListener(() => SetAll());
@@ -28,13 +29,9 @@ public class SimpleTextTraduction : MonoBehaviour
             text.font = GV.FontSO._asianFont;
             text.fontStyle = GV.FontSO._asianFontBold ? FontStyles.Bold : FontStyles.Normal;
         }
-        else if (GameManager.I._langueActuelle == ELangues.KOREAN)
-        {
-            text.font= GV.FontSO._koreanFont;
-        }
         else
         {
-            text.font = GV.FontSO._europeanFont;
+            text.font = !inCredit ? GV.FontSO._europeanFont : GV.FontSO._europeanFontCredit;
             text.fontStyle = GV.FontSO._europeanFontBold ? FontStyles.Bold : FontStyles.Normal;
         }
         

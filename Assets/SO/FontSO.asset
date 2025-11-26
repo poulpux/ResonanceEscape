@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _europeanFont: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   _asianFont: {fileID: 11400000, guid: d28cba34c338dfa42a03064ff519fe92, type: 2}
-  _koreanFont: {fileID: 0}
+  _europeanFontCredit: {fileID: 11400000, guid: d079bd7872532e64688e69c729ec533d, type: 2}
   _europeanFontBold: 0
   _asianFontBold: 1

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: "C_Mercid'avoir jou\xE9"
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u611F\u8C22\u6E38\u73A9\uFF01"
+  _english: Thank you for playing!
+  _russian: "\u0421\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0438\u0433\u0440\u0443!"
+  _spanish: "\xA1Gracias por jugar!"
+  _breazilian: Obrigado por jogar!
+  _german: "Danke f\xFCrs Spielen!"
+  _french: "Merci d'avoir jou\xE9 ! "
+  _turkish: "Oynad\u0131\u011F\u0131n\u0131z i\xE7in te\u015Fekk\xFCrler!  "
+  _japanese: "\u30D7\u30EC\u30A4\u3057\u3066\u304F\u308C\u3066\u3042\u308A\u304C\u3068\u3046\uFF01"
+  _polish: "Dzi\u0119kujemy za gr\u0119!  "
+  _traditionnalChinese: "\u611F\u8B1D\u904A\u73A9\uFF01"
+  _italian: Grazie per aver giocato!
