@@ -16,7 +16,7 @@ public class SoundSO : ScriptableObject
     //All Audio custom values
     [Header("Music")]
     public AudioCustom _menuMusic;
-    public AudioCustom _introGameMusic, _loopGameMusic;
+    public AudioCustom _introGameMusic, _loopGameMusic, _loopCreditMusic;
 
     [Header("UI")]
     public AudioCustom _boutonSurvole;

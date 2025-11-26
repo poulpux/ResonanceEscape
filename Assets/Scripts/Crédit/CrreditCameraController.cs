@@ -45,6 +45,7 @@ public class CrreditCameraController : MonoBehaviour
         if(currentPos == 0)
         {
             SceneManager.LoadScene(0);
+            SoundManager.I.F_PlayMusic(GV.SoundSO._menuMusic, true);
             Destroy(this.gameObject);
             return;
         }
