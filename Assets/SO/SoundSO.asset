@@ -21,6 +21,9 @@ MonoBehaviour:
   _loopGameMusic:
     _clip: {fileID: 8300000, guid: 6d3d1bddb185c3547a5f46aeb7459d61, type: 3}
     _volume: 0.2
+  _loopCreditMusic:
+    _clip: {fileID: 8300000, guid: 13cde2475bc65b746b0b557c3128abb8, type: 3}
+    _volume: 0.5
   _boutonSurvole:
     _clip: {fileID: 8300000, guid: 3d5675187c0e842a18163767eed3a98a, type: 3}
     _volume: 0.8

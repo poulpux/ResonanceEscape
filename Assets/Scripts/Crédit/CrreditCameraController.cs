@@ -40,10 +40,12 @@ public class CrreditCameraController : MonoBehaviour
     {
         if (animateCurve)
             return;
+        SoundManager.I.F_PlaySound(GV.SoundSO._dropTileEditor);
         currentPos = currentPos >= allCamPos.Count-1 ? 0 : currentPos+1;
         if(currentPos == 0)
         {
             SceneManager.LoadScene(0);
+            SoundManager.I.F_PlayMusic(GV.SoundSO._menuMusic, true);
             Destroy(this.gameObject);
             return;
         }
@@ -55,6 +57,7 @@ public class CrreditCameraController : MonoBehaviour
     {
         if (animateCurve)
             return;
+        SoundManager.I.F_PlaySound(GV.SoundSO._eraseTileEditor);
         currentPos = currentPos <= 0 ? allCamPos.Count-1 : currentPos-1;
         curve = new AnimatingCurve(transform.position, (Vector3)allCamPos[currentPos] + Vector3.forward * -10, timeAnimation, GRAPH.EASECUBIC, INANDOUT.IN, LOOP.CLAMP);
         animateCurve = true;

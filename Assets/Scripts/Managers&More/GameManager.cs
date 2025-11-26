@@ -57,7 +57,7 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise_marquet/"));
         RaycastManager_.I.allTag[GV.TagSO._menuKoFi]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
-        RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => SceneManager.LoadScene(1)) ;
+        RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => { SceneManager.LoadScene(1); SoundManager.I.F_PlayMusic(GV.SoundSO._loopCreditMusic, true); }) ;
         RaycastManager_.I.allTag[GV.TagSO._menuLangageSelectionCase]._click2DGameObjectEvent.AddListener((objet) => SelectLanguage(objet)) ;
 
         _pulseEvent.AddListener(() => pulseFeedback.PlayFeedbacks());

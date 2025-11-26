@@ -2,6 +2,7 @@ using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
@@ -23,7 +24,11 @@ public class SoundManager : MonoSingleton<SoundManager>
         RaycastManager_.I.allTag[GV.TagSO._menuSon]._click2DGameObjectEvent.AddListener((objet) => SetSoundVolume(objet));
         RaycastManager_.I.allTag[GV.TagSO._menuMusic]._click2DGameObjectEvent.AddListener((objet) => SetMusicVolume(objet));
 
-        F_PlayMusic(GV.SoundSO._menuMusic, true);
+        print(SceneManager.GetActiveScene().name);
+        if(SceneManager.GetActiveScene().name == "SampleScene")
+            F_PlayMusic(GV.SoundSO._menuMusic, true);
+        else
+            F_PlayMusic(GV.SoundSO._loopCreditMusic, true);
 
         soundFXVolume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
         musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
@@ -53,7 +58,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         sound.PlayOneShot(audio._clip);
     }
 
-    private void F_PlayMusic(AudioCustom audio, bool loop)
+    public void F_PlayMusic(AudioCustom audio, bool loop)
     {
         if (music.clip == audio._clip)
             return;

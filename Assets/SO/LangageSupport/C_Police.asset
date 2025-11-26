@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: C_Police
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u5B57\u4F53\uFF1AQuicksand\u3001NotoSansKR \u548C cinecaption 
+    \r\n\u7248\u6743\uFF1A\xA9 2014-2021 Adobe "
+  _english: "Font: Quicksand, NotoSansKR & cinecaption  \r\nCopyright: \xA9 2014-2021
+    Adobe  "
+  _russian: "\u0428\u0440\u0438\u0444\u0442\u044B: Quicksand, NotoSansKR \u0438 cinecaption 
+    \r\n\u0410\u0432\u0442\u043E\u0440\u0441\u043A\u043E\u0435 \u043F\u0440\u0430\u0432\u043E:
+    \xA9 2014-2021 Adobe "
+  _spanish: "Fuentes: Quicksand, NotoSansKR y cinecaption  \r\nCopyright: \xA9 2014-2021
+    Adobe "
+  _breazilian: "Fontes: Quicksand, NotoSansKR e cinecaption  \r\nDireitos autorais:
+    \xA9 2014-2021 Adobe  "
+  _german: "Schriftarten: Quicksand, NotoSansKR & cinecaption  \r\nUrheberrecht:
+    \xA9 2014-2021 Adobe "
+  _french: "Police : Quicksand, NotoSansKR & cinecaption  \r\nCopyright : \xA9 2014-2021
+    Adobe  "
+  _turkish: "Yaz\u0131 tipleri: Quicksand, NotoSansKR ve cinecaption  \r\nTelif hakk\u0131:
+    \xA9 2014-2021 Adobe  "
+  _japanese: "\u30D5\u30A9\u30F3\u30C8\uFF1AQuicksand\u3001NotoSansKR\u3001cinecaption 
+    \r\n\u8457\u4F5C\u6A29\uFF1A\xA9 2014-2021 Adobe  "
+  _polish: "Czcionki: Quicksand, NotoSansKR i cinecaption  \r\nPrawa autorskie: \xA9
+    2014-2021 Adobe  "
+  _traditionnalChinese: "\u5B57\u9AD4\uFF1AQuicksand\u3001NotoSansKR \u548C cinecaption 
+    \r\n\u7248\u6B0A\uFF1A\xA9 2014-2021 Adobe "
+  _italian: "Caratteri: Quicksand, NotoSansKR e cinecaption  \r\nCopyright: \xA9
+    2014-2021 Adobe"
