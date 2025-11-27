@@ -80,6 +80,24 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftArrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""386a7e07-8421-4ce3-a091-0461440e064e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightArrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""72ffff90-cb8d-4c9a-9a10-d4244ad14e62"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -247,6 +265,28 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""action"": ""R"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ffab985-20e5-418b-9dbc-17c228f318f3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""800c1a72-6b57-4cd9-9a73-075c4d2d5e38"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -322,6 +362,8 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Default_Space = m_Default.FindAction("Space", throwIfNotFound: true);
         m_Default_LeftJoystick = m_Default.FindAction("LeftJoystick", throwIfNotFound: true);
         m_Default_R = m_Default.FindAction("R", throwIfNotFound: true);
+        m_Default_LeftArrow = m_Default.FindAction("LeftArrow", throwIfNotFound: true);
+        m_Default_RightArrow = m_Default.FindAction("RightArrow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -389,6 +431,8 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Space;
     private readonly InputAction m_Default_LeftJoystick;
     private readonly InputAction m_Default_R;
+    private readonly InputAction m_Default_LeftArrow;
+    private readonly InputAction m_Default_RightArrow;
     public struct DefaultActions
     {
         private @Input m_Wrapper;
@@ -399,6 +443,8 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Space => m_Wrapper.m_Default_Space;
         public InputAction @LeftJoystick => m_Wrapper.m_Default_LeftJoystick;
         public InputAction @R => m_Wrapper.m_Default_R;
+        public InputAction @LeftArrow => m_Wrapper.m_Default_LeftArrow;
+        public InputAction @RightArrow => m_Wrapper.m_Default_RightArrow;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -426,6 +472,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @R.started += instance.OnR;
             @R.performed += instance.OnR;
             @R.canceled += instance.OnR;
+            @LeftArrow.started += instance.OnLeftArrow;
+            @LeftArrow.performed += instance.OnLeftArrow;
+            @LeftArrow.canceled += instance.OnLeftArrow;
+            @RightArrow.started += instance.OnRightArrow;
+            @RightArrow.performed += instance.OnRightArrow;
+            @RightArrow.canceled += instance.OnRightArrow;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -448,6 +500,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @R.started -= instance.OnR;
             @R.performed -= instance.OnR;
             @R.canceled -= instance.OnR;
+            @LeftArrow.started -= instance.OnLeftArrow;
+            @LeftArrow.performed -= instance.OnLeftArrow;
+            @LeftArrow.canceled -= instance.OnLeftArrow;
+            @RightArrow.started -= instance.OnRightArrow;
+            @RightArrow.performed -= instance.OnRightArrow;
+            @RightArrow.canceled -= instance.OnRightArrow;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -518,5 +576,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnSpace(InputAction.CallbackContext context);
         void OnLeftJoystick(InputAction.CallbackContext context);
         void OnR(InputAction.CallbackContext context);
+        void OnLeftArrow(InputAction.CallbackContext context);
+        void OnRightArrow(InputAction.CallbackContext context);
     }
 }
