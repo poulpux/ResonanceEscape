@@ -56,7 +56,7 @@ public class FeelCubicButton : MonoBehaviour
         else if (gameObject.tag == GV.TagSO._menuParameter)
         {
             //Je pense que la logique est pas bonne, car quand je déselectionne selectible, tout marche
-            RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { print("passe"); if (isSelected) Unselect(); else Select(); });
+            RaycastManager_.I.allTag[gameObject.tag]._click2DEvent.AddListener(() => { if (isSelected) Unselect(); else Select(); });
         }
         else if (gameObject.tag == GV.TagSO._menuMusic || gameObject.tag == GV.TagSO._menuSon)
         {
@@ -139,7 +139,6 @@ public class FeelCubicButton : MonoBehaviour
     {
         if (!isSelected && !survole && feedbackSurvole != null && !feedbackSurvole.IsPlaying && !feedbackSurvoleBack.IsPlaying && Mathf.Abs(carré1.transform.localEulerAngles.z - 45f) < 0.1f)
         {
-            print(isSelected);
             feedbackSurvoleBack.PlayFeedbacks();
         }
         survole = false;
