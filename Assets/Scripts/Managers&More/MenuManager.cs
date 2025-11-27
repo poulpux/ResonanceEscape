@@ -56,6 +56,8 @@ public class MenuManager : MonoSingleton<MenuManager>
 
     private void ClickOnPlay()
     {
+        if (timerCollision < 0.2f)
+            return;
         //if (!(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0))
         //    return;
         UIMenu.SetActive(false);
