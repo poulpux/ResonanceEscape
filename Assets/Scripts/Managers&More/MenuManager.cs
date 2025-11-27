@@ -12,7 +12,7 @@ public class MenuManager : MonoSingleton<MenuManager>
     [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter, UIHelp;
     public List<float> _heightScoreList = new List<float>();
     [SerializeField] CinemachineCamera  camer;
-
+    float timerCollision = 0f;
     protected override void Awake()
     {
         base.Awake();
@@ -34,9 +34,18 @@ public class MenuManager : MonoSingleton<MenuManager>
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu());
 
+        InputSystem_.I._leftArrow._event.AddListener(() => { if (GameManager.I._state == EGameState.MENUPLAYMODE) LeftClickLevel(); });
+        InputSystem_.I._rightArrow._event.AddListener(() => { if (GameManager.I._state == EGameState.MENUPLAYMODE) RightClickLevel(); });
+
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
         UIInGame.SetActive(false);
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameManager.I._state == EGameState.MENUPLAYMODE)
+            timerCollision += Time.deltaTime;
     }
 
     private void EnterInReplayMod()
@@ -55,6 +64,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         UIInGame.SetActive(true) ;
         camer.Lens.OrthographicSize = 6f;
         camer.transform.position = Vector3.forward * -10f;
+        timerCollision = 0f;
         GameManager.I._playPlayModeEvent.Invoke();
     }
 
@@ -105,5 +115,6 @@ public class MenuManager : MonoSingleton<MenuManager>
         parameter.SetActive(true) ;
         camer.Lens.OrthographicSize = 7.64f;
         camer.transform.position = Vector3.forward * -10f + Vector3.right * -2.11f;
+        timerCollision = 0f;
     }
 }
