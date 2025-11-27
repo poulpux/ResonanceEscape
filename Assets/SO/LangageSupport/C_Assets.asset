@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: C_Assets
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "Unity \u8D44\u6E90\uFF1A  \r\n- \u97F3\u4E50\u548C\u97F3\u6548\uFF1ASWISHSWOOSH 
+    \r\n- Shapes\uFF1AFREYA  \r\n- Feel\uFF1AMORE MOUNTAINS  \r\n- Odin\uFF1ASIRENIX  "
+  _english: "Unity Assets:  \r\n- Musics & SFX by SWISHSWOOSH  \r\n- Shapes by FREYA 
+    \r\n- Feel by MORE MOUNTAINS  \r\n- Odin by SIRENIX  "
+  _russian: "Unity \u0430\u0441\u0441\u0435\u0442\u044B:  \r\n- \u041C\u0443\u0437\u044B\u043A\u0430
+    \u0438 \u0437\u0432\u0443\u043A\u0438: SWISHSWOOSH  \r\n- Shapes: FREYA  \r\n-
+    Feel: MORE MOUNTAINS  \r\n- Odin: SIRENIX  "
+  _spanish: "Assets de Unity:  \r\n- M\xFAsicas y efectos de sonido por SWISHSWOOSH 
+    \r\n- Shapes por FREYA  \r\n- Feel por MORE MOUNTAINS  \r\n- Odin por SIRENIX"
+  _breazilian: "Assets do Unity:  \r\n- M\xFAsicas e efeitos sonoros por SWISHSWOOSH 
+    \r\n- Shapes por FREYA  \r\n- Feel por MORE MOUNTAINS  \r\n- Odin por SIRENIX "
+  _german: "Unity-Assets:  \r\n- Musik & Soundeffekte von SWISHSWOOSH  \r\n- Shapes
+    von FREYA  \r\n- Feel von MORE MOUNTAINS  \r\n- Odin von SIRENIX"
+  _french: "Unity Assets :  \r\n- Musiques & SFX par SWISHSWOOSH  \r\n- Shapes par
+    FREYA  \r\n- Feel par MORE MOUNTAINS  \r\n- Odin par SIRENIX "
+  _turkish: "Unity Varl\u0131klar\u0131:  \r\n- M\xFCzikler ve ses efektleri: SWISHSWOOSH 
+    \r\n- Shapes: FREYA  \r\n- Feel: MORE MOUNTAINS  \r\n- Odin: SIRENIX  "
+  _japanese: "Unity \u30A2\u30BB\u30C3\u30C8\uFF1A  \r\n- \u97F3\u697D\u3068\u52B9\u679C\u97F3\uFF1ASWISHSWOOSH 
+    \r\n- Shapes\uFF1AFREYA  \r\n- Feel\uFF1AMORE MOUNTAINS  \r\n- Odin\uFF1ASIRENIX "
+  _polish: "Assety Unity:  \r\n- Muzyka i efekty d\u017Awi\u0119kowe: SWISHSWOOSH 
+    \r\n- Shapes: FREYA  \r\n- Feel: MORE MOUNTAINS  \r\n- Odin: SIRENIX  "
+  _traditionnalChinese: "Unity \u8CC7\u6E90\uFF1A  \r\n- \u97F3\u6A02\u8207\u97F3\u6548\uFF1ASWISHSWOOSH 
+    \r\n- Shapes\uFF1AFREYA  \r\n- Feel\uFF1AMORE MOUNTAINS  \r\n- Odin\uFF1ASIRENIX"
+  _italian: "Asset Unity:  \r\n- Musiche e effetti sonori di SWISHSWOOSH  \r\n- Shapes
+    di FREYA  \r\n- Feel di MORE MOUNTAINS  \r\n- Odin di SIRENIX"

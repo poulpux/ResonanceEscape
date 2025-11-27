@@ -1906,7 +1906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea7b41c41f77cf45bb41d2b8459efbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  langue: {fileID: 0}
+  langue: {fileID: 11400000, guid: 26115f34f1016d142ae0d8da3a5e774a, type: 2}
   text: {fileID: 428127566}
   inCredit: 1
 --- !u!1 &459935735
@@ -3111,7 +3111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea7b41c41f77cf45bb41d2b8459efbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  langue: {fileID: 0}
+  langue: {fileID: 11400000, guid: 2a6df3956af18d64fbadf55ed7c87e78, type: 2}
   text: {fileID: 752371938}
   inCredit: 1
 --- !u!1 &811682170
