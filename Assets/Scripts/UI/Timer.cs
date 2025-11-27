@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+public class Timer : MonoSingleton<Timer>
 {
-    float time;
+    public float _time;
     TextMeshPro text;
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,8 @@ public class Timer : MonoBehaviour
     {
         if (GameManager.I._state == EGameState.ACT)
         {
-            time += Time.deltaTime;
-            text.text = $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
+            _time += Time.deltaTime;
+            text.text = $"{(int)_time}s{Mathf.Floor((_time % 1f) * 100f):00}";
         }
 
         if (GameManager.I._replay && GameManager.I._state == EGameState.OVERWATCH)
@@ -31,17 +31,17 @@ public class Timer : MonoBehaviour
 
     private void SaveTimer()
     {
-        if (time < /*PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f) */MenuManager.I._heightScoreList[MenuManager.I._indexMapPlayMode] && time != 0f && EditorManager.WriteMap(EditorManager.I.currentMapData) == GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode])
+        if (_time < /*PlayerPrefs.GetFloat(MenuManager.I._indexMapPlayMode.ToString(), 99.99f) */MenuManager.I._heightScoreList[MenuManager.I._indexMapPlayMode] && _time != 0f && EditorManager.WriteMap(EditorManager.I.currentMapData) == GV.GameSO._allMapList[MenuManager.I._indexMapPlayMode])
         {
-            MenuManager.I._heightScoreList[MenuManager.I._indexMapPlayMode] = time;
-            PlayerPrefs.SetFloat(MenuManager.I._indexMapPlayMode.ToString(), time);
+            MenuManager.I._heightScoreList[MenuManager.I._indexMapPlayMode] = _time;
+            PlayerPrefs.SetFloat(MenuManager.I._indexMapPlayMode.ToString(), _time);
             PlayerPrefs.Save();
         }
     }
 
     private void REsetTimer()
     {
-        time = 0f;
-        text.text = $"{(int)time}s{Mathf.Floor((time % 1f) * 100f):00}";
+        _time = 0f;
+        text.text = $"{(int)_time}s{Mathf.Floor((_time % 1f) * 100f):00}";
     }
 }

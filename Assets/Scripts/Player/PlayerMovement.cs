@@ -37,7 +37,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; _rigidBody.bodyType = RigidbodyType2D.Kinematic; _rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
 
         InputSystem_.I._leftClick._event.AddListener(()=> { if (!GameManager.I._replay) TryMove(); });  
-        InputSystem_.I._space._event.AddListener(()=> { if (!GameManager.I._replay) TryInertie(); });
+        InputSystem_.I._space._event.AddListener(()=> { if (!GameManager.I._replay && _dashDistance < GV.GameSO._maxJumpDistance) TryInertie(); });
         InputSystem_.I._r._event.AddListener(()=> { if (!GameManager.I._replay) ResetLV(); gostAllFrames.Clear(); gostAllFeedback.Clear(); });
     }
 
@@ -139,6 +139,8 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         {
             if (GameManager.I._state == EGameState.ACT)
             {
+                if (Timer.I._time > 15f)
+                    return;
                 gostAllFrames.Add(transform.position);
                 gostAllFeedback.Add(EFeedbackType.PASS);
             }
