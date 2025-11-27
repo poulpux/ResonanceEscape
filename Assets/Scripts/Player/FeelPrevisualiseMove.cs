@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class FeelPrevisualiseMove : MonoBehaviour
 {
-    [SerializeField] GameObject futurSelf;
-    [SerializeField] Line line;
+    [SerializeField] GameObject futurSelf, receptacle;
+    [SerializeField] Line line, lineAprès;
     
     void Update()
     {
@@ -26,10 +26,19 @@ public class FeelPrevisualiseMove : MonoBehaviour
             float distance = Vector3.Distance(worldPos, PlayerMovement.I.transform.position);
             float maxDistance = GV.GameSO._maxJumpDistance - PlayerMovement.I._dashDistance;
 
+            lineAprès.enabled = distance > maxDistance;
+
+            if(lineAprès.enabled)
+            {
+                lineAprès.Start = futurSelf.transform.localPosition;
+                receptacle.transform.position = PlayerMovement.I.transform.position + direction * distance;
+                lineAprès.End = receptacle.transform.localPosition;
+            }
             if (distance > maxDistance)
                 worldPos = PlayerMovement.I.transform.position + direction * maxDistance;
             futurSelf.transform.position = worldPos;
             line.End = futurSelf.transform.localPosition;
+
         }
         else 
             futurSelf.transform.parent.transform.gameObject.SetActive(false);

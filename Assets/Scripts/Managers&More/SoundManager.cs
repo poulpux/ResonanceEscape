@@ -24,7 +24,6 @@ public class SoundManager : MonoSingleton<SoundManager>
         RaycastManager_.I.allTag[GV.TagSO._menuSon]._click2DGameObjectEvent.AddListener((objet) => SetSoundVolume(objet));
         RaycastManager_.I.allTag[GV.TagSO._menuMusic]._click2DGameObjectEvent.AddListener((objet) => SetMusicVolume(objet));
 
-        print(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name == "SampleScene")
             F_PlayMusic(GV.SoundSO._menuMusic, true);
         else
