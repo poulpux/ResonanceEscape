@@ -13,7 +13,7 @@ public class RotateEnBoucle : MonoBehaviour
     private void Start()
     {
         if (color1 != null && color2 != null)
-            curveColor = new AnimatingCurve(new Vector3(color1.r, color1.g, color1.b), new Vector3(color2.r, color2.g, color2.b), 0.5f, GRAPH.LINEAR, INANDOUT.INOUT, LOOP.PINGPONG);
+            curveColor = new AnimatingCurve(new Vector3(color1.r, color1.g, color1.b), new Vector3(color2.r, color2.g, color2.b), 1.5f, GRAPH.LINEAR, INANDOUT.INOUT, LOOP.CLAMP);
     }
 
     void FixedUpdate()
@@ -27,12 +27,12 @@ public class RotateEnBoucle : MonoBehaviour
                 if(Tools.isCurveFinish(curveColor))
                 {
                     if(curveColor.beginValue == new Vector3(color1.r, color1.g, color1.b))
-                        curveColor = new AnimatingCurve(new Vector3(color2.r, color2.g, color2.b), new Vector3(color1.r, color1.g, color1.b), 0.5f, GRAPH.LINEAR, INANDOUT.INOUT, LOOP.PINGPONG);
+                        curveColor = new AnimatingCurve(new Vector3(color2.r, color2.g, color2.b), new Vector3(color1.r, color1.g, color1.b), 1.5f, GRAPH.LINEAR, INANDOUT.INOUT, LOOP.CLAMP);
                     else
-                        curveColor = new AnimatingCurve(new Vector3(color1.r, color1.g, color1.b), new Vector3(color2.r, color2.g, color2.b), 0.5f, GRAPH.LINEAR, INANDOUT.INOUT, LOOP.PINGPONG);
+                        curveColor = new AnimatingCurve(new Vector3(color1.r, color1.g, color1.b), new Vector3(color2.r, color2.g, color2.b), 1.5f, GRAPH.LINEAR, INANDOUT.INOUT, LOOP.CLAMP);
                 }
                 //item.Color = new Color(curveColor.endValue.x, curveColor.endValue.y, curveColor.endValue.z, 1f);
-                else
+                else if(colorEnVector != Vector3.zero)
                     item.Color = new Color(colorEnVector.x, colorEnVector.y, colorEnVector.z, 1f);
             }
         }
