@@ -12,15 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
   m_Name: T_4
   m_EditorClassIdentifier: 
-  _simplifiedChinese: 
-  _english: 
-  _russian: 
-  _spanish: 
-  _breazilian: 
-  _german: 
-  _french: 
-  _turkish: 
-  _japanese: 
-  _polish: 
-  _traditionnalChinese: 
-  _italian: 
+  _simplifiedChinese: "\u60A8\u53EF\u4EE5\u6309\u4E0B R \u952E\u91CD\u65B0\u5F00\u59CB\u5173\u5361\u3002\n\n\u795D\u4F60\u597D\u8FD0\uFF01"
+  _english: 'You can restart a level with the R key.
+
+
+    Good luck!'
+  _russian: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0435\u0440\u0435\u0437\u0430\u043F\u0443\u0441\u0442\u0438\u0442\u044C
+    \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u043A\u043B\u0430\u0432\u0438\u0448\u0435\u0439
+    R.\n\n\u0423\u0434\u0430\u0447\u0438!"
+  _spanish: "Puedes reiniciar un nivel con la tecla R.\n\n\xA1Buena suerte!"
+  _breazilian: "Voc\xEA pode reiniciar um n\xEDvel com a tecla R.\n\nBoa sorte!"
+  _german: "Sie k\xF6nnen ein Level mit der Taste R neu starten.\n\nViel Gl\xFCck!"
+  _french: 'Vous pouvez recommencer un niveau avec la touche R.
+
+
+    Bonne chance
+    !'
+  _turkish: "Bir seviyeyi R tu\u015Fuyla yeniden ba\u015Flatabilirsiniz.\n\nBol \u015Fans!"
+  _japanese: "R\u30AD\u30FC\u3067\u30EC\u30D9\u30EB\u3092\u3084\u308A\u76F4\u3059\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002\n\n\u9811\u5F35\u3063\u3066\uFF01"
+  _polish: "Mo\u017Cesz zrestartowa\u0107 poziom klawiszem R.\n\nPowodzenia!"
+  _traditionnalChinese: "\u60A8\u53EF\u4EE5\u4F7F\u7528 R \u9375\u91CD\u65B0\u958B\u59CB\u95DC\u5361\u3002\n\n\u795D\u4F60\u597D\u904B\uFF01"
+  _italian: 'Puoi riavviare un livello con il tasto R.
+
+
+    Buona fortuna!'
