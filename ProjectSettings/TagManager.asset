@@ -58,6 +58,8 @@ TagManager:
   - MenuSon
   - MenuMusic
   - MenuParameter2
+  - TutoNon
+  - TutoOui
   layers:
   - Default
   - TransparentFX
