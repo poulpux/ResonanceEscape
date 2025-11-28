@@ -36,7 +36,7 @@ public class EnergyBar : MonoBehaviour
             //}
         }
         //La ligne la plus claire
-        if(GameManager.I._state == EGameState.OVERWATCH || GameManager.I._state == EGameState.WAITINGACTION)
+        if((GameManager.I._state == EGameState.OVERWATCH || GameManager.I._state == EGameState.WAITINGACTION) && (MenuManager.I._indexMapPlayMode != 0 || MenuManager.I._indexTuto >= 5))
         {
             float baseHeight = (7.57f * (1f - (Mathf.Clamp01(PlayerMovement.I._dashDistance / GV.GameSO._maxJumpDistance))));
             preshootLine.Height = baseHeight;

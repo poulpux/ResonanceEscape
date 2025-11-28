@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: T_3_4
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "3/4\uFF1A\u8109\u51B2"
+  _english: '3/4: Pulse'
+  _russian: "3/4: \u041F\u0443\u043B\u044C\u0441\u0430\u0446\u0438\u044F"
+  _spanish: "3/4: Pulsaci\xF3n"
+  _breazilian: "3/4: Pulsa\xE7\xE3o"
+  _german: '3/4: Pulsation'
+  _french: '3/4 : Pulsasion'
+  _turkish: "3/4: Nab\u0131z"
+  _japanese: "3/4\uFF1A\u30D1\u30EB\u30B9"
+  _polish: '3/4: Pulsacja'
+  _traditionnalChinese: "3/4\uFF1A\u8108\u885D"
+  _italian: '3/4: Pulsazione'

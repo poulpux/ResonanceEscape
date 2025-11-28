@@ -64,4 +64,6 @@ MonoBehaviour:
   _menuSon: MenuSon
   _menuMusic: MenuMusic
   _menuParameter2: MenuParameter2
+  _tutoOui: TutoOui
+  _tutoNon: TutoNon
   _quitParamter: QuitParameter

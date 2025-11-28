@@ -8,11 +8,15 @@ using static EditorManager;
 public class MenuManager : MonoSingleton<MenuManager>
 {
     public int _indexMapPlayMode = 0;
+    public int _indexTuto = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _endTutoEvent = new UnityEvent();
     [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter, UIHelp;
     public List<float> _heightScoreList = new List<float>();
     [SerializeField] CinemachineCamera  camer;
     float timerCollision = 0f;
+    [SerializeField] List<GameObject> AllTutoWindow = new List<GameObject>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,12 +34,17 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._editorPlay]._click2DEvent.AddListener(() => ClickOnPlay());
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => ReturnToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuHelp]._click2DEvent.AddListener(() => UIHelp.SetActive(true));
+        //Ajouter le oui ou non du tuto
+        RaycastManager_.I.allTag[GV.TagSO._tutoNon]._click2DEvent.AddListener(() => { _indexTuto = 5; _endTutoEvent.Invoke(); });
+        RaycastManager_.I.allTag[GV.TagSO._tutoOui]._click2DEvent.AddListener(() => { StartCoroutine(OuiTutoCoroutine()); });
         //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu());
 
         InputSystem_.I._leftArrow._event.AddListener(() => { if (GameManager.I._state == EGameState.MENUPLAYMODE) LeftClickLevel(); });
         InputSystem_.I._rightArrow._event.AddListener(() => { if (GameManager.I._state == EGameState.MENUPLAYMODE) RightClickLevel(); });
+        InputSystem_.I._leftClick._event.AddListener(()=> { if (GameManager.I._state == EGameState.OVERWATCH) LeftClickOnTuto(); });
+        InputSystem_.I._rightClick._event.AddListener(()=> { if (GameManager.I._state == EGameState.OVERWATCH) RightClickOnTuto(); });
 
         UIMenu.SetActive(true);
         UIPlayMode.SetActive(true);
@@ -60,6 +69,7 @@ public class MenuManager : MonoSingleton<MenuManager>
             return;
         //if (!(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0))
         //    return;
+        TryTuto();
         UIMenu.SetActive(false);
         UIPlayMode.SetActive(false);
         UIReplay.SetActive(false);
@@ -68,6 +78,45 @@ public class MenuManager : MonoSingleton<MenuManager>
         camer.transform.position = Vector3.forward * -10f;
         timerCollision = 0f;
         GameManager.I._playPlayModeEvent.Invoke();
+    }
+
+    private void TryTuto()
+    {
+        if(_indexMapPlayMode == 0)
+            AppearTuto();
+    }
+
+    private void AppearTuto()
+    {
+        foreach (var item in AllTutoWindow)
+            item.SetActive(false);
+
+        if(_indexTuto <= 4 && _indexTuto >= 0)
+            AllTutoWindow[_indexTuto].SetActive(true);
+    }
+
+    private void LeftClickOnTuto()
+    {
+        if(_indexTuto == 4)
+            _endTutoEvent.Invoke();
+        if (_indexTuto <= 4 && _indexTuto >= 1)
+            _indexTuto++;
+        TryTuto();
+
+    }
+    
+    private void RightClickOnTuto()
+    {
+        if (_indexTuto <= 4 && _indexTuto >= 2)
+            _indexTuto--;
+        TryTuto();
+    }
+
+    private IEnumerator OuiTutoCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        _indexTuto++; TryTuto();
     }
 
     private void Past()
@@ -118,5 +167,6 @@ public class MenuManager : MonoSingleton<MenuManager>
         camer.Lens.OrthographicSize = 7.64f;
         camer.transform.position = Vector3.forward * -10f + Vector3.right * -2.11f;
         timerCollision = 0f;
+        _indexTuto = 0;
     }
 }

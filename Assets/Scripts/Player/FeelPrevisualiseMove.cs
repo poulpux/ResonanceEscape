@@ -12,7 +12,8 @@ public class FeelPrevisualiseMove : MonoBehaviour
     {
         if ((GameManager.I._state == EGameState.WAITINGACTION || GameManager.I._state == EGameState.OVERWATCH)
             && !GameManager.I._replay
-            && PlayerMovement.I._dashDistance < GV.GameSO._maxJumpDistance)
+            && PlayerMovement.I._dashDistance < GV.GameSO._maxJumpDistance
+            && (MenuManager.I._indexMapPlayMode != 0 || MenuManager.I._indexTuto >= 5))
         {
             Vector3 mousePos = new Vector3(
      Mathf.Clamp(UnityEngine.Input.mousePosition.x, 0, Screen.width),

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: T_Non
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u4E0D"
+  _english: NO
+  _russian: "\u041D\u0415\u0422"
+  _spanish: NO
+  _breazilian: "N\xC3O"
+  _german: NEIN
+  _french: NON
+  _turkish: HAYIR
+  _japanese: "\u3044\u3044\u3048"
+  _polish: NIE
+  _traditionnalChinese: "\u4E0D"
+  _italian: NO

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: T_4_4
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "4/4\uFF1A\u91CD\u65B0\u5F00\u59CB\u5173\u5361"
+  _english: '4/4: Restart Level'
+  _russian: "4/4: \u041F\u0435\u0440\u0435\u0437\u0430\u043F\u0443\u0441\u0442\u0438\u0442\u044C
+    \u0443\u0440\u043E\u0432\u0435\u043D\u044C"
+  _spanish: '4/4: Reiniciar el nivel'
+  _breazilian: "4/4: Reiniciar o n\xEDvel"
+  _german: '4/4: Level neu starten'
+  _french: '4/4 : Recommencer le niveau'
+  _turkish: "4/4: B\xF6l\xFCm\xFC yeniden ba\u015Flat"
+  _japanese: "4/4\uFF1A\u30EC\u30D9\u30EB\u3092\u30EA\u30B9\u30BF\u30FC\u30C8"
+  _polish: '4/4: Zrestartuj poziom'
+  _traditionnalChinese: "4/4\uFF1A\u91CD\u65B0\u958B\u59CB\u95DC\u5361"
+  _italian: '4/4: Riavvia il livello'

@@ -55,6 +55,8 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._mode);
         InstantiateOneTag(GV.TagSO._play);
         InstantiateOneTag(GV.TagSO._reviewBoard);
+        InstantiateOneTag(GV.TagSO._tutoOui);
+        InstantiateOneTag(GV.TagSO._tutoNon);
 
         InstantiateOneTag(GV.TagSO._editorPlayer);
         InstantiateOneTag(GV.TagSO._editorWinCondition);

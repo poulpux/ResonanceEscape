@@ -58,5 +58,7 @@ public class TagSO : ScriptableObject
         _menuSon,
         _menuMusic,
         _menuParameter2,
+        _tutoOui,
+        _tutoNon,
         _quitParamter;
 }
