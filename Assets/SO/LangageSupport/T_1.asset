@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
+  m_Name: T_1
+  m_EditorClassIdentifier: 
+  _simplifiedChinese: "\u8981\u79FB\u52A8\uFF0C\u8BF7\u4F7F\u7528\u9F20\u6807\u5DE6\u952E\u3002\u6307\u793A\u5668\u663E\u793A\u4E00\u6B21\u8109\u52A8\u4E2D\u884C\u8FDB\u7684\u8DDD\u79BB\u3002\n\u79FB\u52A8\u4F1A\u6D88\u8017\u80FD\u91CF\u3002\n\u5982\u679C\u60A8\u60F3\u524D\u5F80\u67D0\u4E2A\u4F4D\u7F6E\u4F46\u6CA1\u6709\u8DB3\u591F\u7684\u79FB\u52A8\u529B\uFF0C\u60A8\u4F1A\u4EE5\u6240\u8981\u6C42\u7684\u901F\u5EA6\u524D\u8FDB\uFF0C\u7136\u540E\u89D2\u8272\u4F1A\u4ECE\u7C89\u8272\u7EBF\u5F00\u59CB\u88AB\u60EF\u6027\u5E26\u52A8\u3002"
+  _english: "To move, use the left mouse click. \nThe indicator shows the distance
+    traveled in one pulse. \nMoving costs energy. \nIf you want to go somewhere but
+    don\u2019t have enough movement, you will move at the requested speed, then the
+    character will be carried by inertia starting from the pink line."
+  _russian: "\u0427\u0442\u043E\u0431\u044B \u0434\u0432\u0438\u0433\u0430\u0442\u044C\u0441\u044F,
+    \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043B\u0435\u0432\u044B\u0439
+    \u0449\u0435\u043B\u0447\u043E\u043A \u043C\u044B\u0448\u0438. \n\u0418\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440
+    \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442 \u0440\u0430\u0441\u0441\u0442\u043E\u044F\u043D\u0438\u0435,
+    \u043F\u0440\u043E\u0439\u0434\u0435\u043D\u043D\u043E\u0435 \u0437\u0430 \u043E\u0434\u0438\u043D
+    \u0438\u043C\u043F\u0443\u043B\u044C\u0441. \n\u0414\u0432\u0438\u0436\u0435\u043D\u0438\u0435
+    \u0441\u0442\u043E\u0438\u0442 \u044D\u043D\u0435\u0440\u0433\u0438\u0438. \n\u0415\u0441\u043B\u0438
+    \u0432\u044B \u0445\u043E\u0442\u0438\u0442\u0435 \u0434\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F
+    \u0434\u043E \u043C\u0435\u0441\u0442\u0430, \u043D\u043E \u0443 \u0432\u0430\u0441
+    \u043D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F,
+    \u0432\u044B \u0431\u0443\u0434\u0435\u0442\u0435 \u0434\u0432\u0438\u0433\u0430\u0442\u044C\u0441\u044F
+    \u0441 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u043E\u0439 \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u044C\u044E,
+    \u0430 \u0437\u0430\u0442\u0435\u043C \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u0436\u0430
+    \u043F\u043E\u043D\u0435\u0441\u0451\u0442 \u043F\u043E \u0438\u043D\u0435\u0440\u0446\u0438\u0438
+    \u043E\u0442 \u0440\u043E\u0437\u043E\u0432\u043E\u0439 \u043B\u0438\u043D\u0438\u0438."
+  _spanish: "Para moverte, usa el clic izquierdo del rat\xF3n. \nEl indicador muestra
+    la distancia recorrida en un pulso. \nMoverse consume energ\xEDa. \nSi quieres
+    ir a un lugar pero no tienes suficiente movimiento, te desplazar\xE1s a la velocidad
+    indicada y luego el personaje ser\xE1 llevado por la inercia a partir de la l\xEDnea
+    rosa."
+  _breazilian: "Para se mover, use o clique esquerdo do mouse. \nO indicador mostra
+    a dist\xE2ncia percorrida em um pulso. \nMover-se custa energia. \nSe voc\xEA
+    quiser ir a um lugar mas n\xE3o tiver movimento suficiente, voc\xEA se mover\xE1
+    na velocidade escolhida e depois o personagem ser\xE1 levado pela in\xE9rcia
+    a partir da linha rosa."
+  _german: "Um sich zu bewegen, verwenden Sie den linken Mausklick. \nDer Indikator
+    zeigt die in einem Puls zur\xFCckgelegte Entfernung. \nBewegung kostet Energie.
+    \nWenn Sie irgendwohin m\xF6chten, aber nicht genug Bewegung haben, bewegen Sie
+    sich mit der gew\xFCnschten Geschwindigkeit, und danach wird die Figur ab der
+    rosa Linie durch die Tr\xE4gheit weitergleiten."
+  _french: "Pour bouger, utilisez le clic gauche de la souris. \nL\u2019indicateur
+    montre la distance parcourue en une pulsation. \nBouger co\xFBte de l\u2019\xE9nergie.
+    \nSi vous souhaitez aller \xE0 un endroit mais que vous n\u2019avez pas assez
+    de mouvement, vous vous d\xE9placerez \xE0 la vitesse demand\xE9e, puis le personnage
+    se laissera guider par l\u2019inertie \xE0 partir de la ligne rose."
+  _turkish: "Hareket etmek i\xE7in farenin sol t\u0131klamas\u0131n\u0131 kullan\u0131n.
+    \nG\xF6sterge, bir at\u0131mda kat edilen mesafeyi g\xF6sterir. \nHareket etmek
+    enerji harcar. \nBir yere gitmek isteyip yeterli hareketiniz yoksa, talep edilen
+    h\u0131zda ilerlersiniz ve ard\u0131ndan karakter pembe \xE7izgiden itibaren
+    ataletle hareket etmeye devam eder."
+  _japanese: "\u79FB\u52D5\u3059\u308B\u306B\u306F\u30DE\u30A6\u30B9\u306E\u5DE6\u30AF\u30EA\u30C3\u30AF\u3092\u4F7F\u7528\u3057\u307E\u3059\u3002\n\u30A4\u30F3\u30B8\u30B1\u30FC\u30BF\u30FC\u306F1\u30D1\u30EB\u30B9\u3067\u79FB\u52D5\u3059\u308B\u8DDD\u96E2\u3092\u793A\u3057\u307E\u3059\u3002\n\u79FB\u52D5\u306B\u306F\u30A8\u30CD\u30EB\u30AE\u30FC\u3092\u6D88\u8CBB\u3057\u307E\u3059\u3002\n\u76EE\u7684\u5730\u307E\u3067\u306E\u79FB\u52D5\u91CF\u304C\u8DB3\u308A\u306A\u3044\u5834\u5408\u3001\u6307\u5B9A\u3057\u305F\u901F\u5EA6\u3067\u52D5\u304D\u3001\u305D\u306E\u5F8C\u306F\u30D4\u30F3\u30AF\u306E\u7DDA\u304B\u3089\u6163\u6027\u3067\u6D41\u3055\u308C\u307E\u3059\u3002"
+  _polish: "Aby si\u0119 porusza\u0107, u\u017Cyj lewego przycisku myszy. \nWska\u017Anik
+    pokazuje dystans pokonywany w jednym pulsie. \nRuch kosztuje energi\u0119. \nJe\u015Bli
+    chcesz doj\u015B\u0107 w jakie\u015B miejsce, ale nie masz wystarczaj\u0105cej
+    liczby punkt\xF3w ruchu, poruszysz si\u0119 z wybran\u0105 pr\u0119dko\u015Bci\u0105,
+    a nast\u0119pnie posta\u0107 b\u0119dzie porusza\u0107 si\u0119 si\u0142\u0105
+    bezw\u0142adno\u015Bci od r\xF3\u017Cowej linii."
+  _traditionnalChinese: "\u8981\u79FB\u52D5\uFF0C\u8ACB\u4F7F\u7528\u6ED1\u9F20\u5DE6\u9375\u3002\n\u6307\u793A\u5668\u986F\u793A\u4E00\u6B21\u8108\u52D5\u4E2D\u884C\u9032\u7684\u8DDD\u96E2\u3002\n\u79FB\u52D5\u6703\u6D88\u8017\u80FD\u91CF\u3002\n\u5982\u679C\u4F60\u60F3\u524D\u5F80\u67D0\u500B\u4F4D\u7F6E\u4F46\u6C92\u6709\u8DB3\u5920\u7684\u79FB\u52D5\u529B\uFF0C\u4F60\u6703\u4EE5\u8981\u6C42\u7684\u901F\u5EA6\u524D\u9032\uFF0C\u7136\u5F8C\u89D2\u8272\u6703\u5F9E\u7C89\u7D05\u7DDA\u958B\u59CB\u88AB\u6163\u6027\u5E36\u52D5\u3002"
+  _italian: "Per muoverti, usa il clic sinistro del mouse.\n L\u2019indicatore mostra
+    la distanza percorsa in un singolo impulso. \nMuoversi costa energia. \nSe vuoi
+    raggiungere un punto ma non hai abbastanza movimento, ti muoverai alla velocit\xE0
+    richiesta e poi il personaggio sar\xE0 trascinato dall\u2019inerzia a partire
+    dalla linea rosa."
