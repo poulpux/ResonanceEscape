@@ -37,9 +37,9 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         GameManager.I._winTheLevelFeedbackEvent.AddListener(() => { /*moveFeedback.StopFeedbacks();*/ /*canDie = false; canMove = false; rigidBody.bodyType = RigidbodyType2D.Kinematic; rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f;*/ ResetLV(); winFeedback.PlayFeedbacks(); });
         GameManager.I._goToMenuEvent.AddListener(() => { gostAllFrames.Clear(); gostAllFeedback.Clear(); canDie = false; canMove = false; _rigidBody.bodyType = RigidbodyType2D.Kinematic; _rigidBody.velocity = Vector2.zero; EditorManager.I.F_SetGoodPlayPlayer(); _dashDistance = 0f; });
 
-        RaycastManager_.I.allTag[GV.TagSO._tutoNon]._click2DEvent.AddListener(() => timerNonTuto = 0f); ;
+        MenuManager.I._endTutoEvent.AddListener(()=> timerNonTuto = 0f);
 
-        InputSystem_.I._leftClick._event.AddListener(()=> { if (!GameManager.I._replay) TryMove(); });  
+        InputSystem_.I._leftClick._event.AddListener(()=> { if (!GameManager.I._replay) { TryMove();}});  
         InputSystem_.I._space._event.AddListener(()=> { if (!GameManager.I._replay && _dashDistance < GV.GameSO._maxJumpDistance) TryInertie(); });
         InputSystem_.I._r._event.AddListener(()=> { if (!GameManager.I._replay) ResetLV(); gostAllFrames.Clear(); gostAllFeedback.Clear(); });
     }
@@ -154,7 +154,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private void TryMove()
     {
         _isDead = false;
-        if(!canMove || _dashDistance >= GV.GameSO._maxJumpDistance || (MenuManager.I._indexMapPlayMode == 0 &&  MenuManager.I._indexTuto < 5) || timerNonTuto < 0.2f) return;
+        if(!canMove || _dashDistance >= GV.GameSO._maxJumpDistance || (MenuManager.I._indexMapPlayMode == 0 &&  MenuManager.I._indexTuto < 5) || timerNonTuto < 0.4f) return;
         _rigidBody.bodyType = RigidbodyType2D.Dynamic;
         _lastThingWasAMove = true;
         _rigidBody.gravityScale = 0f;
@@ -183,7 +183,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     private void TryInertie()
     {
         _isDead = false;
-        if (!canMove || (MenuManager.I._indexMapPlayMode == 0 && MenuManager.I._indexTuto < 5) || timerNonTuto < 0.2f) return;
+        if (!canMove || (MenuManager.I._indexMapPlayMode == 0 && MenuManager.I._indexTuto < 5) || timerNonTuto < 0.4f) return;
 
         inertieFeedback.PlayFeedbacks();
         gostAllFeedback.Add(EFeedbackType.INERTIEFEEDBACKPLAY);

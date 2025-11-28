@@ -10,6 +10,7 @@ public class MenuManager : MonoSingleton<MenuManager>
     public int _indexMapPlayMode = 0;
     public int _indexTuto = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _endTutoEvent = new UnityEvent();
     [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter, UIHelp;
     public List<float> _heightScoreList = new List<float>();
     [SerializeField] CinemachineCamera  camer;
@@ -34,8 +35,8 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => ReturnToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuHelp]._click2DEvent.AddListener(() => UIHelp.SetActive(true));
         //Ajouter le oui ou non du tuto
-        RaycastManager_.I.allTag[GV.TagSO._tutoNon]._click2DEvent.AddListener(() => _indexTuto = 5);
-        RaycastManager_.I.allTag[GV.TagSO._tutoOui]._click2DEvent.AddListener(() => { _indexTuto++; TryTuto(); });
+        RaycastManager_.I.allTag[GV.TagSO._tutoNon]._click2DEvent.AddListener(() => { _indexTuto = 5; _endTutoEvent.Invoke(); });
+        RaycastManager_.I.allTag[GV.TagSO._tutoOui]._click2DEvent.AddListener(() => { StartCoroutine(OuiTutoCoroutine()); });
         //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu());
@@ -96,9 +97,12 @@ public class MenuManager : MonoSingleton<MenuManager>
 
     private void LeftClickOnTuto()
     {
+        if(_indexTuto == 4)
+            _endTutoEvent.Invoke();
         if (_indexTuto <= 4 && _indexTuto >= 1)
             _indexTuto++;
         TryTuto();
+
     }
     
     private void RightClickOnTuto()
@@ -106,6 +110,13 @@ public class MenuManager : MonoSingleton<MenuManager>
         if (_indexTuto <= 4 && _indexTuto >= 2)
             _indexTuto--;
         TryTuto();
+    }
+
+    private IEnumerator OuiTutoCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        _indexTuto++; TryTuto();
     }
 
     private void Past()
