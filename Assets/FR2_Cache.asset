@@ -45,20 +45,22 @@ MonoBehaviour:
     UseGUIDsList: []
   - guid: 00000000000000004000000000000000
     type: 5
-    m_fileInfoHash: 23271.asset
+    m_fileInfoHash: 23362.asset
     m_assetbundle: 
     m_addressable: 
     m_atlas: 
-    m_fileSize: 23271
-    m_assetChangeTS: 1768731417
-    m_fileInfoReadTS: 1768731432
-    m_fileWriteTS: 1768731417
-    m_cachefileWriteTS: 1768731417
+    m_fileSize: 23362
+    m_assetChangeTS: 1768731693
+    m_fileInfoReadTS: 1768732085
+    m_fileWriteTS: 1768731693
+    m_cachefileWriteTS: 1768731693
     m_forceIncludeInBuild: 0
     refreshStamp: 2
     UseGUIDsList:
     - guid: 95af444776aa7a545af3ad454aec843b
       ids: 
+    - guid: 1dcd2c4fad2f0ba45bd9a86ba965c317
+      ids: 2003450100000000
     - guid: 01000000010000000100000001000000
       ids: 0000000000000000
     - guid: 10ad67313f4034357812315f3c407484
@@ -48903,15 +48905,15 @@ MonoBehaviour:
       ids: 0000000000000000
   - guid: 2cda990e2423bbf4892e6590ba056729
     type: 3
-    m_fileInfoHash: 4665842.unity
+    m_fileInfoHash: 4665877.unity
     m_assetbundle: 
     m_addressable: 
     m_atlas: 
-    m_fileSize: 4665842
-    m_assetChangeTS: 1768731417
-    m_fileInfoReadTS: 1768731432
-    m_fileWriteTS: 1768731417
-    m_cachefileWriteTS: 1768731417
+    m_fileSize: 4665877
+    m_assetChangeTS: 1768732234
+    m_fileInfoReadTS: 1768732313
+    m_fileWriteTS: 1768732234
+    m_cachefileWriteTS: 1768732234
     m_forceIncludeInBuild: 0
     refreshStamp: 2
     UseGUIDsList:
@@ -48931,8 +48933,6 @@ MonoBehaviour:
       ids: 200b200000000000
     - guid: 08f210828086c1a4398856e1ba65627c
       ids: e079af0000000000
-    - guid: 616a25aec4b286744b9fa8a7c081c531
-      ids: 003e490000000000
     - guid: 9541d86e2fd84c1d9990edf0852d74ab
       ids: e079af0000000000
     - guid: 0161d805a3764c089bef00bfe00793f5
@@ -48999,6 +48999,8 @@ MonoBehaviour:
       ids: 022a0000000000004228000000000000
     - guid: 7529717ea4ad6804babebf6315a0fe77
       ids: 2003450100000000
+    - guid: 616a25aec4b286744b9fa8a7c081c531
+      ids: 003e490000000000
     - guid: d310ce65af5efe746af2ab3e7b7cb726
       ids: a3234cf2957ad12112748d89bcf4252a31a2c40914d90d522f66fa2d0d67f95b772dfc4360d5a85c8caa18c7840474607f58c52bf3539267725a560e10f8c4676b0903e4a4e8bc70f9d8ad3fef92b37ca067f70500000000
     - guid: 8822c153a9543d5439ebf06c8b688778
@@ -65663,6 +65665,20 @@ MonoBehaviour:
       ids: 0000000000000000
     - guid: 5e97eb03825dee720800000000000000
       ids: 0000000000000000
+  - guid: 1dcd2c4fad2f0ba45bd9a86ba965c317
+    type: 5
+    m_fileInfoHash: 24677657.png
+    m_assetbundle: 
+    m_addressable: 
+    m_atlas: 
+    m_fileSize: 24677657
+    m_assetChangeTS: 0
+    m_fileInfoReadTS: 1768732085
+    m_fileWriteTS: 1768731597
+    m_cachefileWriteTS: 1768731597
+    m_forceIncludeInBuild: 0
+    refreshStamp: 2
+    UseGUIDsList: []
   setting:
     alternateColor: 1
     excludeTypes: 0
