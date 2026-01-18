@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71d9fcd991795d4db1e0624d16dab9f, type: 3}
   m_Name: Help
   m_EditorClassIdentifier: 
-  _simplifiedChinese: "\u5E2E\u52A9"
-  _english: HELP
-  _russian: "\u041F\u041E\u041C\u041E\u0429\u042C"
-  _spanish: AYUDA
-  _breazilian: AJUDA
-  _german: HILFE
+  _simplifiedChinese: "\u7F16\u8F91\u5668\u5E2E\u52A9"
+  _english: EDITOR HELP
+  _russian: "\u041F\u041E\u041C\u041E\u0429\u042C \u0420\u0415\u0414\u0410\u041A\u0422\u041E\u0420\u0410"
+  _spanish: AYUDA DEL EDITOR
+  _breazilian: AJUDA DO EDITOR
+  _german: EDITOR-HILFE
   _french: AIDE
-  _turkish: YARDIM
-  _japanese: "\u30D8\u30EB\u30D7"
-  _polish: POMOC
-  _traditionnalChinese: "\u5E6B\u52A9"
-  _italian: AIUTO
+  _turkish: "D\xDCZENLEY\u0130C\u0130 YARDIMI"
+  _japanese: "\u30A8\u30C7\u30A3\u30BF\u30FC\u30D8\u30EB\u30D7"
+  _polish: POMOC EDYTORA
+  _traditionnalChinese: "\u7DE8\u8F2F\u5668\u8AAA\u660E"
+  _italian: "AIUTO DELL\u2019EDITOR"
