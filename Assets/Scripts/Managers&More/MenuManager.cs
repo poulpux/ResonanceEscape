@@ -62,6 +62,7 @@ public class MenuManager : MonoSingleton<MenuManager>
     {
         UIReplay.SetActive(true );
         UIInGame.SetActive(false );
+        _indexMapPlayMode = _indexMapPlayMode == GV.GameSO._allMapList.Count - 1 ? 0 : _indexMapPlayMode += 1;
     }
 
     private void ClickOnPlay()
