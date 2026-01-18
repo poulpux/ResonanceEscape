@@ -67,3 +67,4 @@ MonoBehaviour:
   _tutoOui: TutoOui
   _tutoNon: TutoNon
   _quitParamter: QuitParameter
+  _gameBackToMenu: GameBackToMenu

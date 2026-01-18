@@ -53,6 +53,7 @@ public class GameManager : MonoSingleton<GameManager>
         InputSystem_.I._leftClick._event.AddListener(() => { if (_replay && PlayerMovement.I._timer >= 0.5f) { GoBackToMenu(); _replay = false; } });
 
         RaycastManager_.I.allTag[GV.TagSO._editorBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
+        RaycastManager_.I.allTag[GV.TagSO._gameBackToMenu]._click2DEvent.AddListener(() => GoBackToMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuEditorMode]._click2DEvent.AddListener(() => { _state = EGameState.EDITOR; _enterInEditModeEvent.Invoke(); });
         RaycastManager_.I.allTag[GV.TagSO._menuPastCode]._click2DEvent.AddListener(() =>  PastBoutonMenu());
         RaycastManager_.I.allTag[GV.TagSO._menuPlayMode]._click2DEvent.AddListener(() => _state = EGameState.MENUPLAYMODE);

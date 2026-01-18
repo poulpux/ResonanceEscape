@@ -19,6 +19,8 @@ public class FeelCubicButton : MonoBehaviour
     [ColorPalette("Resonnance")]
     [SerializeField] Color cubeUnselectColor, cubeSelectColor, outlineCubeUnselectColor, outlineCubeSelectColor;
 
+    bool onCoroutine;
+
     AnimatingCurve curveCube, curveOutlineCube;
     //Coroutine coroutine;
     void Start()
@@ -99,11 +101,14 @@ public class FeelCubicButton : MonoBehaviour
 
     private IEnumerator ClickOnButtonCoroutine()
     {
-        if(!gameObject.activeSelf)
+        if(!gameObject.activeSelf || onCoroutine)
             yield break;
+
+        onCoroutine = true;
         Select();
         yield return new WaitForSeconds(0.3f);
         Unselect();
+        onCoroutine = false;
     }
 
     private void VerifSelectedPourSurvole()

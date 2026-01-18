@@ -96,6 +96,7 @@ public partial class RaycastManager_ : MonoSingleton<RaycastManager_>
         InstantiateOneTag(GV.TagSO._menuLangageSelectionCase);
         InstantiateOneTag(GV.TagSO._menuSon);
         InstantiateOneTag(GV.TagSO._menuMusic);
+        InstantiateOneTag(GV.TagSO._gameBackToMenu);
     }
     private void Click() =>
         HandleRaycast(UI, TwoD, ThreeD, true);
