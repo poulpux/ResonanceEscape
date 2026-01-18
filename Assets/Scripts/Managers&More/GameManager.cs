@@ -17,6 +17,7 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("Feedbacks")]
     [SerializeField] MMF_Player pulseFeedback;
     [SerializeField] MMF_Player winFeedback;
+    [SerializeField] MMF_Player fadeInFeedback, fadeOutFeedback;
     #endregion
 
     #region Events
@@ -61,10 +62,12 @@ public class GameManager : MonoSingleton<GameManager>
         RaycastManager_.I.allTag[GV.TagSO._menuInsta]._click2DEvent.AddListener(() => Application.OpenURL("https://www.instagram.com/ambroise_marquet/"));
         RaycastManager_.I.allTag[GV.TagSO._menuKoFi]._click2DEvent.AddListener(() => Application.OpenURL("https://ko-fi.com/ambroise_marquet"));
         RaycastManager_.I.allTag[GV.TagSO._menuFiverr]._click2DEvent.AddListener(() => Application.OpenURL("https://fr.fiverr.com/s/zWVveqo"));
-        RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => { SceneManager.LoadScene(1); SoundManager.I.F_PlayMusic(GV.SoundSO._loopCreditMusic, true); }) ;
+        RaycastManager_.I.allTag[GV.TagSO._menuCredit]._click2DEvent.AddListener(() => fadeOutFeedback.PlayFeedbacks()) ;
         RaycastManager_.I.allTag[GV.TagSO._menuLangageSelectionCase]._click2DGameObjectEvent.AddListener((objet) => SelectLanguage(objet)) ;
 
         _pulseEvent.AddListener(() => pulseFeedback.PlayFeedbacks());
+
+        fadeInFeedback.PlayFeedbacks();
 
         _langueActuelle = (ELangues)Enum.Parse(typeof(ELangues), PlayerPrefs.GetInt("langue", 2).ToString());
         StartCoroutine(WaitASecond());
@@ -72,6 +75,11 @@ public class GameManager : MonoSingleton<GameManager>
     #endregion
 
     #region Functions
+
+    public void F_LoadCredit()
+    {
+        SceneManager.LoadScene(1); SoundManager.I.F_PlayMusic(GV.SoundSO._loopCreditMusic, true);
+    }
 
     public void F_WaitingAction()
     {

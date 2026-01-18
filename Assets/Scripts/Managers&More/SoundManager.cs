@@ -10,6 +10,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     [HideInInspector] public float musicVolume = 1f, soundFXVolume = 1f;
     [SerializeField] AudioSource sound;
     [SerializeField] AudioSource music;
+
+    [SerializeField] MMF_Player fadeIn;
     #endregion
     #region Callbacks
     void Start()
@@ -29,6 +31,8 @@ public class SoundManager : MonoSingleton<SoundManager>
         else
             F_PlayMusic(GV.SoundSO._loopCreditMusic, true);
 
+
+        fadeIn.PlayFeedbacks();
         soundFXVolume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
         musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
     }
