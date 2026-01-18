@@ -60,6 +60,7 @@ TagManager:
   - MenuParameter2
   - TutoNon
   - TutoOui
+  - GameBackToMenu
   layers:
   - Default
   - TransparentFX

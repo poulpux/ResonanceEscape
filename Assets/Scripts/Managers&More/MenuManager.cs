@@ -10,6 +10,7 @@ public class MenuManager : MonoSingleton<MenuManager>
     public int _indexMapPlayMode = 0;
     public int _indexTuto = 0;
     [HideInInspector] public UnityEvent _changeLvEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent _startTutoEvent = new UnityEvent();
     [HideInInspector] public UnityEvent _endTutoEvent = new UnityEvent();
     [SerializeField] GameObject UIMenu, UIPlayMode, UIEditMode, UIInGame, UIReplay, lockedBackground, shapes, parameter, UIHelp;
     public List<float> _heightScoreList = new List<float>();
@@ -36,7 +37,7 @@ public class MenuManager : MonoSingleton<MenuManager>
         RaycastManager_.I.allTag[GV.TagSO._menuHelp]._click2DEvent.AddListener(() => UIHelp.SetActive(true));
         //Ajouter le oui ou non du tuto
         RaycastManager_.I.allTag[GV.TagSO._tutoNon]._click2DEvent.AddListener(() => { _indexTuto = 5; _endTutoEvent.Invoke(); });
-        RaycastManager_.I.allTag[GV.TagSO._tutoOui]._click2DEvent.AddListener(() => { StartCoroutine(OuiTutoCoroutine()); });
+        RaycastManager_.I.allTag[GV.TagSO._tutoOui]._click2DEvent.AddListener(() => { /*_startTutoEvent.Invoke(); */StartCoroutine(OuiTutoCoroutine()); });
         //GameManager.I._winTheLevelEvent.AddListener(() => ReturnToMenu());
         GameManager.I._winTheLevelEvent.AddListener(() => /*GoBackToMenu()*/ EnterInReplayMod());
         GameManager.I._goToMenuEvent.AddListener(() => ReturnToMenu());
@@ -61,11 +62,12 @@ public class MenuManager : MonoSingleton<MenuManager>
     {
         UIReplay.SetActive(true );
         UIInGame.SetActive(false );
+        _indexMapPlayMode = _indexMapPlayMode == GV.GameSO._allMapList.Count - 1 ? 0 : _indexMapPlayMode += 1;
     }
 
     private void ClickOnPlay()
     {
-        if (timerCollision < 0.2f)
+        if (timerCollision < 0.2f || UIHelp.activeSelf == true)
             return;
         //if (!(PlayerPrefs.GetFloat((_indexMapPlayMode - 1).ToString(), 99.99f) != 99.99f || _indexMapPlayMode == 0))
         //    return;
@@ -91,8 +93,13 @@ public class MenuManager : MonoSingleton<MenuManager>
         foreach (var item in AllTutoWindow)
             item.SetActive(false);
 
-        if(_indexTuto <= 4 && _indexTuto >= 0)
+        if (_indexTuto <= 4 && _indexTuto >= 0)
+        {
+            _startTutoEvent.Invoke();
             AllTutoWindow[_indexTuto].SetActive(true);
+        }
+
+
     }
 
     private void LeftClickOnTuto()

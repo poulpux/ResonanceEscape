@@ -60,5 +60,6 @@ public class TagSO : ScriptableObject
         _menuParameter2,
         _tutoOui,
         _tutoNon,
-        _quitParamter;
+        _quitParamter,
+        _gameBackToMenu;
 }
