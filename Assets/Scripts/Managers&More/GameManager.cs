@@ -41,6 +41,9 @@ public class GameManager : MonoSingleton<GameManager>
     private void Start()
     {
         Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        Cursor.visible = false;
+
+
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
