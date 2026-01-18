@@ -40,7 +40,7 @@ public class GameManager : MonoSingleton<GameManager>
     #region Callbacks
     private void Start()
     {
-
+        Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         //StartCoroutine(WaitASecond());
         _playerActEvent.AddListener(() =>/*F_WaitingAction()*/StartCoroutine(PlayerMoveCoroutine()));
         _playPlayModeEvent.AddListener(() => PlayPlayMode());
