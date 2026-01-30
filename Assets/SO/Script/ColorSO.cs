@@ -7,4 +7,5 @@ using UnityEngine;
 public class ColorSO : ScriptableObject
 {
     //All color values
+    public Color TEst;
 }
